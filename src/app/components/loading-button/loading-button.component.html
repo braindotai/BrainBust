@@ -1,0 +1,11 @@
+<button class="filled-button" [ngClass]="{'disabled': projectLoading}" type="submit" [disabled]="disabled || loading || projectLoading">
+    <div *ngIf="projectLoading else elseBlock">
+        <span>Loading project demo</span>
+        <i class="fa fa-circle-notch fa-spin" *ngIf="loading || projectLoading"></i>
+    </div>
+    <ng-template #elseBlock>
+        <span>{{ title }}</span>
+        <!-- <img src="../../../assets/svg/loading.svg" alt="Loading..." *ngIf="loading"> -->
+        <i class="fa fa-circle-notch fa-spin" *ngIf="loading || projectLoading"></i>
+    </ng-template>
+</button>

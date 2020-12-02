@@ -1,0 +1,39 @@
+h1 {
+    color: #fff;
+}
+
+section {
+    position: relative;
+    height: 100vh;
+
+    #banner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+
+        width: 95%;
+        max-width: 40rem;
+
+        transform: translate(-50%, -50%);
+        
+        img {
+            width: 80%;
+            max-width: 20rem;
+
+            @extend %effect;
+            display:inline-block;
+        }
+
+        h2 {
+            padding-top: 2rem;
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+    }
+
+    %effect{
+        filter:url("#glitch");
+    }
+}

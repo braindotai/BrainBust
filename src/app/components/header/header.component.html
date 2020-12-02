@@ -1,0 +1,57 @@
+<header [ngClass]="{'blur': notOnTop}" #header>
+<!-- <header #header> -->
+    <a id="logo" routerLink=''>BrainBust</a>
+    
+    <nav [ngClass]="{'show-nav': isBurgerMenuOpen}" #nav>
+        <div id="nav-buttons">
+            <a class="link-button" routerLink='/home' routerLinkActive="active-link-button" (click)="toggleBurgerMenu()">
+                <button>
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </button>
+            </a>
+            <a class="link-button" routerLink='/projects' routerLinkActive="active-link-button" (click)="toggleBurgerMenu()">
+                <button>
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Projects</span>
+                </button>
+            </a>
+            <a class="link-button" routerLink='/articles' routerLinkActive="active-link-button" (click)="toggleBurgerMenu()">
+                <button>
+                    <i class="fas fa-newspaper"></i>
+                    <span>Articles</span>
+                </button>
+            </a>
+            <a class="link-button" href="#">
+                <button (click)="toggleBurgerMenu()">
+                    <i class="fas fa-paste"></i>
+                    <span>Papers</span>
+                </button>
+            </a>
+            <a class="link-button" href="https://github.com/braindotai" target="_blank">
+                <button (click)="toggleBurgerMenu()">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </button>
+            </a>
+            <a class="link-button" href="https://www.youtube.com/channel/UCdbcIkMaFdRVYXm76TH6qiw/" target="_blank">
+                <button (click)="toggleBurgerMenu()">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </button>
+            </a>
+            <a class="link-button" routerLink='/about' routerLinkActive="active-link-button" (click)="toggleBurgerMenu()">
+                <button>
+                    <i class="fas fa-user-tie"></i>
+                    <span>About</span>
+                </button>
+            </a>
+        </div>
+    </nav>
+
+    <div id="burger-menu" #burgermenu>
+        <div id="burger" [ngClass]="{'burger-open': isBurgerMenuOpen}" #burger></div>
+    </div>
+</header>
+
+<app-fade-background [burgerOpen]="isBurgerMenuOpen" #fadebackground></app-fade-background>

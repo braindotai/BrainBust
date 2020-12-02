@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 class="container-title">Authentication</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="authenticate()" enctype="multipart/form-data">
+        <div class="field">
+            <div class="text-field">
+                <h2 class="field-title">Username</h2>
+                <input type="text" [ngClass]="{'input-error': touchedError('username')}" formControlName="username">
+                <h2 class="field-error" *ngIf="touchedError('username') && formGroup.get('username').errors.required">
+                    Username is required
+                    <br>
+                    <br>
+                </h2>
+            </div>
+            <div class="text-field">
+                <h2 class="field-title">Email</h2>
+                <input type="text" [ngClass]="{'input-error': touchedError('email')}" formControlName="email">
+                <h2 class="field-error" *ngIf="touchedError('email') && formGroup.get('email').errors.required">
+                    Email is required
+                    <br>
+                    <br>
+                </h2>
+                <h2 class="field-error" *ngIf="touchedError('email') && formGroup.get('email').errors?.email">
+                    Email is not valid
+                    <br>
+                    <br>
+                </h2>
+            </div>
+            <div class="text-field">
+                <h2 class="field-title">Password</h2>
+                <input type="password" [ngClass]="{'input-error': touchedError('password')}" formControlName="password">
+                <h2 class="field-error" *ngIf="touchedError('password') && formGroup.get('password').errors.required">
+                    Password is required
+                    <br>
+                    <br>
+                </h2>
+            </div>
+        </div>
+
+        <app-loading-button
+            title="Authenticate"
+            [disabled]="formGroup.invalid"
+            [loading]="loading">
+        </app-loading-button>
+    </form>
+</div>

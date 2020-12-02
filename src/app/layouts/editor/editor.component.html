@@ -1,0 +1,9 @@
+<app-loading-screen [loading]="pageLoading"></app-loading-screen>
+
+<app-authenticate (authenticatedEvent)="authenticate()" *ngIf="!isAuthenticated"></app-authenticate>
+
+<div class="container" *ngIf="isAuthenticated">
+    <h1 class="container-title">{{ articleName | titlecase }}</h1>
+    <div id="editor-js"></div>
+    <button id="submit-article" class="filled-button" (click)="submitArticle()">{{submitButton}}</button>
+</div>

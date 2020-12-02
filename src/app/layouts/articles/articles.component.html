@@ -1,0 +1,105 @@
+<app-loading-screen [loading]="pageLoading" *ngIf="showPageLoading"></app-loading-screen>
+<div [ngClass]="{'container': showName}" *ngIf="!pageLoading && article else elseblock">
+    <div id="article" *ngIf="article">
+        <h1 id="article-title" *ngIf="showName" #h1tags>{{ articleName | titlecase }}</h1>
+        <div class="article-author-date-minutes">
+            <div class="article-author-date">
+                <img class="article-author-image" src="../../../assets/me.jpg">
+                <div class="article-author-name-date">
+                    <p class="article-author-name">Rishik C. Mourya</p>
+                    <p class="article-date">{{ articleDate | date }}</p>
+                </div>
+            </div>
+            <p class="article-minutes">{{ articleMinutes }} MIN READ</p>
+        </div>
+        <div class="article-tags-framework">
+            <div class="article-tags">
+                <p *ngFor="let tag of articleTags">{{ tag }}</p>
+            </div>
+            <div class="article-framework" *ngIf="articleFramework.length !== 0 && articleFramework !=='none'">
+                <img [src]="articleFramework" alt="framework">
+            </div>
+        </div>
+        <div *ngFor="let field of article; index as index">
+            <div class="article-field" [ngSwitch]="field.type" *ngIf="index > 1">
+                <div class="youtube-embed" *ngSwitchCase="'embed'">
+                    <a [href]="field.data.source" target="_blank">
+                        <img [src]="getYouTubeThumbnail(field.data.source)" alt="Youtube video for the project">
+                    </a>
+                </div>
+                <div class="article-heading" *ngSwitchCase="'header'">
+                    <h1 [innerHTML]="field.data.text"></h1>
+                </div>
+                <div class="article-paragraph" *ngSwitchCase="'paragraph'">
+                    <p [innerHTML]="cleanParagraph(field.data.text)"></p>
+                </div>
+                <div class="article-image" *ngSwitchCase="'image'">
+                    <img [src]="field.data.url">
+                    <p>{{ field.data.caption }}</p>
+                </div>
+                <div class="article-list" *ngSwitchCase="'list'">
+                    <ul *ngIf="field.data.style === 'unordered'">
+                        <li *ngFor="let item of field.data.items" [innerHTML]="item"></li>
+                    </ul>
+                    <ol *ngIf="field.data.style === 'ordered'">
+                        <li *ngFor="let item of field.data.items" [innerHTML]="item"></li>
+                    </ol>
+                </div>
+                <div class="article-block-code" *ngSwitchCase="'blockCode'">
+                    <div class="article-code-container">
+                        <textarea highlight-js [options]="{}" [lang]="'python'" [innerHTML]="field.data.code"></textarea>
+                        <div class="copy-button" (click)="copyCode(field.data.code, $event.target)">Copy</div>
+                    </div>
+                </div>
+                <!-- <div *ngSwitchDefault></div> -->
+            </div>
+        </div>
+        <br>
+
+        <!-- <a routerLink="write-article">
+            <button class="filled-button center-button">Edit Article</button>
+        </a> -->
+    </div>
+</div>
+
+<ng-template #elseblock>
+    <div class="container" *ngIf="articles">
+        <h1 class="container-title">Articles Written</h1>
+        <br>
+        
+        <div *ngIf="articles.length > 0">
+            <app-article-card 
+            [wall]="articles[0].wall"
+            [tags]="articles[0].tags"
+            [framework]="articles[0].framework"
+            [title]="articles[0].title"
+            [description]="articles[0].description"
+            [date]="articles[0].date"
+            minutes="2 MIN READ"
+            [latest]="true"
+            [routerLink]="getArticleLink(articles[0].title)">
+            </app-article-card>
+            <app-article-card
+            [wall]="articles[1].wall"
+            [tags]="articles[1].tags"
+            [framework]="articles[1].framework"
+            [title]="articles[1].title"
+            [description]="articles[1].description"
+            [date]="articles[1].date"
+            minutes="2 MIN READ"
+            [latest]="true"
+            [reverse]="true"
+            [routerLink]="getArticleLink(articles[1].title)">
+            </app-article-card>
+        </div>
+        
+        <!-- <a routerLink="/write-article">
+            <button class="filled-button center-button">Write Article</button>
+        </a> -->
+    </div>
+
+    <!-- <a routerLink="write-article" *ngIf="!article && !articles">
+        <br><br>
+        <button class="filled-button center-button">Write Article</button>
+    </a> -->
+</ng-template>

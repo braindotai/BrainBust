@@ -1,0 +1,72 @@
+button {
+    padding: 0.6rem 2rem;
+    
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+    border: 1.8px solid transparent;
+    outline: none;
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    i {
+        margin-left: 0.5rem;
+    }
+
+    &:disabled {
+        // pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+}
+
+.disabled {
+    pointer-events: none;
+    // cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.center-button {
+    display: block;
+    margin: 0 auto;
+}
+
+.filled-button {
+    background-color: $white;
+    color: $dark-primary;
+
+    transition: all 200ms ease-out;
+    
+    &:hover,
+    &:active {
+        background-color: $primary;
+        color: $white;
+        border-color: $white;
+    }
+}
+
+.round-button {
+    border-radius: 100px;
+}
+
+.upload-button {
+    display: block;
+    width: 20rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+
+    padding: 1rem 2rem;
+    
+    color: $dark-primary;
+    font-size: 1rem;
+    font-weight: 700;
+
+    background-color: $white;
+
+    border: 1.8px solid transparent;
+    border-radius: 8px;
+
+    cursor: pointer;
+}

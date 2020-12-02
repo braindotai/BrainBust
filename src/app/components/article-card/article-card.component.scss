@@ -1,0 +1,188 @@
+@import '../../../styles.variables.scss';
+@import '../../../styles.mixins.scss';
+
+.article-card {
+    margin: 0 0.8rem 2.8rem 0.8rem;
+    cursor: pointer;
+
+    &:hover {
+        .article-card-wall {
+            opacity: 1;
+            transform: scale(0.98);
+        }
+
+        // .article-card-title a {
+        //     color: white;
+        // }
+    }
+
+    .article-card-tags-framework {
+        @include flex(row, space-between, center);
+        padding: 1rem 0;
+
+        img {
+            display: block;
+            width: 24px;
+            border-radius: 100rem;
+            // opacity: 0.75;
+            transition: transform 150ms ease-out;
+            
+            &:hover {
+                // opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+    }
+    .article-card-tags {
+        display: flex;
+        // margin: 0.6rem 0;
+
+        a {
+            margin-right: 0.8rem;
+            
+            color: #627385;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            
+            transition: color 150ms ease-out;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+
+    .article-card-wall {
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 0 0 15px 0 $dark-primary;
+        opacity: 0.85;
+
+        transition: all 250ms ease-out;
+    }
+
+    .article-card-title {
+        // margin-bottom: 1rem;
+        
+        h3 {
+            color: $white;
+            transition: all 250ms ease-out;
+        }
+    }
+
+    .article-card-description {
+        font-size: 0.9rem;
+        color: $text;
+        line-height: 1.5rem;
+        letter-spacing: 0.5px;
+    }
+
+    .article-card-author-date-minutes {
+        @include flexRowSpaceBetween();
+        margin: 0.8rem 0;
+
+        .article-card-author-date {
+            display: flex;
+            align-items: center;
+
+            height: 2.4rem;
+
+            .article-card-author-image {
+                height: 2.3rem;
+                border-radius: 100px;
+                margin-right: 0.8rem;
+            }
+
+            .article-card-author-name-date {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                height: 100%;
+                font-weight: 600;
+
+                .article-card-author-name {
+                    font-size: 0.9rem;
+                    color: #fff;
+                }
+            }
+            
+            
+        }
+
+        .article-card-date,
+        .article-card-minutes {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .article-card-date {
+            color: $red;
+        }
+
+        .article-card-minutes {
+            color: $blue;
+        }
+    }
+}
+
+.latest-article {
+    @include flexRowSpaceBetween();
+
+    .latest-article-right {
+        padding-left: 2rem;
+    }
+
+    .article-card-wall {
+        width: 45%;
+    }
+
+    .article-card-tags {
+        margin: 0;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.reverse-row {
+    flex-direction: row-reverse;
+    
+    .latest-article-right {
+        padding: 0 2rem 0 0;
+    }
+}
+
+@media only screen and (max-width: 673px) {
+    .latest-article,
+    .latest-article:nth-child(2) {
+        flex-direction: column;
+
+        .article-card-wall {
+            width: 100%;
+        }
+
+        .latest-article-right {
+            padding: 0;
+        }
+
+        .article-card-tags {
+            margin: 0.6rem 0;
+        }
+    }
+
+    #latest {
+        margin-bottom: 0rem;
+    }
+
+    .article-card {
+        .article-card-title {
+            margin-top: 1rem;
+        }
+
+        .article-card-title {
+            h3 {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}

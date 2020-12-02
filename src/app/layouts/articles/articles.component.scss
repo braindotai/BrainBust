@@ -1,0 +1,251 @@
+@import '../../../styles.variables.scss';
+@import '../../../styles.mixins.scss';
+
+#article {
+    width: 100%;
+
+    max-width: 50rem;
+    margin: 3rem auto;
+    color: $white;
+}
+
+.article-author-date-minutes {
+    @include flexRowSpaceBetween();
+    margin: 0.8rem 0;
+    padding-top: 2rem;
+    border-top: 1px solid transparentize($color: $text, $amount: 0.7);
+
+    .article-author-date {
+        display: flex;
+        align-items: center;
+
+        height: 2.4rem;
+
+        .article-author-image {
+            height: 2.3rem;
+            border-radius: 100px;
+            margin-right: 0.8rem;
+        }
+
+        .article-author-name-date {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            height: 100%;
+            font-weight: 600;
+
+            .article-author-name {
+                font-size: 0.9rem;
+                color: #fff;
+            }
+        }
+        
+        
+    }
+
+    .article-date,
+    .article-minutes {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    
+    .article-date {
+        color: $red;
+    }
+
+    .article-minutes {
+        color: $blue;
+    }
+}
+
+.article-tags-framework {
+    @include flex(row, space-between, center);
+    padding: 0.4rem 0;
+
+    img {
+        display: block;
+        width: 24px;
+        border-radius: 100rem;
+        transition: transform 150ms ease-out;
+        
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.article-tags {
+    display: flex;
+
+    p {
+        display: block;
+        margin-right: 0.8rem;
+        
+        color: darken($color: $text, $amount: 22%);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        
+        cursor: pointer;
+        transition: color 150ms ease-out;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+
+.article-field {
+    margin: 1.6rem 0;
+}
+
+.article-heading {
+    h1 {
+        margin-top: 2rem;
+    }
+}
+
+.article-paragraph {
+    p {
+        // font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 1.05rem;
+        line-height: 1.8rem;
+        letter-spacing: 0.5px;
+
+        margin: 0 auto;
+        color: $text;
+    }
+}
+
+.article-image {
+    img {
+        display: block;
+        max-width: 45rem;
+
+        width: 100%;
+        margin: 2rem auto 0.8rem auto;
+
+        border-radius: 6px;
+        box-shadow: 0 0 10px 0 $dark-primary;
+    }
+
+    p {
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: $text;
+        // color: darken($color: $text, $amount: 10%);
+    }
+}
+
+.article-list {
+    padding-left: 2rem;
+
+    color: $text;
+
+    li {
+        margin: 0.8rem 0;
+    }
+}
+
+.article-code-container {
+    position: relative;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.3rem;
+    padding: 0.4rem 0.7rem;
+    background-color: #282c34;
+    border-radius: 6px;
+    box-shadow: 0 0 14px 0 darken($color: #282c34, $amount: 14%);
+    
+    * {
+        font-family: Consolas, monospace;
+
+        &::-webkit-scrollbar {
+            height: 0.2rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: transparentize($color: $white, $amount: 0.1);
+            border: 3px solid transparent;
+        }
+    }
+
+    .copy-button {
+        position: absolute;
+        top: 0.7rem;
+        right: 0.5rem;
+
+        padding: 0.2rem 0.6rem;
+        
+        color: lighten($color: $text, $amount: 5%);
+        font-size: 0.9rem;
+        font-family: Consolas, monospace;
+        
+        background-color: lighten($color: #282c34, $amount: 8%);
+        border-radius: 100px;
+        
+        cursor: pointer;
+        
+
+        &:hover {
+            color: $white;
+        }
+        &:active {
+            background-color: $white;
+            color: $dark-primary;
+        }
+    }
+}
+
+
+.youtube-embed {
+    a {
+        display: block;
+        width: 70%;
+        margin: 0 auto;
+
+        img {
+            width: 100%;
+            border-radius: 6px;
+
+            background-size: cover;
+            background-position: center;
+
+            transform: scale(1);
+            transition: box-shadow 200ms ease-out, transform 200ms ease-out;
+
+            &:hover {
+                transform: scale(1.02);
+                box-shadow: 0 0 20px 0 $dark-primary;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 730px) {
+    .youtube-embed {
+        a {
+            width: 90%;
+        }
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .youtube-embed {
+        a {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .article-paragraph {
+        p {
+            font-size: 1rem;
+        }
+    }
+}

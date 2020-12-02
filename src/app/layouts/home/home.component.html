@@ -1,0 +1,94 @@
+<app-loading-screen [loading]="pageLoading"></app-loading-screen>
+
+<div id="wall">
+    <!-- <h1>Laymanize-ing<br>Intelligence</h1> -->
+</div>
+
+<section *ngIf="articles">
+    <h2 class="section-title">
+        <i class="fas fa-newspaper"></i>
+        <span>Recent Articles</span>
+    </h2>    
+
+    <div id="latest" *ngIf="articles.length > 1">
+        <app-article-card 
+            [wall]="articles[0].wall"
+            [tags]="articles[0].tags"
+            [framework]="articles[0].framework"
+            [title]="articles[0].title"
+            [description]="articles[0].description"
+            [date]="articles[0].date"
+            minutes="2 MIN READ"
+            [latest]="true"
+            [routerLink]="getArticleLink(articles[0].title)">
+        </app-article-card>
+        <app-article-card
+            [wall]="articles[1].wall"
+            [tags]="articles[1].tags"
+            [framework]="articles[1].framework"
+            [title]="articles[1].title"
+            [description]="articles[1].description"
+            [date]="articles[1].date"
+            minutes="2 MIN READ"
+            [latest]="true"
+            [reverse]="true"
+            [routerLink]="getArticleLink(articles[1].title)">
+        </app-article-card>
+    </div>
+    <div class="section-read-more">
+        <button routerLink="/articles" class="filled-button">Explore more articles</button>
+    </div>
+</section>
+
+
+<section *ngIf="projectArticles">
+    <h2 class="section-title">
+        <i class="fas fa-project-diagram"></i>
+        <span>Recent Projects</span>
+    </h2>
+
+    <div id="latest" *ngIf="projectArticles.length > 1">
+        <app-article-card 
+            [wall]="projectArticles[0].wall"
+            [tags]="projectArticles[0].tags"
+            [framework]="projectArticles[0].framework"
+            [title]="projectArticles[0].title"
+            [description]="projectArticles[0].description"
+            [date]="projectArticles[0].date"
+            minutes="2 MIN READ"
+            [latest]="true"
+            [routerLink]="getProjectLink(projectArticles[0].title)">
+        </app-article-card>
+        <app-article-card
+            [wall]="projectArticles[1].wall"
+            [tags]="projectArticles[1].tags"
+            [framework]="projectArticles[1].framework"
+            [title]="projectArticles[1].title"
+            [description]="projectArticles[1].description"
+            [date]="projectArticles[1].date"
+            minutes="2 MIN READ"
+            [latest]="true"
+            [reverse]="true"
+            [routerLink]="getProjectLink(projectArticles[1].title)">
+        </app-article-card>
+    </div>
+
+    <div class="article-cards">
+        <app-article-card 
+            [wall]="project.wall"
+            [tags]="project.tags"
+            [framework]="project.framework"
+            [title]="project.title"
+            [description]="project.description"
+            [date]="project.date"
+            minutes="2 MIN READ"
+            [routerLink]="getProjectLink(project.title)"
+            *ngFor="let project of projectArticles | slice:2">
+        </app-article-card>
+    </div>
+
+    <div class="section-read-more">
+        <button routerLink="/projects" class="filled-button">Explore more projects</button>
+    </div>
+</section>
+<br><br><br><br>
