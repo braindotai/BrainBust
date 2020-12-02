@@ -6,7 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2 } fro
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('up') up: ElementRef<HTMLElement>
+  // @ViewChild('up') up: ElementRef<HTMLElement>
   // @ViewChild('viewed') viewed: ElementRef<HTMLElement>
   rootElement: HTMLElement = document.documentElement;
 
@@ -47,14 +47,14 @@ export class AppComponent implements OnInit {
   @HostListener("document:scroll", ['$event'])
   scrollEvent(): void {
     // [ top arrow ]
-    if (this.getPercent > 60 && document.body.scrollHeight >= 1150) {
-      this.renderer.setStyle(this.up.nativeElement, 'visibility', 'visible');
-      this.renderer.setStyle(this.up.nativeElement, 'opacity', '1');
-    }
-    else{
-      this.renderer.setStyle(this.up.nativeElement, 'visibility', 'hidden');
-      this.renderer.setStyle(this.up.nativeElement, 'opacity', '0');
-    }
+    // if (this.getPercent > 60 && document.body.scrollHeight >= 1150) {
+    //   this.renderer.setStyle(this.up.nativeElement, 'visibility', 'visible');
+    //   this.renderer.setStyle(this.up.nativeElement, 'opacity', '1');
+    // }
+    // else{
+    //   this.renderer.setStyle(this.up.nativeElement, 'visibility', 'hidden');
+    //   this.renderer.setStyle(this.up.nativeElement, 'opacity', '0');
+    // }
 
     // [ view progress bar]
 

@@ -61,6 +61,7 @@ export class ApiService {
       projectShortName += substring[0];
     })
     return `https://brainbust-projectsbackend-${projectShortName}.herokuapp.com/inference/`;
+    // return `http://127.0.0.1:7000/inference/`;
   }
 
   articleURL(articleName: string): string {

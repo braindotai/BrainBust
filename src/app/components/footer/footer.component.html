@@ -1,1 +1,58 @@
-<footer></footer>
+<footer>
+    <div id="footer-container">
+        <div id="footer-info">
+            <div id="me">
+                <img src="../../../assets/me.jpg" alt="Rishik C. Mourya">
+                <h1>BrainBust</h1>
+            </div>
+            <p>
+                Welcome to my portfolio website, where my I'll be showcasing my knowledge through projects, articles and video explainations.
+                My ultimate goal is to laymanize the knowledge I've gained.
+                All my projects are open source, and are available on GitHub profile.
+            </p>
+            <br>
+            <button class="filled-button">Subscribe to newsletter</button>
+        </div>
+        <form id="contact-form" [formGroup]="formGroup" enctype="multipart/form-data">
+            <h1>Contact Me</h1>
+            <div class="field">
+                <div class="text-field">
+                    <input placeholder="Email" type="text" [ngClass]="{'input-error': touchedError('email')}" formControlName="email">
+                    <h2 class="field-error" *ngIf="touchedError('email') && formGroup.get('email').errors.required">
+                        Email is required
+                        <br>
+                        <br>
+                    </h2>
+                    <h2 class="field-error" *ngIf="touchedError('email') && formGroup.get('email').errors?.email">
+                        Email is not valid
+                        <br>
+                        <br>
+                    </h2>
+                </div>
+                <div class="text-field">
+                    <textarea placeholder="Your message..." [ngClass]="{'input-error': touchedError('message')}" formControlName="message" rows="8"></textarea>
+                    <h2 class="field-error" *ngIf="touchedError('message') && formGroup.get('message').errors.required">
+                        Message is required
+                        <br>
+                        <br>
+                    </h2>
+                </div>
+            </div>
+
+            <app-loading-button
+                title="Send Message"
+                [disabled]="formGroup.invalid"
+                [loading]="loading">
+            </app-loading-button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div id="quote-copyright">
+        <div id="quote">
+            <blockquote>When you know nothing matters,<br>the universe is yours.</blockquote>
+            <cite>- Rick Sanchez</cite>
+        </div>
+        <p id="copyright">Copyright &copy; 2020 BrainBust. All Rights Reserved.</p>
+    </div>
+</footer>

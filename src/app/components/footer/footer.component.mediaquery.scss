@@ -1,0 +1,57 @@
+@media only screen and (max-width: 670px) {
+    footer {
+        #quote {
+            blockquote {
+                font-size: 1.4rem;
+            }
+        }
+
+        #copyright {
+            font-size: 0.78rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    footer {
+        #quote {
+            blockquote {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 520px) {
+    footer {
+        #quote {
+            blockquote {
+                font-size: 1.1rem;
+                padding: 1rem 0rem;
+
+                &:before {
+                    font-size: 4rem;
+                    left: -3rem;
+                    top: -1.8rem;
+                }
+                
+                &:after {
+                    font-size: 4rem;
+                    right: -2rem;
+                    bottom: -1.6rem;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    footer {
+        #quote {
+            blockquote {
+                &:before {
+                    left: -2.5rem;
+                }
+            }
+        }
+    }
+}

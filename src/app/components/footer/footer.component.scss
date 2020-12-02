@@ -1,9 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
 @import '../../../styles.variables.scss';
 
 footer {
-    margin-top: 2rem;
-    height: 16rem;
+    position: relative;
+
     width: 100%;
-    box-shadow: 0 0 35px 0 lighten($color: $dark-primary, $amount: 7%);
-    background-color: $dark-primary;
+    
+    padding: 3rem 0;
+    margin-top: 10rem;
+
+    color: $white;
+
+    box-shadow: 0 0 5px 0 lighten($color: $dark-primary, $amount: 10%);
+    background-color: transparentize($color: $dark-primary, $amount: 0.5);
+
+    #footer-container {
+        display: flex;
+        justify-content: space-between;
+        
+        width: 100%;
+        max-width: 74rem;
+        
+        margin: 0 auto;
+
+        #footer-info {
+            max-width: 30rem;
+
+            #me {
+                display: flex;
+                align-items: center;
+
+                img {
+                    height: 5rem;
+                    width: 5rem;
+                    margin-right: 1.2rem;
+
+                    border-radius: 100px;
+                }
+
+                margin-bottom: 1rem;
+            }
+
+            p {
+                line-height: 1.5rem;
+                letter-spacing: 0.5px;
+                color: $text;
+            }
+        }
+
+        #contact-form {
+            position: relative;
+            // width: 100%;
+            max-width: 30rem;
+
+            app-loading-button {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    #quote-copyright {
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    #quote {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        width: 70%;
+        // max-width: 75rem;
+        
+        padding-top: 3rem;
+        margin: 2rem auto;
+
+        border-top: 1px solid darken($color: $white, $amount: 72%);
+        
+        * {
+            font-family: 'Special Elite', cursive;
+        }
+
+        blockquote {
+            font-weight: 100;
+            font-size: 1.5rem;
+            max-width: 500px;
+            line-height: 1.4;
+            position: relative;
+            margin: 0;
+            padding: 1rem 2rem;
+            
+            &:before,
+            &:after {
+                position: absolute;
+                color: #f1efe6;
+                font-size: 6rem;
+                width: 4rem;
+                height: 4rem;
+            }
+            
+            &:before {
+                content: '“';
+                left: -2.5rem;
+                top: -1rem;
+            }
+            
+            &:after {
+                content: '”';
+                right: -2rem;
+                bottom: 0rem;
+            }
+        }
+        
+
+        cite {
+            margin: 0.8rem 0;
+        }
+
+    }
 }
+
+@import './footer.component.mediaquery.scss';

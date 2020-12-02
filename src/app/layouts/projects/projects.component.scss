@@ -87,6 +87,43 @@ label {
     }
 }
 
+
+form {
+    @include flex(column, center, center);
+    max-width: 35rem;
+    margin: 0 auto;
+
+    .field {
+        .text-field {
+            @include flex(column, center, center);
+            width: 20rem;
+        }
+
+        .field-title {
+            text-align: center;
+        }
+
+        .field-help {
+            text-align: center;
+        }
+
+        .field-error {
+            text-align: center;
+        }
+    }
+}
+
+input {
+    max-width: 30rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
 @media only screen and (max-width: 750px) {
     #project-name {
         font-size: 2rem;
