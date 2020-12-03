@@ -49,7 +49,9 @@ import { HighlightJsModule } from 'ngx-highlight-js';
     ReactiveFormsModule,
     HighlightJsModule,
   ],
-  providers: [ApiService],
+  providers: [
+    ApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

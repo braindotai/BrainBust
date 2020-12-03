@@ -6,7 +6,7 @@
 
 <section *ngIf="articles">
     <h2 class="section-title">
-        <i class="fas fa-newspaper"></i>
+        <i class="fas fa-pen-alt"></i>
         <span>Recent Articles</span>
     </h2>    
 
@@ -36,7 +36,10 @@
         </app-article-card>
     </div>
     <div class="section-read-more">
-        <button routerLink="/articles" class="filled-button">Explore more articles</button>
+        <button routerLink="/articles" class="round-button">
+            Explore more articles
+            <span><i class="fas fa-long-arrow-alt-right"></i></span>
+        </button>
     </div>
 </section>
 
@@ -88,7 +91,10 @@
     </div>
 
     <div class="section-read-more">
-        <button routerLink="/projects" class="filled-button">Explore more projects</button>
+        <button routerLink="/projects" class="round-button">
+            Explore more projects
+            <span><i class="fas fa-long-arrow-alt-right"></i></span>
+        </button>
     </div>
 </section>
 <br><br><br><br>

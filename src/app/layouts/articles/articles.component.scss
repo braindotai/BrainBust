@@ -9,6 +9,10 @@
     color: $white;
 }
 
+#article-title {
+    font-size: 2.8rem;
+}
+
 .article-author-date-minutes {
     @include flexRowSpaceBetween();
     margin: 0.8rem 0;
@@ -129,6 +133,11 @@
 
         border-radius: 6px;
         box-shadow: 0 0 10px 0 $dark-primary;
+
+        // background-color: #1a1a1a;
+        // background-image: url("");
+        // background-attachment: fixed;
+        // background-size: cover;
     }
 
     p {
@@ -213,13 +222,13 @@
 
             background-size: cover;
             background-position: center;
+            // box-shadow: 0 0 20px 0 $dark-primary;
 
             transform: scale(1);
             transition: box-shadow 200ms ease-out, transform 200ms ease-out;
 
             &:hover {
                 transform: scale(1.02);
-                box-shadow: 0 0 20px 0 $dark-primary;
             }
         }
     }

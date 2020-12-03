@@ -1,16 +1,102 @@
-@media only screen and (max-width: 670px) {
+@media only screen and (max-width: 1160px) {
+    footer {
+        #footer-container {
+            #footer-info {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    footer {
+        #footer-container {
+            width: 88%;
+        }
+    }
+}
+
+@media only screen and (max-width: 765px) {
+    footer {
+        margin-top: 5rem;
+
+        #footer-container {
+            flex-direction: column;
+            align-items: center;
+
+            #footer-info {
+                margin: 0 0 3rem 0;
+                padding: 0;
+                
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                #profile {
+                    #me {
+                        justify-content: center;
+                    }
+
+                    #do {
+                        text-align: center;
+                    }
+                }
+
+                #follow {
+                    i {
+                        margin: 1rem;
+                    }
+                }
+            }
+
+            #contact-form {
+                h1 {
+                    text-align: center;
+                }
+
+                app-loading-button {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 670px) {            
     footer {
         #quote {
             blockquote {
                 font-size: 1.4rem;
+
+                &:before,            
+                &:after {
+                    font-size: 3rem;
+                }
             }
         }
-
+    
         #copyright {
-            font-size: 0.78rem;
+            font-size: 0.9rem;
         }
     }
 }
+
+@media only screen and (max-width: 570px) {
+    footer {
+        #footer-container {
+            width: 80%;
+            #footer-info {
+                #subscription-form {
+                    width: 100%;
+                }
+            }
+
+        }
+    }
+}
+
 
 @media only screen and (max-width: 560px) {
     footer {
@@ -18,6 +104,10 @@
             blockquote {
                 font-size: 1.3rem;
             }
+
+        }
+        #copyright {
+            font-size: 0.9rem;
         }
     }
 }
@@ -25,7 +115,6 @@
     footer {
         #quote {
             blockquote {
-                font-size: 1.1rem;
                 padding: 1rem 0rem;
 
                 &:before {
@@ -41,6 +130,12 @@
                 }
             }
         }
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    #do {
+        font-size: 0.9rem;
     }
 }
 

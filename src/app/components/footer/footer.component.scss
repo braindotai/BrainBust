@@ -5,59 +5,102 @@ footer {
     position: relative;
 
     width: 100%;
-    
-    padding: 3rem 0;
-    margin-top: 10rem;
+    padding: 4rem 0 3rem 0;
+    margin-top: 7rem;
 
     color: $white;
 
-    box-shadow: 0 0 5px 0 lighten($color: $dark-primary, $amount: 10%);
-    background-color: transparentize($color: $dark-primary, $amount: 0.5);
+    // box-shadow: 0 0 10px 0 lighten($color: $dark-primary, $amount: 10%);
+    // background-color: transparentize($color: $dark-primary, $amount: 1.0);
+
+    border-top: 1px solid lighten($color: $dark-primary, $amount: 10%);
+    background: linear-gradient(0deg, #00000000, $dark-primary);
 
     #footer-container {
         display: flex;
         justify-content: space-between;
         
-        width: 100%;
-        max-width: 74rem;
+        width: 85%;
+        max-width: 75rem;    
         
         margin: 0 auto;
 
         #footer-info {
-            max-width: 30rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            
+            position: relative;
+            max-width: 32rem;
 
-            #me {
-                display: flex;
-                align-items: center;
+            margin-right: 2rem;
+            
+            #profile {
+                margin-bottom: 1.5rem;
+                
+                #me {
+                    display: flex;
+                    align-items: center;
 
-                img {
-                    height: 5rem;
-                    width: 5rem;
-                    margin-right: 1.2rem;
-
-                    border-radius: 100px;
+                    margin-bottom: 1rem;
+    
+                    img {
+                        height: 5rem;
+                        width: 5rem;
+                        margin-right: 1.2rem;
+    
+                        border-radius: 100px;
+                    }
                 }
 
-                margin-bottom: 1rem;
+                #do {
+                    font-size: 0.9rem;
+                    color: $blue;
+                }
+    
             }
-
+            
             p {
                 line-height: 1.5rem;
                 letter-spacing: 0.5px;
                 color: $text;
             }
+
+            #follow {
+                display: flex;
+                align-items: center;
+                margin-top: 0.9rem;
+
+                i {
+                    color: #fff;
+                    font-size: 1.4rem;
+                    margin-right: 1.5rem;
+                }
+
+                a {
+                    transition: filter 200ms ease-out;
+                }
+                a:hover {
+                    filter: drop-shadow(0px 0px 5px #b4aeae);
+                }
+            }
+
+            #subscription-form {
+                width: 80%;
+                app-loading-button {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+            }
         }
 
         #contact-form {
-            position: relative;
-            // width: 100%;
-            max-width: 30rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
-            app-loading-button {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-            }
+            max-width: 30rem;
         }
     }
 
@@ -72,13 +115,13 @@ footer {
         align-items: center;
         justify-content: center;
         
-        width: 70%;
+        width: 80%;
         // max-width: 75rem;
         
-        padding-top: 3rem;
+        padding-top: 4rem;
         margin: 2rem auto;
 
-        border-top: 1px solid darken($color: $white, $amount: 72%);
+        border-top: 1px solid transparentize($color: $text, $amount: 0.7);
         
         * {
             font-family: 'Special Elite', cursive;
@@ -121,6 +164,14 @@ footer {
         }
 
     }
+
+    #copyright {
+        margin-top: 2rem;
+        color: $text;
+        // color: lighten($color: $dark-primary, $amount: 40%);
+    }
+
+
 }
 
 @import './footer.component.mediaquery.scss';

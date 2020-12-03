@@ -7,19 +7,30 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  formData: FormData = new FormData();
-  formGroup: FormGroup = new FormGroup({});
+  messageFormData: FormData = new FormData();
+  messageFormGroup: FormGroup = new FormGroup({});
+
+  subscriptionFormData: FormData = new FormData();
+  subscriptionFormGroup: FormGroup = new FormGroup({});
+
   loading: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.formGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
-    this.formGroup.addControl('message', new FormControl('', [Validators.required]));
+    this.messageFormGroup.addControl('name', new FormControl('', [Validators.required]));
+    this.messageFormGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
+    this.messageFormGroup.addControl('message', new FormControl('', [Validators.required]));
+    
+    this.subscriptionFormGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
   }
 
-  touchedError(name: string): boolean {
-    return this.formGroup.get(name).invalid && (this.formGroup.get(name).touched || this.formGroup.get(name).dirty);
+  messageTouchedError(name: string): boolean {
+    return this.messageFormGroup.get(name).invalid && (this.messageFormGroup.get(name).touched || this.messageFormGroup.get(name).dirty);
+  }
+
+  subscriptionTouchedError(name: string): boolean {
+    return this.subscriptionFormGroup.get(name).invalid && (this.subscriptionFormGroup.get(name).touched || this.subscriptionFormGroup.get(name).dirty);
   }
 
 }

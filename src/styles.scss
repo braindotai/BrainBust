@@ -73,9 +73,11 @@ a {
 }
 
 .container {
-    padding: 5rem;
-    max-width: 100rem;
     position: relative;
+    width: 80%;
+    max-width: 75rem;
+    padding: 5rem 0;
+    margin: 0 auto;
     
     .container-title {
         padding: 3rem 0;
@@ -83,6 +85,10 @@ a {
         color: $white;
         font-size: 3rem;
         text-align: center;
+
+        i {
+            margin-right: 1rem;
+        }
     }
 }
 

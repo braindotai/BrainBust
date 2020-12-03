@@ -4,7 +4,7 @@
         <h1 id="article-title" *ngIf="showName" #h1tags>{{ articleName | titlecase }}</h1>
         <div class="article-author-date-minutes">
             <div class="article-author-date">
-                <img class="article-author-image" src="../../../assets/me.jpg">
+                <img alt="Rishik C. Mourya" class="article-author-image" src="../../../assets/me.jpg">
                 <div class="article-author-name-date">
                     <p class="article-author-name">Rishik C. Mourya</p>
                     <p class="article-date">{{ articleDate | date }}</p>
@@ -17,14 +17,14 @@
                 <p *ngFor="let tag of articleTags">{{ tag }}</p>
             </div>
             <div class="article-framework" *ngIf="articleFramework.length !== 0 && articleFramework !=='none'">
-                <img [src]="articleFramework" alt="framework">
+                <img alt="framework" [src]="articleFramework">
             </div>
         </div>
         <div *ngFor="let field of article; index as index">
             <div class="article-field" [ngSwitch]="field.type" *ngIf="index > 1">
                 <div class="youtube-embed" *ngSwitchCase="'embed'">
                     <a [href]="field.data.source" target="_blank">
-                        <img [src]="getYouTubeThumbnail(field.data.source)" alt="Youtube video for the project">
+                        <img alt="Youtube video for the project" [src]="getYouTubeThumbnail(field.data.source)">
                     </a>
                 </div>
                 <div class="article-heading" *ngSwitchCase="'header'">
@@ -64,7 +64,9 @@
 
 <ng-template #elseblock>
     <div class="container" *ngIf="articles">
-        <h1 class="container-title">Articles Written</h1>
+        <h1 class="container-title">
+            <i class="fas fa-pen-alt"></i>Articles Written
+        </h1>
         <br>
         
         <div *ngIf="articles.length > 0">

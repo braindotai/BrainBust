@@ -23,6 +23,8 @@
 
 section {
     width: 90%;
+    // max-width: 75rem;
+    width: 80%;
     max-width: 75rem;
     position: relative;
     margin: 0 auto;
@@ -73,7 +75,7 @@ section {
     // }
 
     section {
-        width: 95%;
+        width: 85%;
     }
 
     .article-cards {
@@ -81,10 +83,16 @@ section {
     }
 }
 
+@media only screen and (max-width: 950px) {
+    section {
+        width: 90%;
+    }
+}
+
 @media only screen and (max-width: 650px) {
     section {
         .section-title {
-            font-size: 2.1rem;
+            font-size: 2rem;
         }
     }
 }
@@ -99,11 +107,7 @@ section {
     }
 
     section {
-        padding: 2rem 0.6rem;
-
-        .section-title {
-            font-size: 2.2rem;
-        }
+        padding: 2rem 0;
     }
 
     .article-cards {
@@ -120,7 +124,9 @@ section {
     // }
 
     .section-title {
-        // font-size: 1px;
+        * {
+            font-size: 2rem;
+        }
         justify-content: center;
     }
 

@@ -1,57 +1,85 @@
 <footer>
     <div id="footer-container">
         <div id="footer-info">
-            <div id="me">
-                <img src="../../../assets/me.jpg" alt="Rishik C. Mourya">
-                <h1>BrainBust</h1>
+
+            <div id="profile">
+                <div id="me">
+                    <img alt="Rishik C. Mourya" src="../../../assets/me.jpg">
+                    <div>
+                        <h1>BrainBust</h1>
+                        <p>Rishik C. Mourya</p>
+                    </div>
+                </div>
+                <p id="do">
+                    ML Engineer | Web Developer | Magician
+                </p>
             </div>
             <p>
-                Welcome to my portfolio website, where my I'll be showcasing my knowledge through projects, articles and video explainations.
-                My ultimate goal is to laymanize the knowledge I've gained.
-                All my projects are open source, and are available on GitHub profile.
+                Welcome to my website, where my I'll be showcasing my knowledge through projects, articles and video explanations.
+                My ultimate goal is to laymanize the knowledge I've gained and contribute to this generous field with quality content.
+                All my projects are entirely open source, and are available on my GitHub profile.
             </p>
-            <br>
-            <button class="filled-button">Subscribe to newsletter</button>
+            <div id="follow">
+                <a href="https://www.youtube.com/channel/UCdbcIkMaFdRVYXm76TH6qiw/"><i class="fab fa-youtube"></i></a>
+                <a id="abc" href="https://github.com/braindotai"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/braindotai"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/braindotai"><i class="fab fa-facebook"></i></a>
+            </div>
+            <form id="subscription-form" [formGroup]="subscriptionFormGroup" enctype="multipart/form-data">
+                <div class="field">
+                    <input placeholder="Email" type="text" [ngClass]="{'input-error': subscriptionTouchedError('email')}" formControlName="email">
+                    <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors.required">
+                        Email is required
+                    </h2>
+                    <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors?.email">
+                        Email is not valid
+                    </h2>
+                </div>
+
+                <app-loading-button
+                    title="Subscribe"
+                    [disabled]="subscriptionFormGroup.invalid"
+                    [loading]="loading">
+                </app-loading-button>
+            </form>
         </div>
-        <form id="contact-form" [formGroup]="formGroup" enctype="multipart/form-data">
+        <form id="contact-form" [formGroup]="messageFormGroup" enctype="multipart/form-data">
             <h1>Contact Me</h1>
             <div class="field">
                 <div class="text-field">
-                    <input placeholder="Email" type="text" [ngClass]="{'input-error': touchedError('email')}" formControlName="email">
-                    <h2 class="field-error" *ngIf="touchedError('email') && formGroup.get('email').errors.required">
-                        Email is required
-                        <br>
-                        <br>
-                    </h2>
-                    <h2 class="field-error" *ngIf="touchedError('email') && formGroup.get('email').errors?.email">
-                        Email is not valid
-                        <br>
-                        <br>
+                    <input placeholder="Name" type="text" [ngClass]="{'input-error': messageTouchedError('name')}" formControlName="name">
+                    <h2 class="field-error" *ngIf="messageTouchedError('name') && messageFormGroup.get('name').errors.required">
+                        Name is required
                     </h2>
                 </div>
                 <div class="text-field">
-                    <textarea placeholder="Your message..." [ngClass]="{'input-error': touchedError('message')}" formControlName="message" rows="8"></textarea>
-                    <h2 class="field-error" *ngIf="touchedError('message') && formGroup.get('message').errors.required">
+                    <input placeholder="Email" type="text" [ngClass]="{'input-error': messageTouchedError('email')}" formControlName="email">
+                    <h2 class="field-error" *ngIf="messageTouchedError('email') && messageFormGroup.get('email').errors.required">
+                        Email is required
+                    </h2>
+                    <h2 class="field-error" *ngIf="messageTouchedError('email') && messageFormGroup.get('email').errors?.email">
+                        Email is not valid
+                    </h2>
+                </div>
+                <div class="text-field">
+                    <textarea placeholder="Your message..." [ngClass]="{'input-error': messageTouchedError('message')}" formControlName="message" rows="8"></textarea>
+                    <h2 class="field-error" *ngIf="messageTouchedError('message') && messageFormGroup.get('message').errors.required">
                         Message is required
-                        <br>
-                        <br>
                     </h2>
                 </div>
             </div>
 
             <app-loading-button
                 title="Send Message"
-                [disabled]="formGroup.invalid"
+                [disabled]="messageFormGroup.invalid"
                 [loading]="loading">
             </app-loading-button>
         </form>
     </div>
-    <br>
-    <br>
     <div id="quote-copyright">
         <div id="quote">
-            <blockquote>When you know nothing matters,<br>the universe is yours.</blockquote>
-            <cite>- Rick Sanchez</cite>
+            <blockquote>A very fancy quote, you never in your life could understand.</blockquote>
+            <cite>- Name, you never heard before</cite>
         </div>
         <p id="copyright">Copyright &copy; 2020 BrainBust. All Rights Reserved.</p>
     </div>

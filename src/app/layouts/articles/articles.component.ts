@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { ArticleResponse, ArticlesReceived, ArticlesResponse } from 'src/app/models/interface';
 import { ActivatedRoute } from '@angular/router';
-import { Target } from '@angular/compiler';
 
 @Component({
   selector: 'app-articles',
@@ -33,7 +31,6 @@ export class ArticlesComponent implements OnInit {
 
   constructor(
     private service: ApiService,
-    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private renderer: Renderer2
   ) { }
@@ -91,10 +88,6 @@ export class ArticlesComponent implements OnInit {
 
   getArticleLink(articleName: string): string {
     return this.service.getArticleLink(articleName);
-  }
-
-  bypassSecurity(embedLink: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedLink.replace('watch?v=', 'embed/'));
   }
 
   cleanInlineCode(innerHTML: string): string {

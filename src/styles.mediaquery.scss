@@ -1,3 +1,9 @@
+// @media only screen and (max-width: 1260px) {
+//     .container {
+//         padding: 5rem;
+//     }
+// }
+
 @media only screen and (max-width: 850px) {
     .container {
         .container-title {
@@ -8,6 +14,7 @@
 
 @media only screen and (max-width: 650px) {
     .container {
+        width: 100%;
         padding: 3rem 1.5rem;
 
         .container-title {

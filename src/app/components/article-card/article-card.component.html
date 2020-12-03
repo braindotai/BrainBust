@@ -1,21 +1,21 @@
 <div class="article-card" [ngClass]="{'latest-article': latest, 'reverse-row': reverse}">
-    <img class="article-card-wall" [src]="wall" data-aos="fade-down">
+    <img alt="Article Image" class="article-card-wall" [src]="wall">
     <div [ngClass]="{'latest-article-right': latest}">
-        <h1 class="article-card-title">
-            <h3 href="#">{{ title | titlecase }}</h3>
-        </h1>
+        <div class="article-card-title">
+            <h1 href="#">{{ title | titlecase }}</h1>
+        </div>
         <div class="article-card-tags-framework">
             <div class="article-card-tags">
                 <a href="#" *ngFor="let tag of tags">{{ tag }}</a>
             </div>
             <div class="article-card-framework" *ngIf="framework_image.length !== 0">
-                <img [src]="framework_image" alt="Pytorch" *ngIf="framework !== 'none'">
+                <img alt="Framework" [src]="framework_image" alt="Pytorch" *ngIf="framework !== 'none'">
             </div>
         </div>
         <p class="article-card-description" [innerHTML]="description"></p>
         <div class="article-card-author-date-minutes">
             <div class="article-card-author-date">
-                <img class="article-card-author-image" src="../../../assets/me.jpg">
+                <img alt="Rishik C. Mourya" class="article-card-author-image" src="../../../assets/me.jpg">
                 <div class="article-card-author-name-date">
                     <p class="article-card-author-name">Rishik C. Mourya</p>
                     <p class="article-card-date">{{ date | date }}</p>

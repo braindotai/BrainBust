@@ -22,6 +22,7 @@ export class ArticleCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.framework.length !== 0) {
+      this.description = this.description.split(' ').slice(0, 70).join(' ') + '...';
       this.framework_image = `../../../assets/${this.framework}.jpg`;
     }
   }
