@@ -56,9 +56,12 @@ export class ApiService {
 
   projectURL(projectName: string): string {
     let projectShortName: string = '';
-    projectName.split(' ').forEach((substring: string) => {
-      projectShortName += substring[0];
-    })
+    for (let word of projectName.split(' ')) {
+      if (word === 'using') {
+        break
+      }
+      projectShortName += word[0];
+    }
     return `https://brainbust-projectsbackend-${projectShortName}.herokuapp.com/inference/`;
     // return `http://127.0.0.1:7000/inference/`;
   }

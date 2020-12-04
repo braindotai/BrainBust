@@ -64,6 +64,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   loadInference(): void {
+    console.log('loading inference......');
     if (this.projectName){
       this.isDeployed = true;
       this.service.getProjectArguments(this.projectName).subscribe((response: ProjectForm) => {

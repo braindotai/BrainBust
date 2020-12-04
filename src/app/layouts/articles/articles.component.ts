@@ -52,6 +52,7 @@ export class ArticlesComponent implements OnInit {
           this.articleMinutes = response.received.minutes;
           this.articleTags = response.received.tags;
 
+          console.log('response.received.has_deployed:', response.received.has_deployed);
           if (response.received.has_deployed) {
             this.loadInference.emit();
           }
@@ -67,7 +68,6 @@ export class ArticlesComponent implements OnInit {
           this.article = jsonResponse.blocks;
           // console.log(this.article);
           this.articleEditURL = `${this.service.articleURL(this.articleName.split(' ').join('-'))}/edit-article`;
-          console.log('object');
         } else {
           // console.log(response);
         }
