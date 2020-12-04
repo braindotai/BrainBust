@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
+    this.scrollToTop();
   }
 
   get getPercent(): number {

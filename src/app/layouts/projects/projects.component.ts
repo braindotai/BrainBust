@@ -21,7 +21,7 @@ export class ProjectsComponent implements OnInit {
   projects: ArticlesReceived[];
 
   projectName: string;
-  isDeployed: boolean;
+  isDeployed: boolean = false;
 
   formFields: ProjectField[];
   formGroup: FormGroup = new FormGroup({});
@@ -46,66 +46,73 @@ export class ProjectsComponent implements OnInit {
     this.title.setTitle('BrainBust - Projects');
     this.route.paramMap.subscribe(params => {
       this.projectName = params.get('projectName');
-      
-      if (this.projectName){
+
+      if (this.projectName) {
         this.projectName = this.projectName.split('-').join(' ');
-        
-        this.service.getProjectArguments(this.projectName).subscribe((response: ProjectForm) => {
-          this.formFields = response.form;
-          this.submitButton = response.submitButton;
-    
-          this.formFields.forEach(field => {
-            field.help = '';
-            
-            let validators = [];
-            validators.push(Validators.required);
-            
-            if (field.validations) {
-              Object.keys(field.validations).forEach(validationType => {
-                let threshold = field.validations[validationType];
-    
-                switch (validationType) {
-                  case 'minlength':
-                    validators.push(Validators.minLength(threshold));
-                    field.help += `Must contain ${threshold} to`;
-                    break;
-                  case 'maxlength':
-                    validators.push(Validators.maxLength(threshold));
-                    field.help += ` ${threshold} characters`;
-                    break;
-                  case 'min':
-                    validators.push(Validators.min(threshold))
-                    field.help += `Value must be from ${threshold}`;
-                    break;
-                  case 'max':
-                    validators.push(Validators.max(threshold));
-                    field.help += ` to ${threshold}`
-                    break;          
-                  default:
-                    break;
-                }
-              });
-            }
-    
-            this.formGroup.addControl(field.name, new FormControl('', validators));
-            
-            if (field.type === 'image') {
-              this.formImageSrc[field.name] = '';
-            }
-          })
-          this.projectLoading = false;
-        })
-        
-      } else {
+      }
+      else {
         this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
           this.projects = response.received;
-          setTimeout(() => {
-            this.articleLoading = false;
-          }, 1000);
+          this.projects.sort((a, b) => {return b.date - a.date})
+          
+          this.articleLoading = false;
+          // setTimeout(() => {
+          // }, 1000);
         })
       }
-      
     });
+  }
+
+  loadInference(): void {
+    if (this.projectName){
+      this.isDeployed = true;
+      this.service.getProjectArguments(this.projectName).subscribe((response: ProjectForm) => {
+        this.formFields = response.form;
+        this.submitButton = response.submitButton;
+  
+        this.formFields.forEach(field => {
+          field.help = '';
+          
+          let validators = [];
+          validators.push(Validators.required);
+          
+          if (field.validations) {
+            Object.keys(field.validations).forEach(validationType => {
+              let threshold = field.validations[validationType];
+  
+              switch (validationType) {
+                case 'minlength':
+                  validators.push(Validators.minLength(threshold));
+                  field.help += `Must contain ${threshold} to`;
+                  break;
+                case 'maxlength':
+                  validators.push(Validators.maxLength(threshold));
+                  field.help += ` ${threshold} characters`;
+                  break;
+                case 'min':
+                  validators.push(Validators.min(threshold))
+                  field.help += `Value must be from ${threshold}`;
+                  break;
+                case 'max':
+                  validators.push(Validators.max(threshold));
+                  field.help += ` to ${threshold}`
+                  break;          
+                default:
+                  break;
+              }
+            });
+          }
+  
+          this.formGroup.addControl(field.name, new FormControl('', validators));
+          
+          if (field.type === 'image') {
+            this.formImageSrc[field.name] = '';
+          }
+        })
+        this.projectLoading = false;
+      })
+      
+    }
   }
   
   getProjectLink(projecName: string): string {

@@ -1,95 +1,97 @@
 <app-loading-screen [loading]="pageLoading"></app-loading-screen>
-<div class="container" *ngIf="projectName else elseblock">
-    <h1 class="container-title">{{ projectName | titlecase }}</h1>
-    <form [formGroup]="formGroup" (ngSubmit)="runInference()" enctype="multipart/form-data">
-        <!-- <p style="color: #fff">Value: {{ formGroup.value | json }}</p> -->
-        <div class="field" *ngFor="let field of this.formFields">
-            <div class="text-field" *ngIf="field.type != 'image' else elseField">
-                <h2 class="field-title">{{ field.title }}</h2>
-                <input [type]="field.type" [ngClass]="{'input-error': touchedError(field.name)}" [formControlName]="field.name">
-                <h2 class="field-help">{{ field.message }}</h2>
-                <h2 class="field-help">{{ field.help }}</h2>
-                
-                <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.required">
-                    This field is required
-                </h2>
-                
-                <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.minlength">
-                    Must contain at least {{ field.validations['minlength'] }} characters
-                </h2>
-                
-                <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.maxlength">
-                    Max {{ field.validations['maxlength'] }} characters are allowed
-                </h2>
-                
-                <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.min">
-                    Value must be more than {{ field.validations['min'] }}
-                </h2>
-                
-                <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.max">
-                    Value must be less than {{ field.validations['max'] }}
-                </h2>
+<div class="container" *ngIf="projectName else elseblock" [ngClass]="{'no-pad': !isDeployed}">
+    <div *ngIf="isDeployed">
+        <h1 class="container-title">{{ projectName | titlecase }}</h1>
+        <form [formGroup]="formGroup" (ngSubmit)="runInference()" enctype="multipart/form-data">
+            <!-- <p style="color: #fff">Value: {{ formGroup.value | json }}</p> -->
+            <div class="field" *ngFor="let field of this.formFields">
+                <div class="text-field" *ngIf="field.type != 'image' else elseField">
+                    <h2 class="field-title">{{ field.title }}</h2>
+                    <input [type]="field.type" [ngClass]="{'input-error': touchedError(field.name)}" [formControlName]="field.name">
+                    <h2 class="field-help">{{ field.message }}</h2>
+                    <h2 class="field-help">{{ field.help }}</h2>
+                    
+                    <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.required">
+                        This field is required
+                    </h2>
+                    
+                    <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.minlength">
+                        Must contain at least {{ field.validations['minlength'] }} characters
+                    </h2>
+                    
+                    <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.maxlength">
+                        Max {{ field.validations['maxlength'] }} characters are allowed
+                    </h2>
+                    
+                    <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.min">
+                        Value must be more than {{ field.validations['min'] }}
+                    </h2>
+                    
+                    <h2 class="field-error" *ngIf="touchedError(field.name) && formGroup.get(field.name).errors.max">
+                        Value must be less than {{ field.validations['max'] }}
+                    </h2>
+                </div>
+    
+                <ng-template #elseField>
+                    <input
+                        type="file"
+                        accept="image/jpg,image/jpeg,image/png,image/x-png"
+                        [id]="field.name"
+                        style="display: none;"
+                        [formControlName]="field.name"
+                        (change)="uploadImage($event, field.name)">
+    
+                    <label
+                        [for]="field.name"label
+                        class="upload-button filled-button" [ngClass]="{'disabled': inferenceLoading}">
+                        {{ field.title }}
+                    </label>
+    
+                    <h2 class="field-help">{{ field.message }}</h2>
+                    <h2 class="field-help">{{ field.help }}</h2>
+    
+                    <img class="image-preview"
+                        [id]="imageName(field.name)"
+                        [src]="formImageSrc[field.name]"
+                        [alt]="field.alt"
+                        [ngStyle]="field.style"
+                        *ngIf="formImageSrc[field.name].length !== 0 && !touchedError(field.name)">
+                    
+                    <h2 class="field-error" *ngIf="touchedError(field.name)">Image is required</h2>
+                </ng-template>
             </div>
-
-            <ng-template #elseField>
-                <input
-                    type="file"
-                    accept="image/jpg,image/jpeg,image/png,image/x-png"
-                    [id]="field.name"
-                    style="display: none;"
-                    [formControlName]="field.name"
-                    (change)="uploadImage($event, field.name)">
-
-                <label
-                    [for]="field.name"label
-                    class="upload-button filled-button" [ngClass]="{'disabled': inferenceLoading}">
-                    {{ field.title }}
-                </label>
-
-                <h2 class="field-help">{{ field.message }}</h2>
-                <h2 class="field-help">{{ field.help }}</h2>
-
-                <img class="image-preview"
-                    [id]="imageName(field.name)"
-                    [src]="formImageSrc[field.name]"
-                    [alt]="field.alt"
-                    [ngStyle]="field.style"
-                    *ngIf="formImageSrc[field.name].length !== 0 && !touchedError(field.name)">
-                
-                <h2 class="field-error" *ngIf="touchedError(field.name)">Image is required</h2>
-            </ng-template>
-        </div>
-
-        <app-loading-button
-            [title]="submitButton"
-            [disabled]="formGroup.invalid"
-            [loading]="inferenceLoading"
-            [projectLoading]="projectLoading">
-        </app-loading-button>
-    </form>
-
-    <div id="inference-outputs" *ngIf="projectInferenceResponse" #inferenceoutputs>
-        <h1>Inference Outputs</h1>
-        <div class="output-group" *ngIf="projectInferenceResponse.received.image_output">
-            <h2>
-                <span><i class="fas fa-images"></i>&nbsp;&nbsp;Image output</span>
-                <a id="download" [href]="outputImageSrc" download="image-outputs">
-                    <i class="fas fa-download"></i>
-                </a>
-            </h2>
-            <div id="image-output">
-                <img class="image-preview " [src]="outputImageSrc" [ngStyle]="projectInferenceResponse.received.image_output.style">
+    
+            <app-loading-button
+                [title]="submitButton"
+                [disabled]="formGroup.invalid"
+                [loading]="inferenceLoading"
+                [projectLoading]="projectLoading">
+            </app-loading-button>
+        </form>
+    
+        <div id="inference-outputs" *ngIf="projectInferenceResponse" #inferenceoutputs>
+            <h1>Inference Outputs</h1>
+            <div class="output-group" *ngIf="projectInferenceResponse.received.image_output">
+                <h2>
+                    <span><i class="fas fa-images"></i>&nbsp;&nbsp;Image output</span>
+                    <a id="download" [href]="outputImageSrc" download="image-outputs">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </h2>
+                <div id="image-output">
+                    <img class="image-preview " [src]="outputImageSrc" [ngStyle]="projectInferenceResponse.received.image_output.style">
+                </div>
             </div>
-        </div>
-        <div class="output-group" *ngIf="projectInferenceResponse.received.json_output">
-            <h2>
-                <span><i class="fas fa-network-wired" title="Download image output"></i>&nbsp;&nbsp;JSON output</span>
-            </h2>
-            <!-- <textarea highlight-js [options]="{}" [lang]="'json'" [innerHTML]="projectInferenceResponse.received.json_output | json"></textarea> -->
-            <p class="json-output">{{ projectInferenceResponse.received.json_output | json }}</p>
+            <div class="output-group" *ngIf="projectInferenceResponse.received.json_output">
+                <h2>
+                    <span><i class="fas fa-network-wired" title="Download image output"></i>&nbsp;&nbsp;JSON output</span>
+                </h2>
+                <!-- <textarea highlight-js [options]="{}" [lang]="'json'" [innerHTML]="projectInferenceResponse.received.json_output | json"></textarea> -->
+                <p class="json-output">{{ projectInferenceResponse.received.json_output | json }}</p>
+            </div>
         </div>
     </div>
-    <app-articles (pageLoaded)="articleLoaded()" [showPageLoading]="false" [articleName]="projectName" [showName]="false" [pageLoading]="articleLoading"></app-articles>
+    <app-articles (loadInference)="loadInference()" (pageLoaded)="articleLoaded()" [showPageLoading]="false" [articleName]="projectName" [showName]="!isDeployed" [pageLoading]="articleLoading"></app-articles>
 </div>
 
 <ng-template #elseblock>
@@ -100,7 +102,7 @@
         <br>
 
         <div *ngIf="projects">
-            <app-article-card 
+            <!-- <app-article-card 
                 [wall]="projects[0].wall"
                 [tags]="projects[0].tags"
                 [framework]="projects[0].framework"
@@ -122,7 +124,7 @@
                 [latest]="true"
                 [reverse]="true"
                 [routerLink]="getProjectLink(projects[1].title)">
-            </app-article-card>
+            </app-article-card> -->
             
             <div class="article-cards">
                 <app-article-card
@@ -132,9 +134,9 @@
                 [title]="project.title"
                 [description]="project.description"
                 [date]="project.date"
-                minutes="2 MIN READ"
+                [minutes]="project.minutes"
                 [routerLink]="getProjectLink(project.title)"
-                *ngFor="let project of projects.slice(2)">
+                *ngFor="let project of projects">
                 </app-article-card>
             </div>
         </div>

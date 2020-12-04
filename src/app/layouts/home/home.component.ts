@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) =>  {
       this.projectArticles = response.received;
+      this.projectArticles.sort((a, b) => {return a.minutes - b.minutes});
       
       // setTimeout(() => {
       //   this.pageLoading = false;
@@ -25,9 +26,9 @@ export class HomeComponent implements OnInit {
     this.service.receiveArticles().subscribe((response: ArticlesResponse) =>  {
       this.articles = response.received;
       
-      setTimeout(() => {
-        this.pageLoading = false;
-      }, 2000);
+      this.pageLoading = false;
+      // setTimeout(() => {
+      // }, 2000);
     })
   }
 

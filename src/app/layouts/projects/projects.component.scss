@@ -1,13 +1,12 @@
 @import '../../../styles.variables.scss';
 @import '../../../styles.mixins.scss';
 
-.article-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
-}
-
 label {
     text-align: center;
+}
+
+.no-pad {
+    padding-top: 0;
 }
 
 #inference-outputs {

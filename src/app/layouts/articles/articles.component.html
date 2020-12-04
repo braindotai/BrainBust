@@ -70,14 +70,14 @@
         <br>
         
         <div *ngIf="articles.length > 0">
-            <app-article-card 
+            <!-- <app-article-card 
             [wall]="articles[0].wall"
             [tags]="articles[0].tags"
             [framework]="articles[0].framework"
             [title]="articles[0].title"
             [description]="articles[0].description"
             [date]="articles[0].date"
-            minutes="2 MIN READ"
+            [minutes]="articles[1].minutes"
             [latest]="true"
             [routerLink]="getArticleLink(articles[0].title)">
             </app-article-card>
@@ -88,11 +88,11 @@
             [title]="articles[1].title"
             [description]="articles[1].description"
             [date]="articles[1].date"
-            minutes="2 MIN READ"
+            [minutes]="articles[1].minutes"
             [latest]="true"
             [reverse]="true"
             [routerLink]="getArticleLink(articles[1].title)">
-            </app-article-card>
+            </app-article-card> -->
 
             <div class="article-cards">
                 <app-article-card
@@ -102,9 +102,9 @@
                 [title]="article.title"
                 [description]="article.description"
                 [date]="article.date"
-                minutes="2 MIN READ"
+                [minutes]="article.minutes"
                 [routerLink]="getArticleLink(article.title)"
-                *ngFor="let article of articles.slice(2)">
+                *ngFor="let article of articles">
                 </app-article-card>
             </div>
             <!-- <app-article-card
@@ -114,7 +114,7 @@
             [title]="article.title"
             [description]="article.description"
             [date]="article.date"
-            minutes="2 MIN READ"
+            [minutes]="2 MIN READ"
             [routerLink]="getArticleLink(article.title)"
             *ngFor="let article of articles.slice(2)">
             </app-article-card> -->

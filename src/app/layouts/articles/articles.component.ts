@@ -17,6 +17,7 @@ export class ArticlesComponent implements OnInit {
   @Input('showPageLoading') showPageLoading: boolean = true;
 
   @Output('pageLoaded') pageLoaded = new EventEmitter<null>();
+  @Output('loadInference') loadInference = new EventEmitter<null>();
 
   articles: ArticlesReceived[];
   
@@ -50,6 +51,10 @@ export class ArticlesComponent implements OnInit {
           this.articleDate = jsonResponse.time;
           this.articleMinutes = response.received.minutes;
           this.articleTags = response.received.tags;
+
+          if (response.received.has_deployed) {
+            this.loadInference.emit();
+          }
           
           if (response.received.framework.length !== 0) {
             if (response.received.framework !== 'none') {
@@ -62,17 +67,19 @@ export class ArticlesComponent implements OnInit {
           this.article = jsonResponse.blocks;
           // console.log(this.article);
           this.articleEditURL = `${this.service.articleURL(this.articleName.split(' ').join('-'))}/edit-article`;
+          console.log('object');
         } else {
           // console.log(response);
         }
-        if (this.showName) {
-          setTimeout(() => {
-            this.pageLoading = false;
-          });
-        } else {
-          // console.log('emiting completed...');
+        setTimeout(() => {
+          this.pageLoading = false;
           this.pageLoaded.emit();
-        }
+        });
+        // if (this.showName) {
+        // } else {
+        //   // console.log('emiting completed...');
+        //   this.pageLoaded.emit();
+        // }
       })
     } else {
       this.service.receiveArticles().subscribe((response: ArticlesResponse) => {

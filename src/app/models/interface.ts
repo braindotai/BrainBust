@@ -1,3 +1,4 @@
+// [======== project inference ========]
 export class ProjectField {
     type: string;
     title: string;
@@ -25,9 +26,11 @@ export interface ProjectInferenceResponse {
     received: ProjectInferenceReceived;
 };
 
+// [======== articles ========]
 interface ArticleReceived {
     content: string;
     has_project: boolean;
+    has_deployed: boolean;
     tags: Array<string>;
     framework: string;
     minutes: number;
@@ -55,7 +58,7 @@ export interface ArticlesResponse {
     received: ArticlesReceived[];
 };
 
-
+// [======== editor js ========]
 class EditorField {
     type: string;
     data = new Array();

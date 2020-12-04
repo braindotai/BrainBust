@@ -18,7 +18,7 @@
             [title]="articles[0].title"
             [description]="articles[0].description"
             [date]="articles[0].date"
-            minutes="2 MIN READ"
+            [minutes]="articles[0].minutes"
             [latest]="true"
             [routerLink]="getArticleLink(articles[0].title)">
         </app-article-card>
@@ -29,7 +29,7 @@
             [title]="articles[1].title"
             [description]="articles[1].description"
             [date]="articles[1].date"
-            minutes="2 MIN READ"
+            [minutes]="articles[1].minutes"
             [latest]="true"
             [reverse]="true"
             [routerLink]="getArticleLink(articles[1].title)">
@@ -52,43 +52,45 @@
 
     <div id="latest" *ngIf="projectArticles.length > 1">
         <app-article-card 
-            [wall]="projectArticles[0].wall"
-            [tags]="projectArticles[0].tags"
-            [framework]="projectArticles[0].framework"
-            [title]="projectArticles[0].title"
-            [description]="projectArticles[0].description"
-            [date]="projectArticles[0].date"
-            minutes="2 MIN READ"
+            [wall]="projectArticle.wall"
+            [tags]="projectArticle.tags"
+            [framework]="projectArticle.framework"
+            [title]="projectArticle.title"
+            [description]="projectArticle.description"
+            [date]="projectArticle.date"
+            [minutes]="projectArticle.minutes"
             [latest]="true"
-            [routerLink]="getProjectLink(projectArticles[0].title)">
+            [reverse]="index % 2 === 0"
+            [routerLink]="getProjectLink(projectArticle.title)"
+            *ngFor="let projectArticle of projectArticles; let index = index">
         </app-article-card>
-        <app-article-card
+        <!-- <app-article-card
             [wall]="projectArticles[1].wall"
             [tags]="projectArticles[1].tags"
             [framework]="projectArticles[1].framework"
             [title]="projectArticles[1].title"
             [description]="projectArticles[1].description"
             [date]="projectArticles[1].date"
-            minutes="2 MIN READ"
+            [minutes]="projectArticles[1].minutes"
             [latest]="true"
             [reverse]="true"
             [routerLink]="getProjectLink(projectArticles[1].title)">
-        </app-article-card>
+        </app-article-card> -->
     </div>
 
-    <div class="article-cards">
+    <!-- <div class="article-cards">
         <app-article-card 
-            [wall]="project.wall"
-            [tags]="project.tags"
-            [framework]="project.framework"
-            [title]="project.title"
-            [description]="project.description"
-            [date]="project.date"
-            minutes="2 MIN READ"
-            [routerLink]="getProjectLink(project.title)"
-            *ngFor="let project of projectArticles | slice:2">
+            [wall]="projectArticle.wall"
+            [tags]="projectArticle.tags"
+            [framework]="projectArticle.framework"
+            [title]="projectArticle.title"
+            [description]="projectArticle.description"
+            [date]="projectArticle.date"
+            [minutes]="projectArticle.minutes"
+            [routerLink]="getProjectLink(projectArticle.title)"
+            *ngFor="let projectArticle of projectArticles | slice:2">
         </app-article-card>
-    </div>
+    </div> -->
 
     <div class="section-read-more">
         <button routerLink="/projects" class="round-button">
