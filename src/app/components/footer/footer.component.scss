@@ -15,6 +15,7 @@ footer {
 
     border-top: 1px solid lighten($color: $dark-primary, $amount: 10%);
     background: linear-gradient(0deg, #00000000, $dark-primary);
+    background-color: $dark-primary;
 
     #footer-container {
         display: flex;
@@ -72,16 +73,15 @@ footer {
                 margin-top: 0.9rem;
 
                 i {
-                    color: #fff;
+                    color: darken($color: $white, $amount: 15%);
                     font-size: 1.4rem;
                     margin-right: 1.5rem;
-                }
+                    
+                    transition: color 200ms ease-out;
 
-                a {
-                    transition: filter 200ms ease-out;
-                }
-                a:hover {
-                    filter: drop-shadow(0px 0px 5px #b4aeae);
+                    &:hover {
+                        color: #fff;
+                    }
                 }
             }
 

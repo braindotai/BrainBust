@@ -129,7 +129,10 @@ export class EditorComponent implements OnInit {
         // 2 - tags
         // 3 - framework
         // 4 - wall
-        // 5 - description (with title title "Article Overview")
+        // 5 - description (with title "Article Overview")
+        // 6 - ...
+        // 7 - ...
+        // 8 - ...
         // 
         this.formData.append('title', content.blocks.shift().data.text.toLocaleLowerCase());
         this.formData.append('content', JSON.stringify(content));

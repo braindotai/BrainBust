@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ApiService } from '../../services/ApiService/api-service.service';
-import { ProjectField, ProjectForm, ProjectInferenceResponse, ArticleResponse, ArticlesResponse, ArticlesReceived } from 'src/app/models/interface';
+import { ProjectField, ProjectForm, ProjectInferenceResponse, ArticlesResponse, ArticlesReceived } from 'src/app/models/interface';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -21,6 +21,7 @@ export class ProjectsComponent implements OnInit {
   projects: ArticlesReceived[];
 
   projectName: string;
+  isDeployed: boolean;
 
   formFields: ProjectField[];
   formGroup: FormGroup = new FormGroup({});

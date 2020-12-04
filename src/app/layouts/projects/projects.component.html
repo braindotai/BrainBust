@@ -123,6 +123,21 @@
                 [reverse]="true"
                 [routerLink]="getProjectLink(projects[1].title)">
             </app-article-card>
+            
+            <div class="article-cards">
+                <app-article-card
+                [wall]="project.wall"
+                [tags]="project.tags"
+                [framework]="project.framework"
+                [title]="project.title"
+                [description]="project.description"
+                [date]="project.date"
+                minutes="2 MIN READ"
+                [routerLink]="getProjectLink(project.title)"
+                *ngFor="let project of projects.slice(2)">
+                </app-article-card>
+            </div>
         </div>
+
     </div>
 </ng-template>

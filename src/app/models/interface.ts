@@ -46,6 +46,7 @@ export interface ArticlesReceived {
     wall: string;
     title: string;
     description: string;
+    minutes: number;
 };
 
 export interface ArticlesResponse {

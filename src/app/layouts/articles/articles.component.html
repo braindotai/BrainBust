@@ -93,6 +93,31 @@
             [reverse]="true"
             [routerLink]="getArticleLink(articles[1].title)">
             </app-article-card>
+
+            <div class="article-cards">
+                <app-article-card
+                [wall]="article.wall"
+                [tags]="article.tags"
+                [framework]="article.framework"
+                [title]="article.title"
+                [description]="article.description"
+                [date]="article.date"
+                minutes="2 MIN READ"
+                [routerLink]="getArticleLink(article.title)"
+                *ngFor="let article of articles.slice(2)">
+                </app-article-card>
+            </div>
+            <!-- <app-article-card
+            [wall]="article.wall"
+            [tags]="article.tags"
+            [framework]="article.framework"
+            [title]="article.title"
+            [description]="article.description"
+            [date]="article.date"
+            minutes="2 MIN READ"
+            [routerLink]="getArticleLink(article.title)"
+            *ngFor="let article of articles.slice(2)">
+            </app-article-card> -->
         </div>
         
         <!-- <a routerLink="/write-article">
