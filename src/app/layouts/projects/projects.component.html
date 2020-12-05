@@ -1,5 +1,5 @@
 <app-loading-screen [loading]="pageLoading"></app-loading-screen>
-<div class="container" *ngIf="projectName else elseblock" [ngClass]="{'no-pad': !isDeployed}">
+<div *ngIf="projectName else elseblock" [ngClass]="{'container': isDeployed, 'no-pad': !isDeployed}">
     <div *ngIf="isDeployed">
         <h1 class="container-title">{{ projectName | titlecase }}</h1>
         <form [formGroup]="formGroup" (ngSubmit)="runInference()" enctype="multipart/form-data">

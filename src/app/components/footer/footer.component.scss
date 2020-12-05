@@ -13,7 +13,7 @@ footer {
     // box-shadow: 0 0 10px 0 lighten($color: $dark-primary, $amount: 10%);
     // background-color: transparentize($color: $dark-primary, $amount: 1.0);
 
-    border-top: 2px solid transparentize($color: $text, $amount: 0.7);
+    border-top: 1px solid transparentize($color: $text, $amount: 0.7);
     background: linear-gradient(0deg, #00000000, $dark-primary);
     background-color: $dark-primary;
 

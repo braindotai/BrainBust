@@ -2,18 +2,18 @@
 @import '../../../styles.mixins.scss';
 
 .blur {
-    background-color: transparentize($color: $dark-primary, $amount: 0.6);
+    background-color: transparentize($color: $dark-primary, $amount: 0.5);
     backdrop-filter: blur(55px);
     box-shadow: 0 0 30px 0 $dark-primary;
 }
 
 header {
-    @include flexRowSpaceBetween();
-
     position: fixed;
     top: 0;
 
-    padding: 0 1rem;
+    // padding: 0 20rem;
+    @include flexRowSpaceBetween();
+    align-items: center;
     
     height: 4rem;
     width: 100%;
@@ -22,13 +22,23 @@ header {
     
     z-index: 9;
 
-    transition: background-color box-shadow 5000ms ease-out;
+    transition: opacity 200ms ease-out, height 200ms ease-out;
+
+    #header-container {
+        @include flexRowSpaceBetween();
+
+        margin: 0 auto;
+
+        width: 80%;
+        max-width: 75rem;
+    }
 
     #logo {
         color: #fff;
         font-size: 1.8rem;
         font-weight: 700;
     }
+
 }
 
 .link-button {
@@ -40,15 +50,17 @@ header {
         
         padding: 0.4rem 0rem;
         margin: 0 1.2rem;
-    
-        color: #bec2c5;
+
+        
+        color: #a5aaac;
         font-size: 0.9rem;
         font-weight: 500;
-    
+        
         background-color: transparent;
-        outline: none;
         border: none;
-    
+        height: 100%;
+        
+
         transition: all 200ms ease-out;
     
         i {
@@ -58,7 +70,7 @@ header {
 
         &:before {
             content: '';
-            border-bottom: 2px solid #ffffff;
+            border-bottom: 2px solid #808080;
             border-radius: 10px;
             position: absolute;
             bottom: 0;
@@ -119,6 +131,11 @@ header {
     header {
         height: 3.5rem;
         z-index: 11;
+
+        #header-container {
+            width: 100%;
+            padding: 0 0.8rem;
+        }
     }
 
     nav {

@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   
   isBurgerMenuOpen: boolean = false;
   currentScrollPosition = window.pageYOffset;
+  previousScrollPosition = window.pageYOffset;
 
   constructor(private renderer: Renderer2) { }
 
@@ -27,13 +28,14 @@ export class HeaderComponent implements OnInit {
   scrollEvent() {
     this.currentScrollPosition = window.pageYOffset;
 
-    // if (this.previousScrollPosition > currentScrollPosition) {
-    //   this.renderer.setStyle(this.header.nativeElement, 'top', '0');
-    // } else if (!this.isBurgerMenuOpen && this.scrollPosition > 60) {
-    //   this.renderer.setStyle(this.header.nativeElement, 'top', '-4rem');
-    // }
+    if (this.currentScrollPosition > this.previousScrollPosition && this.currentScrollPosition > 40) {
+      this.renderer.setStyle(this.header.nativeElement, 'height', '3.4rem');
+    } else if (!this.isBurgerMenuOpen && this.currentScrollPosition > 40) {
+      this.renderer.setStyle(this.header.nativeElement, 'height', '4rem');
+      // this.renderer.setStyle(this.header.nativeElement, 'top', '-4rem');
+    }
     
-    // this.previousScrollPosition = currentScrollPosition;
+    this.previousScrollPosition = this.currentScrollPosition;
   }
 
   get notOnTop(): boolean {
