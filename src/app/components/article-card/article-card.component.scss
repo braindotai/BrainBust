@@ -10,10 +10,6 @@
             opacity: 1;
             transform: scale(0.98);
         }
-
-        // .article-card-title a {
-        //     color: white;
-        // }
     }
 
     .article-card-tags-framework {
@@ -59,6 +55,8 @@
         box-shadow: 0 0 15px 0 $dark-primary;
         opacity: 0.85;
 
+        perspective: 1000px;
+
         transition: all 250ms ease-out;
     }
 
@@ -73,8 +71,8 @@
     }
 
     .article-card-description {
-        font-size: 0.9rem;
         color: $text;
+        font-size: 0.9rem;
         line-height: 1.5rem;
         letter-spacing: 0.5px;
     }

@@ -2,7 +2,7 @@
 @import '../../../styles.mixins.scss';
 
 .blur {
-    background-color: transparentize($color: $dark-primary, $amount: 0.5);
+    background-color: transparentize($color: $dark-primary, $amount: 0.45);
     backdrop-filter: blur(55px);
     box-shadow: 0 0 30px 0 $dark-primary;
 }
@@ -68,22 +68,22 @@ header {
             margin-right: 0.5rem;
         }
 
-        &:before {
-            content: '';
-            border-bottom: 2px solid #808080;
-            border-radius: 10px;
-            position: absolute;
-            bottom: 0;
-            // left: 0;
-            // right: 0;
-            margin: 0 auto;
-            width: 0;
-            transition: 0.25s;
-        }
+        // &:before {
+        //     content: '';
+        //     border-bottom: 2px solid #808080;
+        //     border-radius: 10px;
+        //     position: absolute;
+        //     bottom: 0;
+        //     // left: 0;
+        //     // right: 0;
+        //     margin: 0 auto;
+        //     width: 0;
+        //     transition: 0.25s;
+        // }
 
-        &:hover {
-            cursor: pointer;
-        }
+        // &:hover {
+        //     cursor: pointer;
+        // }
     }
 }
 

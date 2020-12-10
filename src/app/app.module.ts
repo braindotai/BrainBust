@@ -16,6 +16,7 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
 import { EditorComponent } from './layouts/editor/editor.component';
 import { FadeBackgroundComponent } from './components/fade-background/fade-background.component';
 import { AuthenticateComponent } from './layouts/authenticate/authenticate.component';
+import { UnsubscribeComponent } from './layouts/unsubscribe/unsubscribe.component';
 
 import { ApiService } from './services/ApiService/api-service.service';
 
@@ -40,6 +41,7 @@ import { HighlightJsModule } from 'ngx-highlight-js';
     EditorComponent,
     FadeBackgroundComponent,
     AuthenticateComponent,
+    UnsubscribeComponent,
   ],
   imports: [
     BrowserModule,

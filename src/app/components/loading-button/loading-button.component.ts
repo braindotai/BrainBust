@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-loading-button',
@@ -11,8 +11,16 @@ export class LoadingButtonComponent implements OnInit {
   @Input('loading') loading: boolean;
   @Input('projectLoading') projectLoading: boolean;
 
+  @Output('clickEvent') clickEvent = new EventEmitter<null>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  onClick(): void {
+    this.clickEvent.emit();
+  }
+
+
 }

@@ -27,8 +27,8 @@
                         <img alt="Youtube video for the project" [src]="getYouTubeThumbnail(field.data.source)">
                     </a>
                 </div>
-                <div class="article-heading" *ngSwitchCase="'header'">
-                    <h1 [innerHTML]="field.data.text"></h1>
+                <div class="article-heading" *ngSwitchCase="'header'" [id]="headingID(field.data.text)">
+                    <h1 [innerHTML]="field.data.text" [ngClass]="{'subheading': field.data.level === 2}"></h1>
                 </div>
                 <div class="article-paragraph" *ngSwitchCase="'paragraph'">
                     <p [innerHTML]="cleanParagraph(field.data.text)"></p>
@@ -59,6 +59,17 @@
         <!-- <a routerLink="write-article">
             <button class="filled-button center-button">Edit Article</button>
         </a> -->
+    </div>
+
+    <div id="article-index" #articleindex>
+        <div *ngFor="let field of article; index as index">
+            <div class="article-index-item" *ngIf="field.type === 'header'" [ngClass]="{'visible': isHeadingVisible(field.data.text)}" (click)="scrollToHeading(headingID(field.data.text))">
+                <div [ngClass]="{'article-index-heading': field.data.level === 1, 'article-index-subheading': field.data.level === 2}">
+                    <i class="fas fa-minus" *ngIf="field.data.level === 1"></i>
+                    <p style="display: inline;" [innerHTML]="field.data.text.slice(0, 24) + '...'"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

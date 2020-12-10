@@ -1,12 +1,11 @@
 <footer>
     <div id="footer-container">
         <div id="footer-info">
-
             <div id="profile">
                 <div id="me">
                     <img alt="Rishik C. Mourya" src="../../../assets/me.jpg">
                     <div>
-                        <h1>BrainBust</h1>
+                        <h1>Brain Bust</h1>
                         <p>Rishik C. Mourya</p>
                     </div>
                 </div>
@@ -15,7 +14,7 @@
                 </p>
             </div>
             <p>
-                Welcome to my website, where my I'll be showcasing my knowledge through projects, articles and video explanations.
+                Welcome to my website, where I'll be showcasing my knowledge through projects, articles and video explanations.
                 My ultimate goal is to laymanize the knowledge I've gained and contribute to this generous field with quality content.
                 All my projects are entirely open source, and are available on my GitHub profile.
             </p>
@@ -25,7 +24,7 @@
                 <a href="https://github.com/braindotai"><i class="fab fa-twitter"></i></a>
                 <a href="https://github.com/braindotai"><i class="fab fa-facebook"></i></a>
             </div>
-            <form id="subscription-form" [formGroup]="subscriptionFormGroup" enctype="multipart/form-data">
+            <form id="subscription-form" [formGroup]="subscriptionFormGroup" (ngSubmit)="subscribe()" enctype="multipart/form-data">
                 <div class="field">
                     <input placeholder="Email" type="text" [ngClass]="{'input-error': subscriptionTouchedError('email')}" formControlName="email">
                     <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors.required">
@@ -34,12 +33,15 @@
                     <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors?.email">
                         Email is not valid
                     </h2>
+                    <h2 class="field-help" *ngIf="subscriptionResponseMessage">
+                        {{ subscriptionResponseMessage }}
+                    </h2>
                 </div>
-
+                
                 <app-loading-button
                     title="Subscribe to my newsletter"
                     [disabled]="subscriptionFormGroup.invalid"
-                    [loading]="loading">
+                    [loading]="subscriptionLoading">
                 </app-loading-button>
             </form>
         </div>
@@ -67,12 +69,17 @@
                         Message is required
                     </h2>
                 </div>
+                <div class="text-field">
+                    <h2 class="field-help" *ngIf="messageResponseMessage">
+                        {{ messageResponseMessage }}
+                    </h2>
+                </div>
             </div>
 
             <app-loading-button
                 title="Send Message"
                 [disabled]="messageFormGroup.invalid"
-                [loading]="loading">
+                [loading]="messageLoading">
             </app-loading-button>
         </form>
     </div>
@@ -81,6 +88,6 @@
             <blockquote>When you know nothing matters,<br>the universe is yours.</blockquote>
             <cite>- Rick Sanchez</cite>
         </div>
-        <p id="copyright">Copyright &copy; 2020 BrainBust. All Rights Reserved.</p>
+        <p id="copyright">Copyright &copy; 2020 Brain Bust. All Rights Reserved.</p>
     </div>
 </footer>

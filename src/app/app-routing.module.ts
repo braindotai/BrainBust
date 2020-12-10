@@ -7,6 +7,7 @@ import { ArticlesComponent } from './layouts/articles/articles.component';
 import { AboutComponent } from './layouts/about/about.component';
 import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 import { EditorComponent } from './layouts/editor/editor.component';
+import { UnsubscribeComponent } from './layouts/unsubscribe/unsubscribe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:articleName', component: ArticlesComponent },
   { path: 'articles/:articleName/edit-article', component: EditorComponent },
+
+  { path: 'unsubscribe/:encodedEmail', component: UnsubscribeComponent },
   
   { path: 'write-article', component: EditorComponent },
   

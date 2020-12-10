@@ -47,6 +47,14 @@
                         margin: 1rem;
                     }
                 }
+
+                // #subscription-form {
+                //     app-loading-button {
+                //         position: absolute;
+                //         // width: 100%;
+                //         text-align: center;
+                //     }
+                // }
             }
 
             #contact-form {
@@ -86,7 +94,7 @@
 @media only screen and (max-width: 570px) {
     footer {
         #footer-container {
-            width: 80%;
+            width: 85%;
             #footer-info {
                 #subscription-form {
                     width: 100%;

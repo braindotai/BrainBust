@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     this.currentScrollPosition = window.pageYOffset;
 
     if (this.currentScrollPosition > this.previousScrollPosition && this.currentScrollPosition > 40) {
-      this.renderer.setStyle(this.header.nativeElement, 'height', '3.4rem');
+      this.renderer.setStyle(this.header.nativeElement, 'height', '3.3rem');
     } else if (!this.isBurgerMenuOpen && this.currentScrollPosition > 40) {
       this.renderer.setStyle(this.header.nativeElement, 'height', '4rem');
       // this.renderer.setStyle(this.header.nativeElement, 'top', '-4rem');

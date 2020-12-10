@@ -58,6 +58,16 @@ export interface ArticlesResponse {
     received: ArticlesReceived[];
 };
 
+export interface SubscriptionResponse {
+    result: string;
+    message: string;
+}
+export interface UnsubscriptionResponse {
+    result: string;
+    message: string;
+    alreadyLeaved: boolean;
+}
+
 // [======== editor js ========]
 class EditorField {
     type: string;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2, ViewChild, ElementRef } from '@angular/core';
 
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { ArticleResponse, ArticlesReceived, ArticlesResponse } from 'src/app/models/interface';
@@ -18,6 +18,8 @@ export class ArticlesComponent implements OnInit {
 
   @Output('pageLoaded') pageLoaded = new EventEmitter<null>();
   @Output('loadInference') loadInference = new EventEmitter<null>();
+
+  @ViewChild('articleindex') articleindex: ElementRef<HTMLElement>;
 
   articles: ArticlesReceived[];
   
@@ -52,7 +54,6 @@ export class ArticlesComponent implements OnInit {
           this.articleMinutes = response.received.minutes;
           this.articleTags = response.received.tags;
 
-          console.log('response.received.has_deployed:', response.received.has_deployed);
           if (response.received.has_deployed) {
             this.loadInference.emit();
           }
@@ -114,14 +115,54 @@ export class ArticlesComponent implements OnInit {
   copyCode(code: string, copyButton): void {
     this.codeToCopy = code;
     document.execCommand('copy');
-    copyButton.innerHTML = 'Copied';
+    copyButton.innerHTML = 'Copied!';
     setTimeout(() => {
       copyButton.innerHTML = 'Copy';
     }, 1500);
   }
 
+  get getScrolledPercent(): number {
+    return (this.getScrollPosition/this.getMaxScroll) * 100.0
+  }
+
+  get getScrollPosition(): number {
+    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentElement || document.body).scrollTop;               
+  }
+
+  get getMaxScroll(): number {
+    return this.getDocHeight - this.getWindowHeight;
+  }
+
+  get getWindowHeight(): number {
+    return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+  }
+
+  get getDocHeight(): number {
+    return Math.max(
+        document.body.scrollHeight || 0, 
+        document.documentElement.scrollHeight || 0,
+        document.body.offsetHeight || 0, 
+        document.documentElement.offsetHeight || 0,
+        document.body.clientHeight || 0, 
+        document.documentElement.clientHeight || 0
+    );
+  }
+
+  @HostListener("document:scroll", ['$event'])
+  showArticleIndex(): void {
+    if (this.articleindex) {
+      if (window.pageYOffset > 400 && this.getScrolledPercent < 85) {
+        this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '1');
+        this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'visible');
+      } else {
+        this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '0');
+        this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'none');
+      }
+    }
+  }
+
   @HostListener("document:copy", ['$event'])
-  copyClipboard(event: ClipboardEvent) {
+  copyClipboard(event: ClipboardEvent): void {
     event.clipboardData.setData('text/plain', (this.codeToCopy.replace('$ ', '')));
     event.preventDefault();
     document.removeEventListener('copy', null);
@@ -131,5 +172,37 @@ export class ArticlesComponent implements OnInit {
     var rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
     const id = url.match(rx)[1];
     return `https://img.youtube.com/vi/${id}/0.jpg`
+  }
+
+  headingID(heading: string): string {
+    let id: string = '';
+    heading.toLocaleLowerCase().split(' ').forEach(word => {
+      id += word[0] + word[1];
+    })
+
+    return id;
+  }
+
+  scrollToHeading(headingID: string): void {
+    document.getElementById(headingID).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    })
+  }
+
+  // function isHidden(el) {
+  //   var style = window.getComputedStyle(el);
+  //   return (style.display === 'none')
+  // }
+
+  isHeadingVisible(heading: string): boolean {
+    const rect = document.getElementById(this.headingID(heading)).getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight - 30 || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
   }
 }

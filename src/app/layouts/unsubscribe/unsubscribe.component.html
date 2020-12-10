@@ -1,0 +1,27 @@
+<app-loading-screen [loading]="loading"></app-loading-screen>
+<div id="unsubscribe">
+    <div id="message">
+        <div *ngIf="message else elseBlock">
+            <p class="white">{{message}}</p>
+            <p>And its sad to see that you leaved.</p>
+        </div>
+        <ng-template #elseBlock>
+            <p class="white">Hey buddy, you have successfully unsubscribed from my newsletter.</p>
+            <p>And its sad to see you leaving.</p>
+        </ng-template>
+        <p>I always try to keep my content short, to the point, and engaging.</p>
+        <p>
+            In any case if you feel like your experiance with my website is not up to your expectations, then feel free to provide any
+            constructive feedback through the contact form at the bottom of the page.
+        </p>
+        <br>
+        <br>
+        <app-loading-button
+            [title]="title"
+            [disabled]="disabled"
+            [loading]="subscriptionLoading"
+            (clickEvent)="subscribe()">
+        </app-loading-button>
+    </div>
+    <img src="../../../assets/svg/cry.svg" alt="I'm sad to see you leave">
+</div>

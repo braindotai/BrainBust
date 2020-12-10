@@ -82,6 +82,11 @@ export class ApiService {
     return this.http.post(`${this.ArticleBackendURL}/articles/authenticate/`, userCredentials);
   }
 
+  subscribe(userEmail: FormData) {
+    return this.http.post(`${this.ArticleBackendURL}/articles/subscribe/`, userEmail)
+  }
 
-
+  unsubscribe(email: string) {
+    return this.http.get(`${this.ArticleBackendURL}/articles/unsubscribe/${email}`)
+  }
 }

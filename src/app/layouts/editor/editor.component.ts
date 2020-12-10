@@ -42,7 +42,7 @@ export class EditorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('BrainBust - Write Article');
+    this.title.setTitle('Brain Bust - Write Article');
 
     this.route.paramMap.subscribe(params => {
       this.articleName = params.get('projectName');

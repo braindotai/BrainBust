@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/ApiService/api-service.service';
 import { ArticlesResponse, ArticlesReceived } from 'src/app/models/interface';
 
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) =>  {
       this.projectArticles = response.received;
-      this.projectArticles.sort((a, b) => {return a.minutes - b.minutes});
+      this.projectArticles.sort((a, b) => {return b.date - a.date});
       
       // setTimeout(() => {
       //   this.pageLoading = false;
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     })
     this.service.receiveArticles().subscribe((response: ArticlesResponse) =>  {
       this.articles = response.received;
+      this.articles.sort((a, b) => {return b.date - a.date});
       
       this.pageLoading = false;
       // setTimeout(() => {

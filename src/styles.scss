@@ -35,6 +35,8 @@ body {
 
 body, html {
     overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
 }
 
 // li {
@@ -209,6 +211,7 @@ textarea {
 .fas,
 .fab {
     margin: 0;
+    transform: translateY(1px);
 }
 
 @import './styles.mediaquery.scss';

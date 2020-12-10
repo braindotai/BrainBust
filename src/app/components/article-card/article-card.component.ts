@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-article-card',
@@ -16,26 +16,20 @@ export class ArticleCardComponent implements OnInit {
   @Input('latest') latest: boolean = false;
   @Input('reverse') reverse: boolean = false;
   
+  @ViewChild('infoElement') infoElement: ElementRef<HTMLElement>;
+  
   framework_image: string = '';
 
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
     if (this.framework.length !== 0) {
-      this.description = this.description.split(' ').slice(0, 70).join(' ') + '...';
+      if (this.latest) {
+        this.description = this.description.split(' ').slice(0, 70).join(' ') + '...';
+      } else {
+        this.description = this.description.split(' ').slice(0, 40).join(' ') + '...';
+      }
       this.framework_image = `../../../assets/${this.framework}.jpg`;
     }
   }
-
-  // @HostListener('document:mousemove', ['$event'])
-  // mouseMoveEvent(event: MouseEvent) {
-    // const x1 = (window.innerWidth - event.pageX * 2) / 100.0;
-    // const y1 = (window.innerHeight - event.pageY * 2) / 100.0;
-    // this.renderer.setStyle(this.articlecard.nativeElement, 'transform', `translate(${x1}px, ${y1}px)`);
-    
-    // const x2 = (window.innerWidth - event.pageX * 2) / 100.0;
-    // const y2 = (window.innerHeight - event.pageY * 2) / 100.0;
-    // this.renderer.setStyle(this.articlecardwall.nativeElement, 'transform', `translate(${x2}px, ${y2}px)`);
-  // }
-
 }

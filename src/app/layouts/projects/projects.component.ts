@@ -43,7 +43,7 @@ export class ProjectsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('BrainBust - Projects');
+    this.title.setTitle('Brain Bust - Projects');
     this.route.paramMap.subscribe(params => {
       this.projectName = params.get('projectName');
 
@@ -148,7 +148,6 @@ export class ProjectsComponent implements OnInit {
     }
 
     this.inferenceLoading = true;
-    console.log('running inference...');
     this.service.postProjectArguments(this.projectName, this.formData).subscribe((response: ProjectInferenceResponse) => {
       this.projectInferenceResponse = response;
       this.inferenceLoading = false;

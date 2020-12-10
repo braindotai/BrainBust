@@ -1,0 +1,73 @@
+@import '../../../styles.variables.scss';
+
+#unsubscribe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 50rem;
+    padding: 8rem 0rem 6rem 0;
+    margin: 0 auto;
+
+    #message{
+        max-width: 28rem;
+    }
+    
+    .white {
+        color: $white;
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    p {
+        color: $text;
+        line-height: 1.5rem;
+        letter-spacing: 0.5px;
+        
+    }
+
+    img {
+        margin-left: 3rem;
+        height: 25rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #unsubscribe {
+        flex-direction: column-reverse;
+        padding: 4rem 2rem 2rem 2rem;
+        align-items: initial;
+
+        .white {
+            text-align: center;
+        }
+
+        #message {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        img {
+            height: 20rem;
+            margin-left: 0;
+            margin-bottom: 2rem;
+        }
+
+        app-loading-button {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 550px) {
+    #unsubscribe {
+        img {
+            height: 15rem;
+        }
+    }
+}

@@ -12,27 +12,17 @@
 
     <div id="latest" *ngIf="articles.length > 1">
         <app-article-card 
-            [wall]="articles[0].wall"
-            [tags]="articles[0].tags"
-            [framework]="articles[0].framework"
-            [title]="articles[0].title"
-            [description]="articles[0].description"
-            [date]="articles[0].date"
-            [minutes]="articles[0].minutes"
+            [wall]="article.wall"
+            [tags]="article.tags"
+            [framework]="article.framework"
+            [title]="article.title"
+            [description]="article.description"
+            [date]="article.date"
+            [minutes]="article.minutes"
             [latest]="true"
-            [routerLink]="getArticleLink(articles[0].title)">
-        </app-article-card>
-        <app-article-card
-            [wall]="articles[1].wall"
-            [tags]="articles[1].tags"
-            [framework]="articles[1].framework"
-            [title]="articles[1].title"
-            [description]="articles[1].description"
-            [date]="articles[1].date"
-            [minutes]="articles[1].minutes"
-            [latest]="true"
-            [reverse]="true"
-            [routerLink]="getArticleLink(articles[1].title)">
+            [reverse]="index % 2 !== 0"
+            [routerLink]="getArticleLink(article.title)"
+            *ngFor="let article of articles; let index = index">
         </app-article-card>
     </div>
     <div class="section-read-more">
@@ -60,22 +50,10 @@
             [date]="projectArticle.date"
             [minutes]="projectArticle.minutes"
             [latest]="true"
-            [reverse]="index % 2 === 0"
+            [reverse]="index % 2 !== 0"
             [routerLink]="getProjectLink(projectArticle.title)"
             *ngFor="let projectArticle of projectArticles; let index = index">
         </app-article-card>
-        <!-- <app-article-card
-            [wall]="projectArticles[1].wall"
-            [tags]="projectArticles[1].tags"
-            [framework]="projectArticles[1].framework"
-            [title]="projectArticles[1].title"
-            [description]="projectArticles[1].description"
-            [date]="projectArticles[1].date"
-            [minutes]="projectArticles[1].minutes"
-            [latest]="true"
-            [reverse]="true"
-            [routerLink]="getProjectLink(projectArticles[1].title)">
-        </app-article-card> -->
     </div>
 
     <!-- <div class="article-cards">
@@ -99,4 +77,4 @@
         </button>
     </div>
 </section>
-<br><br><br><br>
+<!-- <br><br><br><br> -->
