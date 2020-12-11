@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { SubscriptionResponse, MessageResponse } from 'src/app/models/interface';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
   messageFormData: FormData = new FormData();
   messageFormGroup: FormGroup = new FormGroup({});
   messageResponseMessage: string = null;
-
   subscriptionFormData: FormData = new FormData();
   subscriptionFormGroup: FormGroup = new FormGroup({});
   subscriptionResponseMessage: string = null;
-
   messageLoading: boolean = false;
   subscriptionLoading: boolean = false;
+  componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private service: ApiService
@@ -47,18 +47,20 @@ export class FooterComponent implements OnInit {
       this.subscriptionFormData.append(key, values[key]);
     }
 
-    this.service.subscribe(this.subscriptionFormData).subscribe((response: SubscriptionResponse) => {
-      if (response.result === 'success') {
-        this.subscriptionResponseMessage = response.message;
-
-        setTimeout(() => {
-          this.subscriptionResponseMessage = null;
-          this.subscriptionFormGroup.reset();
-        }, 3000);
-      }
-
-      this.subscriptionLoading = false;
-    })
+    this.componentSubscriptions.push(
+      this.service.subscribe(this.subscriptionFormData).subscribe((response: SubscriptionResponse) => {
+        if (response.result === 'success') {
+          this.subscriptionResponseMessage = response.message;
+  
+          setTimeout(() => {
+            this.subscriptionResponseMessage = null;
+            this.subscriptionFormGroup.reset();
+          }, 3000);
+        }
+  
+        this.subscriptionLoading = false;
+      })
+    )
   }
 
   message(): void {
@@ -68,19 +70,24 @@ export class FooterComponent implements OnInit {
       this.messageFormData.append(key, values[key]);
     }
 
-    this.service.message(this.messageFormData).subscribe((response: MessageResponse) => {
-      console.log(response);
-      if (response.result === 'success') {
-        this.messageResponseMessage = response.message;
+    this.componentSubscriptions.push(
+      this.service.message(this.messageFormData).subscribe((response: MessageResponse) => {
+        console.log(response);
+        if (response.result === 'success') {
+          this.messageResponseMessage = response.message;
 
-        setTimeout(() => {
-          this.messageResponseMessage = null;
-          this.messageFormGroup.reset();
-        }, 10000);
-      }
+          setTimeout(() => {
+            this.messageResponseMessage = null;
+            this.messageFormGroup.reset();
+          }, 5000);
+        }
 
-      this.messageLoading = false;
-    })
+        this.messageLoading = false;
+      })
+    )
   }
 
+  ngOnDestroy() {
+    this.componentSubscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 }

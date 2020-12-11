@@ -1,6 +1,6 @@
 <div class="article-card" [ngClass]="{'latest-article': latest, 'reverse-row': reverse}" #infoElement>
     <img alt="Article Image" class="article-card-wall" [src]="wall">
-    <div [ngClass]="{'latest-article-right': latest}">
+    <div class="info" [ngClass]="{'latest-article-right': latest}">
         <div class="article-card-title">
             <h1 href="#">{{ title | titlecase }}</h1>
         </div>

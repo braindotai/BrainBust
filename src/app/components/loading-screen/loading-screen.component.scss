@@ -54,12 +54,12 @@
     }
 
     
-    i {
+    img {
         position: absolute;
         
         top: calc(50vh - 5rem / 2);
         left: calc(50vw - 5rem / 2);
-        font-size: 5rem;     
+        width: 6rem;     
         color: #fff;
 
         animation: rotate 1500ms infinite linear;

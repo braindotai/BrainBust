@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { ArticleResponse, ArticlesReceived, ArticlesResponse } from 'src/app/models/interface';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-articles',
@@ -10,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./articles.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent implements OnInit, OnDestroy {
   @Input('articleName') articleName: string;
   @Input('showName') showName: boolean = true;
   @Input('pageLoading') pageLoading: boolean = true;
@@ -30,67 +32,109 @@ export class ArticlesComponent implements OnInit {
   articleFramework: string = '';
   articleEditURL: string;
 
+  readMore: string;
+
   codeToCopy: string;
+
+  componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private service: ApiService,
+    private title: Title,
     private route: ActivatedRoute,
     private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
     if (!this.articleName) {
-      this.route.paramMap.subscribe(params => {
-        this.articleName = params.get('articleName');
-      })
+      this.componentSubscriptions.push(
+        this.route.paramMap.subscribe(params => {
+          this.articleName = params.get('articleName');
+          if (this.showPageLoading) {
+            this.title.setTitle('Brain Bust - Articles');
+          }
+        })
+      )
     }
     if (this.articleName) {
       this.articleName = this.articleName.split('-').join(' ');
+      if (this.showPageLoading) {
+        this.title.setTitle('Brain Bust - Article - ' + this.articleName.split(' ').map((word: string) => {
+          return word.replace(word[0], word[0].toUpperCase());
+        }).join(' '));
+      }
 
-      this.service.receiveArticle(this.articleName).subscribe((response: ArticleResponse) => {
-        if (response.result === 'success') {
-          const jsonResponse = JSON.parse(response.received.content);
-          this.articleDate = jsonResponse.time;
-          this.articleMinutes = response.received.minutes;
-          this.articleTags = response.received.tags;
-
-          if (response.received.has_deployed) {
-            this.loadInference.emit();
-          }
-          
-          if (response.received.framework.length !== 0) {
-            if (response.received.framework !== 'none') {
-              this.articleFramework = `../../../assets/${response.received.framework}.jpg`;
-            } else {
-              this.articleFramework = 'none';
+      this.componentSubscriptions.push(
+        this.service.receiveArticle(this.articleName).subscribe((response: ArticleResponse) => {
+          if (response.result === 'success') {
+            const jsonResponse = JSON.parse(response.received.content);
+            this.articleDate = jsonResponse.time;
+            this.articleMinutes = response.received.minutes;
+            this.articleTags = response.received.tags;
+  
+            if (response.received.has_deployed) {
+              this.loadInference.emit();
             }
+            
+            if (response.received.framework.length !== 0) {
+              if (response.received.framework !== 'none') {
+                this.articleFramework = `../../../assets/${response.received.framework}.jpg`;
+              } else {
+                this.articleFramework = 'none';
+              }
+            }
+    
+            this.article = jsonResponse.blocks;
+            // console.log(this.article);
+            this.articleEditURL = `${this.service.articleURL(this.articleName.split(' ').join('-'))}/edit-article`;
+          } else {
+            // console.log(response);
+          }
+          setTimeout(() => {
+            this.pageLoading = false;
+            this.pageLoaded.emit();
+          });
+          // if (this.showName) {
+          // } else {
+          //   // console.log('emiting completed...');
+          //   this.pageLoaded.emit();
+          // }
+  
+          if (response.received.has_project) {
+            this.componentSubscriptions.push(
+              this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
+                this.articles = response.received;  
+                this.articles = this.articles.filter(article => {
+                  return article.title.toString() !== this.articleName;
+                })
+                this.readMore = 'More Projects';
+              })
+            )
+          } else {
+            this.componentSubscriptions.push(
+              this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
+                this.articles = response.received;  
+                this.articles = this.articles.filter(article => {
+                  return article.title.toString() !== this.articleName;
+                })
+                this.readMore = 'More Articles';
+              })
+            )
           }
   
-          this.article = jsonResponse.blocks;
-          // console.log(this.article);
-          this.articleEditURL = `${this.service.articleURL(this.articleName.split(' ').join('-'))}/edit-article`;
-        } else {
-          // console.log(response);
-        }
-        setTimeout(() => {
-          this.pageLoading = false;
-          this.pageLoaded.emit();
-        });
-        // if (this.showName) {
-        // } else {
-        //   // console.log('emiting completed...');
-        //   this.pageLoaded.emit();
-        // }
-      })
+        })
+      )
     } else {
-      this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
-        // console.log(response);
-        this.articles = response.received;
-
-        setTimeout(() => {
-          this.pageLoading = false;
-        });
-      })
+      this.componentSubscriptions.push(
+        this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
+          // console.log(response);
+          this.articles = response.received;
+  
+          setTimeout(() => {
+            this.pageLoading = false;
+          });
+        })
+      )
     }
   }
 
@@ -151,7 +195,7 @@ export class ArticlesComponent implements OnInit {
   @HostListener("document:scroll", ['$event'])
   showArticleIndex(): void {
     if (this.articleindex) {
-      if (window.pageYOffset > 400 && this.getScrolledPercent < 85) {
+      if (window.pageYOffset > 400 && this.getScrolledPercent < 70) {
         this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '1');
         this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'visible');
       } else {
@@ -204,5 +248,9 @@ export class ArticlesComponent implements OnInit {
         rect.bottom <= (window.innerHeight - 30 || document.documentElement.clientHeight) &&
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
+  }
+
+  ngOnDestroy() {
+    this.componentSubscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

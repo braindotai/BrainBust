@@ -6,7 +6,10 @@
 
     max-width: 50rem;
     margin: 3rem auto;
+    padding-bottom: 4rem;
     color: $white;
+
+    border-bottom: 1px solid transparentize($color: $text, $amount: 0.7);
 }
 
 #article-title {
@@ -153,6 +156,13 @@
     }
 }
 
+.article-wall {
+    img {
+        max-width: 100%;
+        // width: 100%;
+    }
+}
+
 .article-list {
     padding-left: 2rem;
 
@@ -168,10 +178,53 @@
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.3rem;
-    padding: 0.4rem 0.7rem;
+    padding: 2.2rem 0.7rem 0.5rem 0.7rem;
     background-color: #282c34;
     border-radius: 6px;
     box-shadow: 0 0 14px 0 darken($color: #282c34, $amount: 14%);
+
+    .mac {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 3.1rem;
+
+        .red {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #ff5f56;
+            // filter: drop-shadow(0 0 2px darken(#282c34, 4%));
+            border-radius: 100px;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+        .yellow {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #ffc62e;
+            // filter: drop-shadow(0 0 2px darken(#282c34, 4%));
+            border-radius: 100px;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+        .green {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #27c93f;
+            // filter: drop-shadow(0 0 2px darken(#282c34, 4%));
+            border-radius: 100px;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
     
     * {
         font-family: Consolas, monospace;
@@ -241,7 +294,7 @@
 #article-index {
     position: fixed;
     top: 5rem;
-    left: 1%;
+    left: 2%;
     
     color: transparentize($color: #8394aa, $amount: 0.3);
     border-left: 1px solid transparentize($color: $text, $amount: 0.5);
@@ -281,6 +334,16 @@
     }
 }
 
+#read-more {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    
+    .section-title {
+        padding-left: 0;
+        font-size: 2.5rem;
+    }
+}
 
 
 

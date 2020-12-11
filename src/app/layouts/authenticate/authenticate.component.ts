@@ -1,18 +1,20 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-authenticate',
   templateUrl: './authenticate.component.html',
   styleUrls: ['./authenticate.component.scss']
 })
-export class AuthenticateComponent implements OnInit {
+export class AuthenticateComponent implements OnInit, OnDestroy {
   @Output('authenticatedEvent') authenticatedEvent = new EventEmitter<FormGroup>();
-
   formData: FormData = new FormData();
   formGroup: FormGroup = new FormGroup({});
   loading: boolean = false;
+
+  componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(private service: ApiService) { }
 
@@ -28,15 +30,21 @@ export class AuthenticateComponent implements OnInit {
     for ( const key of Object.keys(values) ) {
       this.formData.append(key, values[key]);
     }
-    this.service.authenticate(this.formData).subscribe((response: any) => {
-      if (response.result == 'success') {
-        this.authenticatedEvent.emit(this.formGroup);
-      }
-      this.loading = false;
-    })
+    this.componentSubscriptions.push(
+      this.service.authenticate(this.formData).subscribe((response: any) => {
+        if (response.result == 'success') {
+          this.authenticatedEvent.emit(this.formGroup);
+        }
+        this.loading = false;
+      })
+    )
   }
 
   touchedError(name: string): boolean {
     return this.formGroup.get(name).invalid && (this.formGroup.get(name).touched || this.formGroup.get(name).dirty);
+  }
+
+  ngOnDestroy() {
+    this.componentSubscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

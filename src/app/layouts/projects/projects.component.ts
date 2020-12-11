@@ -1,39 +1,34 @@
-import { Component, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ApiService } from '../../services/ApiService/api-service.service';
 import { ProjectField, ProjectForm, ProjectInferenceResponse, ArticlesResponse, ArticlesReceived } from 'src/app/models/interface';
 import { Title } from '@angular/platform-browser';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
   @ViewChild('inferenceoutputs') inferenceoutputs: ElementRef<HTMLElement>;
-
   articleLoading: boolean = true;
   projectLoading: boolean = true;
   inferenceLoading: boolean = false;
-
   projects: ArticlesReceived[];
-
   projectName: string;
   isDeployed: boolean = false;
-
   formFields: ProjectField[];
   formGroup: FormGroup = new FormGroup({});
   formData: FormData = new FormData();
-
   formImageSrc: object = new Object();
-
   submitButton: string;
-
   projectInferenceResponse: ProjectInferenceResponse = null;
-
   projectArticle: object = null;
+
+  componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -43,74 +38,83 @@ export class ProjectsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Brain Bust - Projects');
-    this.route.paramMap.subscribe(params => {
-      this.projectName = params.get('projectName');
-
-      if (this.projectName) {
-        this.projectName = this.projectName.split('-').join(' ');
-      }
-      else {
-        this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
-          this.projects = response.received;
-          this.projects.sort((a, b) => {return b.date - a.date})
-          
-          this.articleLoading = false;
-          // setTimeout(() => {
-          // }, 1000);
-        })
-      }
-    });
+    this.componentSubscriptions.push(
+      this.route.paramMap.subscribe(params => {
+        this.projectName = params.get('projectName');
+  
+        if (this.projectName) {
+          this.projectName = this.projectName.split('-').join(' ');
+          this.title.setTitle('Brain Bust - Project - ' + this.projectName.split(' ').map((word: string) => {
+            return word.replace(word[0], word[0].toUpperCase());
+          }).join(' '));
+        }
+        else {
+          this.title.setTitle('Brain Bust - Projects');
+          this.componentSubscriptions.push(
+            this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
+              this.projects = response.received;
+              this.projects.sort((a, b) => {return b.date - a.date})
+              
+              this.articleLoading = false;
+              // setTimeout(() => {
+              // }, 1000);
+            })
+          )
+        }
+      })
+    );
   }
 
   loadInference(): void {
     if (this.projectName){
       this.isDeployed = true;
-      this.service.getProjectArguments(this.projectName).subscribe((response: ProjectForm) => {
-        this.formFields = response.form;
-        this.submitButton = response.submitButton;
-  
-        this.formFields.forEach(field => {
-          field.help = '';
-          
-          let validators = [];
-          validators.push(Validators.required);
-          
-          if (field.validations) {
-            Object.keys(field.validations).forEach(validationType => {
-              let threshold = field.validations[validationType];
-  
-              switch (validationType) {
-                case 'minlength':
-                  validators.push(Validators.minLength(threshold));
-                  field.help += `Must contain ${threshold} to`;
-                  break;
-                case 'maxlength':
-                  validators.push(Validators.maxLength(threshold));
-                  field.help += ` ${threshold} characters`;
-                  break;
-                case 'min':
-                  validators.push(Validators.min(threshold))
-                  field.help += `Value must be from ${threshold}`;
-                  break;
-                case 'max':
-                  validators.push(Validators.max(threshold));
-                  field.help += ` to ${threshold}`
-                  break;          
-                default:
-                  break;
-              }
-            });
-          }
-  
-          this.formGroup.addControl(field.name, new FormControl('', validators));
-          
-          if (field.type === 'image') {
-            this.formImageSrc[field.name] = '';
-          }
+      this.componentSubscriptions.push(
+        this.service.getProjectArguments(this.projectName).subscribe((response: ProjectForm) => {
+          this.formFields = response.form;
+          this.submitButton = response.submitButton;
+    
+          this.formFields.forEach(field => {
+            field.help = '';
+            
+            let validators = [];
+            validators.push(Validators.required);
+            
+            if (field.validations) {
+              Object.keys(field.validations).forEach(validationType => {
+                let threshold = field.validations[validationType];
+    
+                switch (validationType) {
+                  case 'minlength':
+                    validators.push(Validators.minLength(threshold));
+                    field.help += `Must contain ${threshold} to`;
+                    break;
+                  case 'maxlength':
+                    validators.push(Validators.maxLength(threshold));
+                    field.help += ` ${threshold} characters`;
+                    break;
+                  case 'min':
+                    validators.push(Validators.min(threshold))
+                    field.help += `Value must be from ${threshold}`;
+                    break;
+                  case 'max':
+                    validators.push(Validators.max(threshold));
+                    field.help += ` to ${threshold}`
+                    break;          
+                  default:
+                    break;
+                }
+              });
+            }
+    
+            this.formGroup.addControl(field.name, new FormControl('', validators));
+            
+            if (field.type === 'image') {
+              this.formImageSrc[field.name] = '';
+            }
+          })
+          this.projectLoading = false;
         })
-        this.projectLoading = false;
-      })
+      )
       
     }
   }
@@ -148,20 +152,20 @@ export class ProjectsComponent implements OnInit {
     }
 
     this.inferenceLoading = true;
-    this.service.postProjectArguments(this.projectName, this.formData).subscribe((response: ProjectInferenceResponse) => {
-      this.projectInferenceResponse = response;
-      this.inferenceLoading = false;
-
-      console.log(this.projectInferenceResponse);
-
-      this.changeDetector.detectChanges();
-
-      this.inferenceoutputs.nativeElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "start",
-      });
-    })
+    this.componentSubscriptions.push(
+      this.service.postProjectArguments(this.projectName, this.formData).subscribe((response: ProjectInferenceResponse) => {
+        this.projectInferenceResponse = response;
+        this.inferenceLoading = false;
+  
+        this.changeDetector.detectChanges();
+  
+        this.inferenceoutputs.nativeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "start",
+        });
+      })
+    )
   }
 
   articleLoaded(): void {
@@ -178,5 +182,9 @@ export class ProjectsComponent implements OnInit {
 
   get outputImageSrc(): string {
     return `data:image/png;base64,${this.projectInferenceResponse.received.image_output.image}`;
+  }
+
+  ngOnDestroy() {
+    this.componentSubscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

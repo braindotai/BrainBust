@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { ArticleResponse, EditorData } from 'src/app/models/interface';
+import { FormGroup } from '@angular/forms';
+import { SubscriptionLike } from 'rxjs';
 import { Title } from '@angular/platform-browser';
+
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 
 import EditorJS from '@editorjs/editorjs'; 
@@ -12,8 +16,6 @@ import SimpleImage from '@editorjs/simple-image';
 import Quote from '@editorjs/quote';
 import InlineCode from '@editorjs/inline-code';
 import CodeTool from '@editorjs/code';
-import { ArticleResponse, EditorData } from 'src/app/models/interface';
-import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -21,20 +23,18 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
   pageLoading: boolean = true;
-
   articleName: string;
   editorData: EditorData;
   formData: FormData = new FormData();
-
   editor: EditorJS;
   articleURL: string;
-
   submitButton: string = 'Save Article';
-  
   isAuthenticated: boolean = false;
   authInfo: FormGroup;
+
+  componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private router: Router, 
@@ -46,14 +46,18 @@ export class EditorComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Brain Bust - Write Article');
 
-    this.route.paramMap.subscribe(params => {
-      this.articleName = params.get('projectName');
-    });
+    this.componentSubscriptions.push(
+      this.route.paramMap.subscribe(params => {
+        this.articleName = params.get('projectName');
+      })
+    )
 
     if (!this.articleName) {
-      this.route.paramMap.subscribe(params => {
-        this.articleName = params.get('articleName');
-      });
+      this.componentSubscriptions.push(
+        this.route.paramMap.subscribe(params => {
+          this.articleName = params.get('articleName');
+        })
+      )
     }
 
     this.pageLoading = false;
@@ -122,13 +126,17 @@ export class EditorComponent implements OnInit {
         this.formData.append('password', this.authInfo['password']);
   
         if (this.editorData) {
-          this.service.updateArticle(this.formData).subscribe(response => {
-            this.router.navigate([this.articleURL]);
-          });
+          this.componentSubscriptions.push(
+            this.service.updateArticle(this.formData).subscribe(response => {
+              this.router.navigate([this.articleURL]);
+            })
+          )
         } else {
-          this.service.uploadArticle(this.formData).subscribe(response => {
-            this.router.navigate([this.articleURL]);
-          });
+          this.componentSubscriptions.push(
+            this.service.uploadArticle(this.formData).subscribe(response => {
+              this.router.navigate([this.articleURL]);
+            })
+          )
         }
       } else {
         // 1 - title
@@ -143,9 +151,11 @@ export class EditorComponent implements OnInit {
         this.formData.append('title', content.blocks.shift().data.text.toLocaleLowerCase());
         this.formData.append('content', JSON.stringify(content));
 
-        this.service.uploadArticle(this.formData).subscribe(response => {
-          this.router.navigate(['/articles']);
-        })
+        this.componentSubscriptions.push(
+          this.service.uploadArticle(this.formData).subscribe(response => {
+            this.router.navigate(['/articles']);
+          })
+        )
       }
     })
   }
@@ -168,24 +178,30 @@ export class EditorComponent implements OnInit {
 
     if (this.articleName) {
       this.articleName = this.articleName.split('-').join(' ');
-      this.service.receiveArticle(this.articleName).subscribe((response: ArticleResponse) => {
-        if (response.result === 'success') {
-          this.editorData = JSON.parse(response.received.content);
-          if (response.received.has_project) {
-            this.articleURL = `/projects/${this.articleName.split(' ').join('-')}`;
-          } else {
-            this.articleURL = `/articles/${this.articleName.split(' ').join('-')}`;
+      this.componentSubscriptions.push(
+        this.service.receiveArticle(this.articleName).subscribe((response: ArticleResponse) => {
+          if (response.result === 'success') {
+            this.editorData = JSON.parse(response.received.content);
+            if (response.received.has_project) {
+              this.articleURL = `/projects/${this.articleName.split(' ').join('-')}`;
+            } else {
+              this.articleURL = `/articles/${this.articleName.split(' ').join('-')}`;
+            }
+            this.submitButton = 'Update Article';
           }
-          this.submitButton = 'Update Article';
-        }
-        setTimeout(() => {
-          this.initEditor();
-        }, 0);
-      })
+          setTimeout(() => {
+            this.initEditor();
+          }, 0);
+        })
+      )
     } else {
       setTimeout(() => {
         this.initEditor();
       }, 0);
     }
+  }
+
+  ngOnDestroy() {
+    this.componentSubscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

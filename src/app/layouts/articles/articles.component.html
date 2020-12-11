@@ -33,7 +33,7 @@
                 <div class="article-paragraph" *ngSwitchCase="'paragraph'">
                     <p [innerHTML]="cleanParagraph(field.data.text)"></p>
                 </div>
-                <div class="article-image" *ngSwitchCase="'image'">
+                <div class="article-image" [ngClass]="{'article-wall': index === 2}" *ngSwitchCase="'image'">
                     <img [src]="field.data.url">
                     <p>{{ field.data.caption }}</p>
                 </div>
@@ -45,20 +45,18 @@
                         <li *ngFor="let item of field.data.items" [innerHTML]="item"></li>
                     </ol>
                 </div>
-                <div class="article-block-code" *ngSwitchCase="'blockCode'">
-                    <div class="article-code-container">
-                        <textarea highlight-js [options]="{}" [lang]="'python'" [innerHTML]="field.data.code"></textarea>
-                        <div class="copy-button" (click)="copyCode(field.data.code, $event.target)">Copy</div>
+                <div class="article-code-container" *ngSwitchCase="'blockCode'">
+                    <div class="mac">
+                        <div class="red"></div>
+                        <div class="yellow"></div>
+                        <div class="green"></div>
                     </div>
+                    <textarea highlight-js [options]="{}" [lang]="'python'" [innerHTML]="field.data.code"></textarea>
+                    <div class="copy-button" (click)="copyCode(field.data.code, $event.target)">Copy</div>
                 </div>
-                <!-- <div *ngSwitchDefault></div> -->
             </div>
         </div>
         <br>
-
-        <!-- <a routerLink="write-article">
-            <button class="filled-button center-button">Edit Article</button>
-        </a> -->
     </div>
 
     <div id="article-index" #articleindex>
@@ -71,6 +69,24 @@
             </div>
         </div>
     </div>
+
+    <section id="read-more" *ngIf="articles">
+        <h2 class="section-title">{{ readMore }}</h2>
+    
+        <div class="article-cards">
+            <app-article-card
+                [wall]="article.wall"
+                [tags]="article.tags"
+                [framework]="article.framework"
+                [title]="article.title"
+                [description]="article.description"
+                [date]="article.date"
+                [minutes]="article.minutes"
+                [routerLink]="getArticleLink(article.title)"
+                *ngFor="let article of articles">
+            </app-article-card>
+        </div>
+    </section>
 </div>
 
 <ng-template #elseblock>

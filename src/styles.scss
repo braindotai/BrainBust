@@ -97,6 +97,29 @@ a {
     }
 }
 
+section {
+    width: 80%;
+    max-width: 77rem;
+    position: relative;
+    margin: 0 auto;
+    padding-top: 3rem;
+
+    .section-title {
+        margin-left: 1rem;
+        margin-bottom: 2.8rem;
+        
+        display: flex;
+        align-items: center;
+
+        color: #fff;
+        font-size: 3rem;
+
+        i {
+            padding-right: 1rem;
+        }
+    }
+}
+
 .image-preview {
     display: block;
     margin: 2rem auto;
