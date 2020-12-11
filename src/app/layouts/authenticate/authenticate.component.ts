@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/ApiService/api-service.service';
   styleUrls: ['./authenticate.component.scss']
 })
 export class AuthenticateComponent implements OnInit {
-  @Output('authenticatedEvent') authenticatedEvent = new EventEmitter<null>();
+  @Output('authenticatedEvent') authenticatedEvent = new EventEmitter<FormGroup>();
 
   formData: FormData = new FormData();
   formGroup: FormGroup = new FormGroup({});
@@ -30,7 +30,7 @@ export class AuthenticateComponent implements OnInit {
     }
     this.service.authenticate(this.formData).subscribe((response: any) => {
       if (response.result == 'success') {
-        this.authenticatedEvent.emit();
+        this.authenticatedEvent.emit(this.formGroup);
       }
       this.loading = false;
     })

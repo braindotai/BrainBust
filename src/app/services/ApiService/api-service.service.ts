@@ -89,4 +89,8 @@ export class ApiService {
   unsubscribe(email: string) {
     return this.http.get(`${this.ArticleBackendURL}/articles/unsubscribe/${email}`)
   }
+
+  message(messageForm: FormData) {
+    return this.http.post(`${this.ArticleBackendURL}/articles/contact/`, messageForm);
+  }
 }

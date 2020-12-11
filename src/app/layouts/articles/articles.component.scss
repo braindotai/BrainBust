@@ -255,7 +255,7 @@
     }
 
     .article-index-item {
-        // mask-image: linear-gradient(90deg, #000, #000, #000, #00000000);
+        mask-image: linear-gradient(90deg, #000, #000, #00000000);
         cursor: pointer;
         transform: translateX(0px);
         transition: transform 200ms ease-out, color 200ms ease-out;
@@ -284,9 +284,20 @@
 
 
 
+@media only screen and (max-width: 1350px) {
+    #article-index {
+        top: 4rem;
+        left: 0.6%;
+        font-size: 0.8rem;
+    }
+}
 
 
-
+@media only screen and (max-width: 1250px) {
+    #article-index {
+        display: none;
+    }
+}
 
 @media only screen and (max-width: 730px) {
     .youtube-embed {

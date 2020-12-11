@@ -45,7 +45,7 @@
                 </app-loading-button>
             </form>
         </div>
-        <form id="contact-form" [formGroup]="messageFormGroup" enctype="multipart/form-data">
+        <form id="contact-form" [formGroup]="messageFormGroup" (ngSubmit)="message()" enctype="multipart/form-data">
             <h1>Contact Me</h1>
             <div class="field">
                 <div class="text-field">

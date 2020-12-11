@@ -62,10 +62,16 @@ export interface SubscriptionResponse {
     result: string;
     message: string;
 }
+
 export interface UnsubscriptionResponse {
     result: string;
     message: string;
     alreadyLeaved: boolean;
+}
+
+export interface MessageResponse {
+    result: string;
+    message: string;
 }
 
 // [======== editor js ========]

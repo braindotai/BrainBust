@@ -74,7 +74,7 @@
 </div>
 
 <ng-template #elseblock>
-    <div class="container" *ngIf="articles">
+    <div class="container" *ngIf="articles else show404">
         <h1 class="container-title">
             <i class="fas fa-pen-alt"></i>Articles Written
         </h1>
@@ -140,4 +140,8 @@
         <br><br>
         <button class="filled-button center-button">Write Article</button>
     </a> -->
+
+    <ng-template #show404>
+        <app-page-not-found></app-page-not-found>
+    </ng-template>
 </ng-template>

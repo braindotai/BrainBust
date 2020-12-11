@@ -1,6 +1,6 @@
 <app-loading-screen [loading]="pageLoading"></app-loading-screen>
 
-<app-authenticate (authenticatedEvent)="authenticate()" *ngIf="!isAuthenticated"></app-authenticate>
+<app-authenticate (authenticatedEvent)="authenticate($event)" *ngIf="!isAuthenticated"></app-authenticate>
 
 <div class="container" *ngIf="isAuthenticated">
     <h1 class="container-title">{{ articleName | titlecase }}</h1>

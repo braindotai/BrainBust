@@ -13,6 +13,7 @@ import Quote from '@editorjs/quote';
 import InlineCode from '@editorjs/inline-code';
 import CodeTool from '@editorjs/code';
 import { ArticleResponse, EditorData } from 'src/app/models/interface';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class EditorComponent implements OnInit {
   submitButton: string = 'Save Article';
   
   isAuthenticated: boolean = false;
+  authInfo: FormGroup;
 
   constructor(
     private router: Router, 
@@ -114,6 +116,10 @@ export class EditorComponent implements OnInit {
         this.formData.append('has_project', 'True');
         this.formData.append('title', this.articleName);
         this.formData.append('content', JSON.stringify(content));
+
+        this.formData.append('username', this.authInfo['username']);
+        this.formData.append('email', this.authInfo['email']);
+        this.formData.append('password', this.authInfo['password']);
   
         if (this.editorData) {
           this.service.updateArticle(this.formData).subscribe(response => {
@@ -155,7 +161,9 @@ export class EditorComponent implements OnInit {
   //   })
   // }
 
-  authenticate(): void {
+  authenticate(authenticationFormGroup: FormGroup): void {
+    this.authInfo = authenticationFormGroup.value;
+
     this.isAuthenticated = true;
 
     if (this.articleName) {

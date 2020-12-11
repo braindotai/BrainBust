@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
-import { SubscriptionResponse } from 'src/app/models/interface';
+import { SubscriptionResponse, MessageResponse } from 'src/app/models/interface';
 
 @Component({
   selector: 'app-footer',
@@ -59,12 +59,28 @@ export class FooterComponent implements OnInit {
 
       this.subscriptionLoading = false;
     })
-    // this.service.http.pose().subscribe((response: any) => {
-    //   if (response.result == 'success') {
-        
-    //   }
-    //   this.loading = false;
-    // })
+  }
+
+  message(): void {
+    this.messageLoading = true;
+    let values = this.messageFormGroup.value;
+    for ( const key of Object.keys(values) ) {
+      this.messageFormData.append(key, values[key]);
+    }
+
+    this.service.message(this.messageFormData).subscribe((response: MessageResponse) => {
+      console.log(response);
+      if (response.result === 'success') {
+        this.messageResponseMessage = response.message;
+
+        setTimeout(() => {
+          this.messageResponseMessage = null;
+          this.messageFormGroup.reset();
+        }, 10000);
+      }
+
+      this.messageLoading = false;
+    })
   }
 
 }

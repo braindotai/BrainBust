@@ -2,8 +2,8 @@
 @import '../../../styles.mixins.scss';
 
 .blur {
-    background-color: transparentize($color: $dark-primary, $amount: 0.45);
-    backdrop-filter: blur(55px);
+    background-color: transparentize($color: $dark-primary, $amount: 0.52);
+    backdrop-filter: blur(45px);
     box-shadow: 0 0 30px 0 $dark-primary;
 }
 
@@ -61,7 +61,7 @@ header {
         height: 100%;
         
 
-        transition: all 200ms ease-out;
+        transition: all 100ms ease-out;
     
         i {
             font-size: 1.1rem;
@@ -168,6 +168,7 @@ header {
             padding: 0.4rem 0;
             width: 100%;
             text-align: center;
+            border: 2px solid transparent;
             
             button {
                 font-size: 1rem;
@@ -180,7 +181,9 @@ header {
             }
 
             &:hover {
-                background-color: darken($color: $dark-primary, $amount: 10%);
+                background-color: #000;
+                border-right: 2px solid #fff;
+                border-left: 2px solid #fff;
             }
         }
     }
