@@ -2,9 +2,10 @@ import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, Even
 
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { ArticleResponse, ArticlesReceived, ArticlesResponse } from 'src/app/models/interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { SubscriptionLike } from 'rxjs';
+import { ScrollService } from 'src/app/services/ScrollService/scroll-service.service';
 
 @Component({
   selector: 'app-articles',
@@ -17,33 +18,43 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   @Input('showName') showName: boolean = true;
   @Input('pageLoading') pageLoading: boolean = true;
   @Input('showPageLoading') showPageLoading: boolean = true;
-
   @Output('pageLoaded') pageLoaded = new EventEmitter<null>();
   @Output('loadInference') loadInference = new EventEmitter<null>();
-
   @ViewChild('articleindex') articleindex: ElementRef<HTMLElement>;
-
   articles: ArticlesReceived[];
-  
   article: object = null;
   articleDate: number;
   articleMinutes: number;
   articleTags: Array<string>;
   articleFramework: string = '';
   articleEditURL: string;
-
   readMore: string;
-
   codeToCopy: string;
-
   componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private service: ApiService,
+    private scrollService: ScrollService,
     private title: Title,
+    private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2
-  ) { }
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+
+    this.componentSubscriptions.push(
+      this.router.events.subscribe((evt) => {
+          if (evt instanceof NavigationEnd) {
+            // trick the Router into believing it's last link wasn't previously loaded
+            this.router.navigated = false;
+            // if you need to scroll back to top, here is the right place
+            window.scrollTo(0, 0);
+          }
+      })
+    )
+  }
 
   ngOnInit(): void {
     if (!this.articleName) {
@@ -87,23 +98,17 @@ export class ArticlesComponent implements OnInit, OnDestroy {
             this.article = jsonResponse.blocks;
             // console.log(this.article);
             this.articleEditURL = `${this.service.articleURL(this.articleName.split(' ').join('-'))}/edit-article`;
-          } else {
-            // console.log(response);
           }
+          
           setTimeout(() => {
             this.pageLoading = false;
             this.pageLoaded.emit();
           });
-          // if (this.showName) {
-          // } else {
-          //   // console.log('emiting completed...');
-          //   this.pageLoaded.emit();
-          // }
   
           if (response.received.has_project) {
             this.componentSubscriptions.push(
               this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
-                this.articles = response.received;  
+                this.articles = response.received;
                 this.articles = this.articles.filter(article => {
                   return article.title.toString() !== this.articleName;
                 })
@@ -142,6 +147,10 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     return this.service.getArticleLink(articleName);
   }
 
+  getProjectLink(articleName: string): string {
+    return this.service.getProjectLink(articleName);
+  }
+
   cleanInlineCode(innerHTML: string): string {
     return innerHTML.replace(/code/g, 'p').replace(/ class="inline-p"/g, ' class="article-inline-code"').replace(/<p/g, '<br><br><p').replace(/p>/g, 'p><br><br>');
   }
@@ -165,37 +174,10 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     }, 1500);
   }
 
-  get getScrolledPercent(): number {
-    return (this.getScrollPosition/this.getMaxScroll) * 100.0
-  }
-
-  get getScrollPosition(): number {
-    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentElement || document.body).scrollTop;               
-  }
-
-  get getMaxScroll(): number {
-    return this.getDocHeight - this.getWindowHeight;
-  }
-
-  get getWindowHeight(): number {
-    return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
-  }
-
-  get getDocHeight(): number {
-    return Math.max(
-        document.body.scrollHeight || 0, 
-        document.documentElement.scrollHeight || 0,
-        document.body.offsetHeight || 0, 
-        document.documentElement.offsetHeight || 0,
-        document.body.clientHeight || 0, 
-        document.documentElement.clientHeight || 0
-    );
-  }
-
   @HostListener("document:scroll", ['$event'])
   showArticleIndex(): void {
     if (this.articleindex) {
-      if (window.pageYOffset > 400 && this.getScrolledPercent < 70) {
+      if (window.pageYOffset > 400 && this.scrollService.getScrolledPercent < 70) {
         this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '1');
         this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'visible');
       } else {

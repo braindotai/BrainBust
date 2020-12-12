@@ -40,9 +40,9 @@
             justify-content: space-between;
 
             height: 100%;
-            font-weight: 600;
 
             .article-author-name {
+                font-weight: bold;
                 font-size: 0.9rem;
                 color: #fff;
             }
@@ -54,7 +54,7 @@
     .article-date,
     .article-minutes {
         font-size: 0.8rem;
-        font-weight: 600;
+        font-weight: bold;
     }
     
     .article-date {
@@ -123,7 +123,7 @@
         // font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
         font-size: 1.05rem;
         line-height: 1.8rem;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
 
         margin: 0 auto;
         color: $text;
@@ -178,10 +178,16 @@
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.3rem;
-    padding: 2.2rem 0.7rem 0.5rem 0.7rem;
+    padding: 2.5rem 0.7rem 0.5rem 0.7rem;
     background-color: #282c34;
     border-radius: 6px;
     box-shadow: 0 0 14px 0 darken($color: #282c34, $amount: 14%);
+
+    &:hover {
+        .copy-button {
+            opacity: 1;
+        }
+    }
 
     .mac {
         position: absolute;
@@ -253,8 +259,10 @@
         background-color: lighten($color: #282c34, $amount: 8%);
         border-radius: 100px;
         
+        opacity: 0.0;
         cursor: pointer;
-        
+
+        transition: opacity 200ms ease-out;
 
         &:hover {
             color: $white;
@@ -294,11 +302,11 @@
 #article-index {
     position: fixed;
     top: 5rem;
-    left: 2%;
+    left: 3%;
     
     color: transparentize($color: #8394aa, $amount: 0.3);
     border-left: 1px solid transparentize($color: $text, $amount: 0.5);
-    opacity: 0.0;
+    // opacity: 0.0;
     
     pointer-events: none;
     transition: opacity 200ms ease-out;
@@ -350,7 +358,7 @@
 @media only screen and (max-width: 1350px) {
     #article-index {
         top: 4rem;
-        left: 0.6%;
+        left: 2%;
         font-size: 0.8rem;
     }
 }
@@ -368,9 +376,29 @@
             width: 90%;
         }
     }
+
+    section {
+        padding-top: 0;
+
+        .section-title {
+            display: block;
+            text-align: center;
+            margin-left: 0;
+        }
+    }
 }
 
 @media only screen and (max-width: 490px) {
+    #article-title {
+        font-size: 2.2rem;
+    }
+
+    #article {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
     .youtube-embed {
         a {
             width: 100%;

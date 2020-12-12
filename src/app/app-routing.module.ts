@@ -10,6 +10,7 @@ import { EditorComponent } from './layouts/editor/editor.component';
 import { UnsubscribeComponent } from './layouts/unsubscribe/unsubscribe.component';
 
 const routes: Routes = [
+  // { path: '', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   
   { path: 'projects', component: ProjectsComponent },
@@ -19,18 +20,26 @@ const routes: Routes = [
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:articleName', component: ArticlesComponent },
   { path: 'articles/:articleName/edit-article', component: EditorComponent },
-
+  
   { path: 'unsubscribe/:encodedEmail', component: UnsubscribeComponent },
   
   { path: 'write-article', component: EditorComponent },
   
-  { path: 'about', component: AboutComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
   { path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top', relativeLinkResolution: 'legacy' })],
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      {
+        scrollPositionRestoration: 'top',
+        relativeLinkResolution: 'legacy',
+      }
+    )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

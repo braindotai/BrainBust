@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { ScrollService } from 'src/app/services/ScrollService/scroll-service.service';
 
 @Component({
   selector: 'app-header',
@@ -12,34 +13,34 @@ export class HeaderComponent implements OnInit {
   @ViewChild('burger') burger: ElementRef<HTMLElement>;
   
   isBurgerMenuOpen: boolean = false;
-  currentScrollPosition = window.pageYOffset;
-  previousScrollPosition = window.pageYOffset;
+  previousScrollPosition: number;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2,
+    private scrollService: ScrollService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  toggleBurgerMenu(): void {
-    this.isBurgerMenuOpen = !this.isBurgerMenuOpen;
-  }
+  // toggleBurgerMenu(delay: number = 0.0): void {
+  //   setTimeout(() => {
+  //     this.isBurgerMenuOpen = !this.isBurgerMenuOpen;
+  //   }, delay);
+  // }
 
   @HostListener('window:scroll', [])
   scrollEvent() {
-    this.currentScrollPosition = window.pageYOffset;
-
-    if (this.currentScrollPosition > this.previousScrollPosition && this.currentScrollPosition > 40) {
-      this.renderer.setStyle(this.header.nativeElement, 'height', '3.3rem');
-    } else if (!this.isBurgerMenuOpen && this.currentScrollPosition > 40) {
+    if (this.scrollService.getScrollPosition > this.previousScrollPosition && this.scrollService.getScrollPosition > 40) {
+      this.renderer.setStyle(this.header.nativeElement, 'height', '3rem');
+    } else if (!this.isBurgerMenuOpen && this.scrollService.getScrollPosition > 40) {
       this.renderer.setStyle(this.header.nativeElement, 'height', '4rem');
-      // this.renderer.setStyle(this.header.nativeElement, 'top', '-4rem');
-    }
-    
-    this.previousScrollPosition = this.currentScrollPosition;
+    }    
+    this.previousScrollPosition = this.scrollService.getScrollPosition;
   }
 
   get notOnTop(): boolean {
-    return this.currentScrollPosition > 10;
+    return this.scrollService.getScrollPosition > 10;
   }
 
   @HostListener('document:click', ['$event'])

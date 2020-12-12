@@ -30,8 +30,11 @@
                 <div class="article-heading" *ngSwitchCase="'header'" [id]="headingID(field.data.text)">
                     <h1 [innerHTML]="field.data.text" [ngClass]="{'subheading': field.data.level === 2}"></h1>
                 </div>
-                <div class="article-paragraph" *ngSwitchCase="'paragraph'">
-                    <p [innerHTML]="cleanParagraph(field.data.text)"></p>
+                <div [ngClass]="{'article-paragraph': !field.data.text.includes('.webp'), 'article-image': field.data.text.includes('.webp')}" *ngSwitchCase="'paragraph'">
+                    <img [src]="field.data.text" *ngIf="field.data.text.includes('.webp') else showText">
+                    <ng-template #showText>
+                        <p [innerHTML]="cleanParagraph(field.data.text)"></p>
+                    </ng-template>
                 </div>
                 <div class="article-image" [ngClass]="{'article-wall': index === 2}" *ngSwitchCase="'image'">
                     <img [src]="field.data.url">
@@ -82,7 +85,7 @@
                 [description]="article.description"
                 [date]="article.date"
                 [minutes]="article.minutes"
-                [routerLink]="getArticleLink(article.title)"
+                [routerLink]="showPageLoading ? getArticleLink(article.title) : getProjectLink(article.title)"
                 *ngFor="let article of articles">
             </app-article-card>
         </div>

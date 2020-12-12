@@ -87,6 +87,7 @@
     
         #copyright {
             font-size: 0.9rem;
+            padding-bottom: 1.8rem;
         }
     }
 }
@@ -115,7 +116,7 @@
 
         }
         #copyright {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
     }
 }
@@ -151,6 +152,7 @@
     footer {
         #quote {
             blockquote {
+                font-size: 1.2rem;
                 &:before {
                     left: -2.5rem;
                 }

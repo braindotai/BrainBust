@@ -73,7 +73,7 @@
         color: $text;
         font-size: 0.9rem;
         line-height: 1.5rem;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
     }
 
     .article-card-author-date-minutes {
@@ -151,6 +151,10 @@
 }
 
 @media only screen and (max-width: 673px) {
+    .article-card {
+        margin: 0 0 2.8rem 0;
+    }
+
     .latest-article,
     .latest-article:nth-child(2) {
         flex-direction: column;

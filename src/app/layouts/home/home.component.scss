@@ -4,7 +4,7 @@
 #wall {
     width: 100%;
     height: 450px;
-    background-image: url('../../../assets/BrainBustArt.png');
+    background-image: url('../../../assets/BrainBustArt.webp');
     background-size: cover;
     background-position: center;
     box-shadow: inset 0 -25px 55px 0px black;
@@ -88,7 +88,7 @@ section {
 
 @media only screen and (max-width: 800px) {
     #wall {
-        background-image: url('../../../assets/BrainBustArt2.png');
+        background-image: url('../../../assets/BrainBustArt2.webp');
         height: 300px;
         // h1 {
         //     font-size: 5rem;
@@ -143,7 +143,7 @@ section {
 
 @media only screen and (max-width: 520px) {
     #wall {
-        background-image: url('../../../assets/BrainBustArt3.png');
+        background-image: url('../../../assets/BrainBustArt3.webp');
         height: 300px;
         box-shadow: inset 0 -20px 35px 0px black;
         // h1 {

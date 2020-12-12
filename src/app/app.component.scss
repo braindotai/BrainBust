@@ -10,11 +10,10 @@
     align-items: center;
 
     width: 2rem;
-    height: 4rem;
+    height: 3.5rem;
     
     color: $white;
     font-size: 30px;
-    text-decoration: none;
     
     background-color: $primary;
     border-radius: 100px;
@@ -24,17 +23,9 @@
     cursor: pointer;
 
     transition: opacity 0.5s ease-in-out, background-color 0.2s ease-in-out, color 0.2s ease-in-out, visibility 0.2s ease-in-out;
-}
 
-#up:hover{
-    color: $dark-primary;
-    background-color: $white;
-}
-
-#viewed{
-    position: fixed;
-    bottom: 0;
-    height: 2px;
-    background-color: $white;
-    transition: opacity 0.2s ease-in-out;
+    &:hover {
+        color: $dark-primary;
+        background-color: $white;
+    }
 }
