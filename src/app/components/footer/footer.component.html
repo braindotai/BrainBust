@@ -27,7 +27,7 @@
             <form id="subscription-form" [formGroup]="subscriptionFormGroup" (ngSubmit)="subscribe()" enctype="multipart/form-data">
                 <div class="field">
                     <label for="subscription-email" class="field-title">Email</label>
-                    <input id="subscription-email" placeholder="You'll receive all notifications in this mail" type="text" [ngClass]="{'input-error': subscriptionTouchedError('email')}" formControlName="email">
+                    <input id="subscription-email" placeholder="You'll receive all notifications here" type="text" [ngClass]="{'input-error': subscriptionTouchedError('email')}" formControlName="email">
                     <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors.required">
                         Email is required
                     </h2>
