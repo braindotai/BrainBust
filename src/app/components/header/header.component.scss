@@ -103,7 +103,6 @@ header {
 
 .show-nav {
     transform: translateX(0);
-    filter: drop-shadow(0 0 2rem darken($color: $dark-primary, $amount: 80%));
 }
 
 @media only screen and (max-width: 1110px) {

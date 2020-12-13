@@ -1,0 +1,125 @@
+{
+  "configVersion": 1,
+  "timestamp": 1607885821508,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.51062ee4c66dc9082569.js",
+        "/manifest.webmanifest",
+        "/polyfills.245b4e7d06552a17db95.js",
+        "/runtime.0e49e2b53282f40c8925.js",
+        "/styles.f95b04e1ed8c3171420e.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/BrainBustArt.510281db277104dd3464.webp",
+        "/BrainBustArt2.6cd9335e97ff6a2fb39e.webp",
+        "/BrainBustArt3.fce32db224a4880b7110.webp",
+        "/assets/BrainBust.png",
+        "/assets/BrainBustArt.webp",
+        "/assets/BrainBustArt2.webp",
+        "/assets/BrainBustArt3.webp",
+        "/assets/favicon/android-chrome-192x192.png",
+        "/assets/favicon/android-chrome-512x512.png",
+        "/assets/favicon/apple-touch-icon.png",
+        "/assets/favicon/favicon-16x16.png",
+        "/assets/favicon/favicon-32x32.png",
+        "/assets/favicon/favicon.ico",
+        "/assets/favicon/site.webmanifest",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-256x256.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/me.jpg",
+        "/assets/pytorch.jpg",
+        "/assets/svg/cry.svg",
+        "/assets/svg/edit.svg",
+        "/assets/svg/loadingB.svg",
+        "/assets/svg/loadingW.svg",
+        "/assets/tensorflow.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/BrainBustArt.510281db277104dd3464.webp": "d9c0c663a9cf4ce028acf9ef8bb4a260ac08d2e3",
+    "/BrainBustArt2.6cd9335e97ff6a2fb39e.webp": "034c7c35d32e6760c84353b134e1782f7695466c",
+    "/BrainBustArt3.fce32db224a4880b7110.webp": "2672044563a7b496c69a4802e9ee50ca34e00eb9",
+    "/assets/BrainBust.png": "dc0eba43509af988570c36ddb6ea288e2c63d4c3",
+    "/assets/BrainBustArt.webp": "d9c0c663a9cf4ce028acf9ef8bb4a260ac08d2e3",
+    "/assets/BrainBustArt2.webp": "034c7c35d32e6760c84353b134e1782f7695466c",
+    "/assets/BrainBustArt3.webp": "2672044563a7b496c69a4802e9ee50ca34e00eb9",
+    "/assets/favicon/android-chrome-192x192.png": "1a416fbd48090a81393cc37caa2e01f7a56ee496",
+    "/assets/favicon/android-chrome-512x512.png": "b225e976e54dc8360096d105e4debf59c52662ca",
+    "/assets/favicon/apple-touch-icon.png": "4353897872313b7b6f2f6bb523855fd6c37fc2a2",
+    "/assets/favicon/favicon-16x16.png": "1fef7fd0fedc819007f6a78f8d8bff7a7fc6831b",
+    "/assets/favicon/favicon-32x32.png": "b30e170bf9828faaa20cd17fdc5e22a69139bfe2",
+    "/assets/favicon/favicon.ico": "e5fa5f0d9e9abfdcbe910d452a72a9944fe55ede",
+    "/assets/favicon/site.webmanifest": "bf31baf91bdd2fcde24a45e3f2a1be33733c6f69",
+    "/assets/icons/icon-128x128.png": "f0de602432fde1de1c33a3cf4dfcde6be666f31f",
+    "/assets/icons/icon-144x144.png": "de6309f227f647a262285edc52429bcc99ac534f",
+    "/assets/icons/icon-152x152.png": "0c33b9d4af0f86046d2b541e2b9473ee8c680f21",
+    "/assets/icons/icon-192x192.png": "911caa7b47eeedce396167694828e8e46eca7ea6",
+    "/assets/icons/icon-256x256.png": "1e3916de8b6b6fe1e3a1dd42cbfd59fb236a990b",
+    "/assets/icons/icon-384x384.png": "18efab8f2a95af5e42e13a88a8414bb7d2bf4f43",
+    "/assets/icons/icon-512x512.png": "68e8a425a0afc44b81e8c96e3ba587e945972ddc",
+    "/assets/icons/icon-72x72.png": "9b682a10b829ae811fcdda31f0476699d859d920",
+    "/assets/icons/icon-96x96.png": "e1ec24b8fdaaebd0c10d110152fc85bcb21bf318",
+    "/assets/me.jpg": "4e6f231fc800bd6ea018bb41d48fe2ef1fcf4349",
+    "/assets/pytorch.jpg": "d743e22f180355da7b08ce7983af2f4fe2387e79",
+    "/assets/svg/cry.svg": "8afa59c5fff6ebf81f0a46928b1945f3d932b869",
+    "/assets/svg/edit.svg": "4bfa6a15b14f22d44b903217b53830a7b20c1ee6",
+    "/assets/svg/loadingB.svg": "3323de184108c9aa4c3ed62061312139044e566f",
+    "/assets/svg/loadingW.svg": "056948ef97aa84e82f744c4f60b5bd108c2d82ae",
+    "/assets/tensorflow.jpg": "4d4992c0959fef057fa42bc8690f869cf14ae749",
+    "/favicon.ico": "e5fa5f0d9e9abfdcbe910d452a72a9944fe55ede",
+    "/index.html": "86e5aba183d75eedc12e141bec878e7bbdadee54",
+    "/main.51062ee4c66dc9082569.js": "6a919115e7858d944e9872ae4dd34584b7037274",
+    "/manifest.webmanifest": "13305876ee276c6c3705dfa5dd7bd34de29d4c12",
+    "/polyfills.245b4e7d06552a17db95.js": "f888b31e000d9b05c8c3fef19c325d813f2b7e1b",
+    "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/styles.f95b04e1ed8c3171420e.css": "3f346b23d992e2ca8a6f65836262fb1bcebb0d83"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
