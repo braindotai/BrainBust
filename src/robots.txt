@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://bb-portfolio-test3.web.app/sitemap.xml

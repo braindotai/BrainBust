@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-fade-background',
   templateUrl: './fade-background.component.html',
-  styleUrls: ['./fade-background.component.scss']
+  styleUrls: ['./fade-background.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FadeBackgroundComponent implements OnInit {
   @Input('burgerOpen') burgerOpen: boolean = false;

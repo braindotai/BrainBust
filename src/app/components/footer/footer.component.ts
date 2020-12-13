@@ -72,7 +72,6 @@ export class FooterComponent implements OnInit, OnDestroy {
 
     this.componentSubscriptions.push(
       this.service.message(this.messageFormData).subscribe((response: MessageResponse) => {
-        console.log(response);
         if (response.result === 'success') {
           this.messageResponseMessage = response.message;
 

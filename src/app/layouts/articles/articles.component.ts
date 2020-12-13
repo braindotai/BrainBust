@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, EventEmitter, Renderer2, ViewChild, ElementRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { ArticleResponse, ArticlesReceived, ArticlesResponse } from 'src/app/models/interface';
@@ -13,6 +13,7 @@ import { SEOService } from 'src/app/services/SEO/seo.service';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   @Input('articleName') articleName: string;

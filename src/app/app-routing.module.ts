@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './layouts/home/home.component';
 import { ProjectsComponent } from './layouts/projects/projects.component';
 import { ArticlesComponent } from './layouts/articles/articles.component';
-import { AboutComponent } from './layouts/about/about.component';
 import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 import { EditorComponent } from './layouts/editor/editor.component';
 import { UnsubscribeComponent } from './layouts/unsubscribe/unsubscribe.component';
@@ -26,7 +25,6 @@ const routes: Routes = [
   { path: 'write-article', component: EditorComponent },
   
   { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
   { path: '**', component: PageNotFoundComponent}
 ];
 

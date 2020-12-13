@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-loading-button',
   templateUrl: './loading-button.component.html',
-  styleUrls: ['./loading-button.component.scss']
+  styleUrls: ['./loading-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingButtonComponent implements OnInit {
   @Input('title') title: string;

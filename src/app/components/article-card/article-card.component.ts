@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-article-card',
   templateUrl: './article-card.component.html',
-  styleUrls: ['./article-card.component.scss']
+  styleUrls: ['./article-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleCardComponent implements OnInit {
   @Input('wall') wall: string;
