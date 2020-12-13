@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "brain-bust": {
+      "hosting": {
+        "BrainBust": [
+          "brain-bust"
+        ]
+      }
+    }
+  }
+}
