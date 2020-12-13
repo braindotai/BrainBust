@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~11.0.4",
     "@angular/platform-browser-dynamic": "~11.0.4",
     "@angular/router": "~11.0.4",
+    "@angular/service-worker": "~11.0.4",
     "@editorjs/code": "^2.6.0",
     "@editorjs/editorjs": "^2.19.1",
     "@editorjs/embed": "^2.4.0",

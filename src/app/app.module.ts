@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HighlightJsModule } from 'ngx-highlight-js';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { HighlightJsModule } from 'ngx-highlight-js';
     FormsModule,
     ReactiveFormsModule,
     HighlightJsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     ApiService,
