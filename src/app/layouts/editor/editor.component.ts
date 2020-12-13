@@ -44,7 +44,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Brain Bust - Write Article');
+    this.title.setTitle('BrainBust - Write Article');
 
     this.componentSubscriptions.push(
       this.route.paramMap.subscribe(params => {

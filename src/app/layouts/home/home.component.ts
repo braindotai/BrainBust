@@ -3,6 +3,7 @@ import { ApiService } from '../../services/ApiService/api-service.service';
 import { ArticlesResponse, ArticlesReceived } from 'src/app/models/interface';
 import { Title } from '@angular/platform-browser';
 import { SubscriptionLike } from 'rxjs';
+import { SEOService } from 'src/app/services/SEO/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
-    private service: ApiService,
+    private apiService: ApiService,
+    private seoService: SEOService,
     private title: Title
   ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Brain Bust');
+    this.seoService.setMeta('BrainBust', "This is BrainBust aka Rishik C. Mourya, and I welcome you to my website, where my ultimate goal is to laymanize the knowledge I've gained and contribute to this generous field of AI with quality content.");
+
     this.componentSubscriptions.push(
-      this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) =>  {
+      this.apiService.receiveProjectArticles().subscribe((response: ArticlesResponse) =>  {
         this.projectArticles = response.received;
         this.projectArticles.sort((a, b) => {return b.date - a.date});
         
@@ -33,7 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
     )
     this.componentSubscriptions.push(
-      this.service.receiveArticles().subscribe((response: ArticlesResponse) =>  {
+      this.apiService.receiveArticles().subscribe((response: ArticlesResponse) =>  {
         this.articles = response.received;
         this.articles.sort((a, b) => {return b.date - a.date});
         
@@ -45,11 +48,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getProjectLink(projectName: string): string {
-    return this.service.getProjectLink(projectName);
+    return this.apiService.getProjectLink(projectName);
   }
 
   getArticleLink(articleName: string): string {
-    return this.service.getArticleLink(articleName);
+    return this.apiService.getArticleLink(articleName);
   }
 
   ngOnDestroy() {

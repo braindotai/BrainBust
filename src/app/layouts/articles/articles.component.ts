@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { SubscriptionLike } from 'rxjs';
 import { ScrollService } from 'src/app/services/ScrollService/scroll-service.service';
+import { SEOService } from 'src/app/services/SEO/seo.service';
 
 @Component({
   selector: 'app-articles',
@@ -35,10 +36,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   constructor(
     private service: ApiService,
     private scrollService: ScrollService,
+    private seoService: SEOService,
     private title: Title,
     private router: Router,
     private route: ActivatedRoute,
-    private renderer: Renderer2
+    private renderer: Renderer2,
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
@@ -62,22 +64,22 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         this.route.paramMap.subscribe(params => {
           this.articleName = params.get('articleName');
           if (this.showPageLoading) {
-            this.title.setTitle('Brain Bust - Articles');
+            this.seoService.setMeta('BrainBust - Articles', 'Articles written by BrainBust | Rishik Mourya');
           }
         })
       )
     }
     if (this.articleName) {
       this.articleName = this.articleName.split('-').join(' ');
-      if (this.showPageLoading) {
-        this.title.setTitle('Brain Bust - Article - ' + this.articleName.split(' ').map((word: string) => {
-          return word.replace(word[0], word[0].toUpperCase());
-        }).join(' '));
-      }
 
       this.componentSubscriptions.push(
         this.service.receiveArticle(this.articleName).subscribe((response: ArticleResponse) => {
           if (response.result === 'success') {
+            const metaTitle: string = this.articleName.split(' ').map((word: string) => {
+              return word.replace(word[0], word[0].toUpperCase());
+            }).join(' ')
+            this.seoService.setMeta(this.showPageLoading ? 'BrainBust - Article - ' + metaTitle: 'BrainBust - Project - ' + metaTitle, response.received.metaDescription);
+
             const jsonResponse = JSON.parse(response.received.content);
             this.articleDate = jsonResponse.time;
             this.articleMinutes = response.received.minutes;
@@ -156,7 +158,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   cleanLink(innerHTML: string): string {
-    return innerHTML.replace(/<a href=/g, '<a target="_blank" href=');
+    return innerHTML.replace(/<a href=/g, '<a target="_blank" rel="noopener" href=');
   }
 
   cleanParagraph(innerHTML: string): string {

@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   @ViewChild('up') up: ElementRef<HTMLElement>
   rootElement: HTMLElement = document.documentElement;
 
-  title = 'Brain Bust';
+  title = 'BrainBust';
 
   constructor(
     private renderer: Renderer2,

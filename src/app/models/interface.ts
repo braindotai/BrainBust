@@ -28,6 +28,7 @@ export interface ProjectInferenceResponse {
 
 // [======== articles ========]
 interface ArticleReceived {
+    metaDescription: string;
     content: string;
     has_project: boolean;
     has_deployed: boolean;

@@ -44,12 +44,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   
         if (this.projectName) {
           this.projectName = this.projectName.split('-').join(' ');
-          this.title.setTitle('Brain Bust - Project - ' + this.projectName.split(' ').map((word: string) => {
+          this.title.setTitle('BrainBust - Project - ' + this.projectName.split(' ').map((word: string) => {
             return word.replace(word[0], word[0].toUpperCase());
           }).join(' '));
         }
         else {
-          this.title.setTitle('Brain Bust - Projects');
+          this.title.setTitle('BrainBust - Projects');
           this.componentSubscriptions.push(
             this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
               this.projects = response.received;

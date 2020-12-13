@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Renderer2, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-article-card',
@@ -20,7 +20,7 @@ export class ArticleCardComponent implements OnInit {
   
   framework_image: string = '';
 
-  constructor(private renderer: Renderer2) { }
+  constructor() { }
 
   ngOnInit(): void {
     if (this.framework.length !== 0) {
@@ -31,5 +31,7 @@ export class ArticleCardComponent implements OnInit {
       }
       this.framework_image = `../../../assets/${this.framework}.jpg`;
     }
+
+    this.description = this.description.replace(/<a href=/g, '<a target="_blank" rel="noopener" href=');
   }
 }
