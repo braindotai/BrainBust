@@ -61,7 +61,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     if (!this.articleName) {
       this.componentSubscriptions.push(
         this.route.paramMap.subscribe(params => {
-          this.articleName = params.get('articleName');
+          this.articleName = params.get('articleName')
           if (this.showPageLoading) {
             this.seoService.setMeta('BrainBust - Articles', 'Articles written by BrainBust | Rishik Mourya');
           }

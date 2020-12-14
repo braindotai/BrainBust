@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1607942042067,
+  "timestamp": 1607964085184,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.d3aa8db8a5aa227ffc99.js",
+        "/main.8de91cbe384db2b5a632.js",
         "/manifest.webmanifest",
         "/polyfills.245b4e7d06552a17db95.js",
         "/runtime.0e49e2b53282f40c8925.js",
-        "/styles.f95b04e1ed8c3171420e.css"
+        "/styles.ef32f4de0f6d7aa19f00.css"
       ],
       "patterns": []
     },
@@ -96,12 +96,12 @@
     "/assets/svg/loadingW.svg": "056948ef97aa84e82f744c4f60b5bd108c2d82ae",
     "/assets/tensorflow.jpg": "4d4992c0959fef057fa42bc8690f869cf14ae749",
     "/favicon.ico": "e5fa5f0d9e9abfdcbe910d452a72a9944fe55ede",
-    "/index.html": "09222e1c5f307d3f97b450233ce51b40b0a70e08",
-    "/main.d3aa8db8a5aa227ffc99.js": "986a0fa00c833842765923598ef91ec922cf7f18",
+    "/index.html": "447516cf19f5448e5e62bf361645d36ebcfd231c",
+    "/main.8de91cbe384db2b5a632.js": "4694ce96b55dedc7d00701c2b5e433ae06883c91",
     "/manifest.webmanifest": "13305876ee276c6c3705dfa5dd7bd34de29d4c12",
     "/polyfills.245b4e7d06552a17db95.js": "f888b31e000d9b05c8c3fef19c325d813f2b7e1b",
     "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/styles.f95b04e1ed8c3171420e.css": "3f346b23d992e2ca8a6f65836262fb1bcebb0d83"
+    "/styles.ef32f4de0f6d7aa19f00.css": "48d79d67cab47d4b6d91efffa2e9b346662297a4"
   },
   "navigationUrls": [
     {

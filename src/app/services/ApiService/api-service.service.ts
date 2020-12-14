@@ -8,14 +8,13 @@ export class ApiService {
   readonly ArticleBackendURL: string = "https://brainbust-articlesbackend.herokuapp.com";
   // readonly ArticleBackendURL: string = "http://127.0.0.1:8000";
 
-  readonly MediaUploadURL = `http://localhost:8000/upload/`;
-  
-  readonly UploadArticleURL = `${this.ArticleBackendURL}/articles/upload-article/`;
-  readonly UpdateArticleURL = `${this.ArticleBackendURL}/articles/update-article/`;
-  readonly ReceiveArticleURL = `${this.ArticleBackendURL}/articles/receive-article`;
+  // readonly MediaUploadURL = `http://localhost:8000/upload/`;
+  // readonly UploadArticleURL = `${this.ArticleBackendURL}/articles/upload-article/`;
+  // readonly UpdateArticleURL = `${this.ArticleBackendURL}/articles/update-article/`;
+  // readonly ReceiveArticleURL = `${this.ArticleBackendURL}/articles/receive-article`;
 
-  readonly ReceiveArticlesURL = `${this.ArticleBackendURL}/articles/receive-articles`;
-  readonly ReceiveProjectArticlesURL = `${this.ArticleBackendURL}/articles/receive-project-articles`;
+  // readonly ReceiveArticlesURL = `${this.ArticleBackendURL}/articles/receive-articles`;
+  // readonly ReceiveProjectArticlesURL = `${this.ArticleBackendURL}/articles/receive-project-articles`;
 
   constructor(public http: HttpClient) { }
 
@@ -31,11 +30,11 @@ export class ApiService {
   }
 
   uploadArticle(value: FormData) {
-    return this.http.post(this.UploadArticleURL, value);
+    return this.http.post(`${this.ArticleBackendURL}/articles/upload-article/`, value);
   }
 
   updateArticle(value: FormData) {
-    return this.http.post(this.UpdateArticleURL, value);
+    return this.http.post(`${this.ArticleBackendURL}/articles/update-article/`, value);
   }
 
   receiveArticle(projectName: string) {
@@ -47,11 +46,11 @@ export class ApiService {
   // }
 
   receiveProjectArticles() {
-    return this.http.get(this.ReceiveProjectArticlesURL);
+    return this.http.get(`${this.ArticleBackendURL}/articles/receive-project-articles`);
   }
 
   receiveArticles() {
-    return this.http.get(this.ReceiveArticlesURL);
+    return this.http.get(`${this.ArticleBackendURL}/articles/receive-articles`);
   }
 
   projectURL(projectName: string): string {
@@ -67,7 +66,7 @@ export class ApiService {
   }
 
   articleURL(articleName: string): string {
-    return `${this.ReceiveArticleURL}/${articleName}/`;
+    return `${`${this.ArticleBackendURL}/articles/receive-article`}/${articleName.replace("?", "question_mark")}/`;
   }
   
   getProjectLink(projectName: string): string {

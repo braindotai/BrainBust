@@ -140,7 +140,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   touchedError(name: string): boolean {
-    return this.formGroup.get(name).invalid && (this.formGroup.get(name).touched || this.formGroup.get(name).dirty);
+    return this.formGroup.get(name).invalid && this.formGroup.get(name).dirty;
   }
 
   runInference(): void {
