@@ -73,9 +73,9 @@
             <h1>Inference Outputs</h1>
             <div class="output-group" *ngIf="projectInferenceResponse.received.image_output">
                 <h2>
-                    <span><i class="fas fa-images"></i>&nbsp;&nbsp;Image output</span>
+                    <span><i class="fas fa-images" title="Image Outputs"></i>&nbsp;&nbsp;Image output</span>
                     <a id="download" [href]="outputImageSrc" download="image-outputs">
-                        <i class="fas fa-download"></i>
+                        <i class="fas fa-download" title="Dowload Image Outputs"></i>
                     </a>
                 </h2>
                 <div id="image-output">
@@ -84,7 +84,7 @@
             </div>
             <div class="output-group" *ngIf="projectInferenceResponse.received.json_output">
                 <h2>
-                    <span><i class="fas fa-network-wired" title="Download image output"></i>&nbsp;&nbsp;JSON output</span>
+                    <span><i class="fas fa-network-wired" title="JSON Outputs"></i>&nbsp;&nbsp;JSON output</span>
                 </h2>
                 <p class="json-output">{{ projectInferenceResponse.received.json_output | json }}</p>
             </div>
