@@ -66,7 +66,7 @@ export interface SubscriptionResponse {
 
 export interface UnsubscriptionResponse {
     result: string;
-    message: string;
+    email: string;
     alreadyLeaved: boolean;
 }
 

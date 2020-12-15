@@ -14,7 +14,7 @@ export class UnsubscribeComponent implements OnInit, OnDestroy {
   subscriptionLoading: boolean = false;
   encodedEmail: string;
   subscriptionFormData: FormData = new FormData();
-  message: string = null;  
+  email: string = null;  
   title: string = 'Subscribe again';
   disabled: boolean = false;
 
@@ -35,7 +35,7 @@ export class UnsubscribeComponent implements OnInit, OnDestroy {
           this.service.unsubscribe(this.encodedEmail).subscribe((response: UnsubscriptionResponse) => {
             if (response.result === 'success') {
               if (response.alreadyLeaved) {
-                this.message = response.message;
+                this.email = response.email;
               }
               this.loading = false;
             }

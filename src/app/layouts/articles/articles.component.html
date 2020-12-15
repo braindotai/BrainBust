@@ -21,7 +21,7 @@
             </div>
         </div>
         <div *ngFor="let field of article; index as index">
-            <div class="article-field" [ngSwitch]="field.type" *ngIf="index > 1">
+            <div class="article-field" [ngSwitch]="field.type" *ngIf="index > 2">
                 <div class="youtube-embed" *ngSwitchCase="'embed'">
                     <a [href]="field.data.source" target="_blank" rel="noopener">
                         <img alt="Youtube video for this project" [src]="getYouTubeThumbnail(field.data.source)">
@@ -30,13 +30,19 @@
                 <div class="article-heading" *ngSwitchCase="'header'" [id]="headingID(field.data.text)">
                     <h1 [innerHTML]="field.data.text" [ngClass]="{'subheading': field.data.level === 2}"></h1>
                 </div>
-                <div [ngClass]="{'article-paragraph': !field.data.text.includes('.webp'), 'article-image': field.data.text.includes('.webp')}" *ngSwitchCase="'paragraph'">
+                <div
+                    [ngClass]="{
+                        'article-paragraph': !field.data.text.includes('.webp'),
+                        'article-image': field.data.text.includes('.webp'),
+                        'article-wall': index === 3
+                    }"
+                    *ngSwitchCase="'paragraph'">
                     <img [src]="field.data.text" alt="Article image" *ngIf="field.data.text.includes('.webp') else showText">
                     <ng-template #showText>
                         <p [innerHTML]="cleanParagraph(field.data.text)"></p>
                     </ng-template>
                 </div>
-                <div class="article-image" [ngClass]="{'article-wall': index === 2}" *ngSwitchCase="'image'">
+                <div class="article-image" *ngSwitchCase="'image'">
                     <img [src]="field.data.url" alt="Article image">
                     <p>{{ field.data.caption }}</p>
                 </div>
