@@ -24,7 +24,8 @@
             <div class="article-field" [ngSwitch]="field.type" *ngIf="index > 2">
                 <div class="youtube-embed" *ngSwitchCase="'embed'">
                     <a [href]="field.data.source" target="_blank" rel="noopener">
-                        <img alt="Youtube video for this project" [src]="getYouTubeThumbnail(field.data.source)">
+                        <img class="youtube-logo" src="../../../assets/youtube-logo.png" alt="YouTube Video">
+                        <img class="youtube-video" alt="Youtube video for this project" [src]="getYouTubeThumbnail(field.data.source)">
                     </a>
                 </div>
                 <div class="article-heading" *ngSwitchCase="'header'" [id]="headingID(field.data.text)">
@@ -41,8 +42,9 @@
                     <ng-template #showText>
                         <p [innerHTML]="cleanParagraph(field.data.text)"></p>
                     </ng-template>
+                    <!-- <p style="color: white;">{{index}}</p> -->
                 </div>
-                <div class="article-image" *ngSwitchCase="'image'">
+                <div class="article-image" [ngClass]="{'article-wall': index === 3}" *ngSwitchCase="'image'">
                     <img [src]="field.data.url" alt="Article image">
                     <p>{{ field.data.caption }}</p>
                 </div>

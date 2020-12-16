@@ -116,14 +116,14 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   submitArticle(): void {
     this.editor.saver.save().then(content => {
+      this.formData.append('username', this.authInfo['username']);
+      this.formData.append('email', this.authInfo['email']);
+      this.formData.append('password', this.authInfo['password']);
+
       if (this.articleName) {
         this.formData.append('has_project', 'True');
         this.formData.append('title', this.articleName);
         this.formData.append('content', JSON.stringify(content));
-
-        this.formData.append('username', this.authInfo['username']);
-        this.formData.append('email', this.authInfo['email']);
-        this.formData.append('password', this.authInfo['password']);
   
         if (this.editorData) {
           this.componentSubscriptions.push(
@@ -142,6 +142,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         // 1 - title
         // 2 - tags
         // 3 - framework
+        // 4 - meta desc
         // 4 - wall
         // 5 - description (with title "Article Overview")
         // 6 - ...
@@ -150,7 +151,6 @@ export class EditorComponent implements OnInit, OnDestroy {
         // 
         this.formData.append('title', content.blocks.shift().data.text.toLocaleLowerCase());
         this.formData.append('content', JSON.stringify(content));
-
         this.componentSubscriptions.push(
           this.service.uploadArticle(this.formData).subscribe(response => {
             this.router.navigate(['/articles']);

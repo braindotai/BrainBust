@@ -36,7 +36,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     private service: ApiService,
     private scrollService: ScrollService,
     private seoService: SEOService,
-    private title: Title,
     private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
@@ -178,7 +177,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   @HostListener("document:scroll", ['$event'])
   showArticleIndex(): void {
     if (this.articleindex) {
-      if (window.pageYOffset > 400 && this.scrollService.getScrolledPercent < 70) {
+      if (window.pageYOffset > 400 && (this.scrollService.getMaxScroll - this.scrollService.getScrollPosition) > 2100) {
         this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '1');
         this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'visible');
       } else {
@@ -206,7 +205,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     heading.toLocaleLowerCase().split(' ').forEach(word => {
       id += word[0] + word[1];
     })
-
     return id;
   }
 
@@ -226,10 +224,10 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   isHeadingVisible(heading: string): boolean {
     const rect = document.getElementById(this.headingID(heading)).getBoundingClientRect();
     return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight - 30 || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight - 30 || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
 

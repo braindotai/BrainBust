@@ -159,7 +159,6 @@
 .article-wall {
     img {
         max-width: 100%;
-        // width: 100%;
     }
 }
 
@@ -280,8 +279,24 @@
         display: block;
         width: 70%;
         margin: 0 auto;
+        position: relative;
 
-        img {
+        &:hover {
+            .youtube-video {
+                transform: scale(1.02);
+            }
+        }
+
+        .youtube-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            filter: drop-shadow(0 0 8px $primary);
+        }
+
+        .youtube-video {
             width: 100%;
             border-radius: 6px;
 
@@ -292,9 +307,6 @@
             transform: scale(1);
             transition: box-shadow 200ms ease-out, transform 200ms ease-out;
 
-            &:hover {
-                transform: scale(1.02);
-            }
         }
     }
 }
@@ -303,9 +315,12 @@
     position: fixed;
     top: 5rem;
     left: 2%;
+    max-height: 85vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
     
     color: transparentize($color: #8394aa, $amount: 0.3);
-    border-left: 2px solid transparentize($color: $text, $amount: 0.5);
+    // border-left: 2px solid transparentize($color: $text, $amount: 0.5);
     opacity: 0.0;
     
     pointer-events: none;
