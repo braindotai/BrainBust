@@ -123,7 +123,7 @@
         // font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
         font-size: 1.05rem;
         line-height: 1.8rem;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.4px;
 
         margin: 0 auto;
         color: $text;
@@ -164,7 +164,9 @@
 
 .article-list {
     padding-left: 2rem;
-
+    
+    font-size: 1.05rem;
+    line-height: 1.8rem;
     color: $text;
 
     li {
