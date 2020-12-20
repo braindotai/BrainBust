@@ -147,6 +147,7 @@
 
     .article-quote-source {
         margin-top: 0.6rem;
+        color: $text;
         // margin-left: 2rem;
         &::before {
             content: "━ ";
@@ -178,7 +179,7 @@
         color: $text;
         // color: darken($color: $text, $amount: 10%);
         a {
-            color: $text;
+            // color: $blue;
             &:hover {
                 text-decoration: underline;
             }

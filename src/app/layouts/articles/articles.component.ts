@@ -175,20 +175,36 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   getImageSource(caption: string): string {
-    return caption.includes('source') ? `<a href=${caption.split(':&nbsp;')[1]} target="_blank" rel="noopener">source</a>` : caption;
+    if (caption.includes('http')) {
+      let preCaption: string, title: string, link: string, detail: string;
+      [preCaption, link] = caption.split(':&nbsp;');
+      [detail, title] = preCaption.split('. ');
+      // if (caption.includes('source')) {
+      //   link = caption.split('source:&nbsp;')[1];
+      //   caption = caption.replace('source:&nbsp;' + link, `<a href=${link} target="_blank" rel="noopener">source</a>`);
+      // } else if (caption.includes('Source')) {
+      //   link = caption.split('Source:&nbsp;')[1];
+      // }
+      return title ? `${detail}. <a href=${link} target="_blank" rel="noopener">${title}</a>` : `<a href=${link} target="_blank" rel="noopener">${detail}</a>`;
+    }
+    return caption;
+    // return caption.includes('source') || caption.includes('Source') ? `<a href=${caption.split(':&nbsp;')[1]} target="_blank" rel="noopener">source</a>` : caption;
   }
 // Source: hdhskadjlksad.com
   getCaptionSource(caption: string): string {
-    let preCaption: string, title: string, link: string, detail: string;
-    [preCaption, link] = caption.split(':&nbsp;');
-    [detail, title] = preCaption.split('. ');
-    // if (caption.includes('source')) {
-    //   link = caption.split('source:&nbsp;')[1];
-    //   caption = caption.replace('source:&nbsp;' + link, `<a href=${link} target="_blank" rel="noopener">source</a>`);
-    // } else if (caption.includes('Source')) {
-    //   link = caption.split('Source:&nbsp;')[1];
-    // }
-    return title ? `${detail}. <a href=${link} target="_blank" rel="noopener">${title}</a>` : `<a href=${link} target="_blank" rel="noopener">${detail}</a>`;
+    if (caption.includes('http')) {
+      let preCaption: string, title: string, link: string, detail: string;
+      [preCaption, link] = caption.split(':&nbsp;');
+      [detail, title] = preCaption.split('. ');
+      // if (caption.includes('source')) {
+      //   link = caption.split('source:&nbsp;')[1];
+      //   caption = caption.replace('source:&nbsp;' + link, `<a href=${link} target="_blank" rel="noopener">source</a>`);
+      // } else if (caption.includes('Source')) {
+      //   link = caption.split('Source:&nbsp;')[1];
+      // }
+      return title ? `${detail}. <a href=${link} target="_blank" rel="noopener">${title}</a>` : `<a href=${link} target="_blank" rel="noopener">${detail}</a>`;
+    }
+    return caption;
   }
 
   @HostListener("document:scroll", ['$event'])
