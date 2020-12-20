@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewEncapsulation, HostListener, Output, Even
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { ArticleResponse, ArticlesReceived, ArticlesResponse } from 'src/app/models/interface';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { SubscriptionLike } from 'rxjs';
 import { ScrollService } from 'src/app/services/ScrollService/scroll-service.service';
 import { SEOService } from 'src/app/services/SEO/seo.service';
@@ -134,6 +133,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
         this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
           // console.log(response);
           this.articles = response.received;
+          this.articles.sort((a, b) => {return b.date - a.date})
   
           setTimeout(() => {
             this.pageLoading = false;
@@ -151,16 +151,16 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     return this.service.getProjectLink(articleName);
   }
 
-  cleanInlineCode(innerHTML: string): string {
-    return innerHTML.replace(/code/g, 'p').replace(/ class="inline-p"/g, ' class="article-inline-code"').replace(/<p/g, '<br><br><p').replace(/p>/g, 'p><br><br>');
-  }
+  // cleanInlineCode(innerHTML: string): string {
+  //   return innerHTML.replace(/code/g, 'p').replace(/ class="inline-p"/g, ' class="article-inline-code"').replace(/<p/g, '<br><br><p').replace(/p>/g, 'p><br><br>');
+  // }
 
   cleanLink(innerHTML: string): string {
     return innerHTML.replace(/<a href=/g, '<a target="_blank" rel="noopener" href=');
   }
 
   cleanParagraph(innerHTML: string): string {
-    innerHTML = this.cleanInlineCode(innerHTML);
+    // innerHTML = this.cleanInlineCode(innerHTML);
     innerHTML = this.cleanLink(innerHTML);
     return innerHTML;
   }
@@ -172,6 +172,23 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       copyButton.innerHTML = 'Copy';
     }, 1500);
+  }
+
+  getImageSource(caption: string): string {
+    return caption.includes('source') ? `<a href=${caption.split(':&nbsp;')[1]} target="_blank" rel="noopener">source</a>` : caption;
+  }
+// Source: hdhskadjlksad.com
+  getCaptionSource(caption: string): string {
+    let preCaption: string, title: string, link: string, detail: string;
+    [preCaption, link] = caption.split(':&nbsp;');
+    [detail, title] = preCaption.split('. ');
+    // if (caption.includes('source')) {
+    //   link = caption.split('source:&nbsp;')[1];
+    //   caption = caption.replace('source:&nbsp;' + link, `<a href=${link} target="_blank" rel="noopener">source</a>`);
+    // } else if (caption.includes('Source')) {
+    //   link = caption.split('Source:&nbsp;')[1];
+    // }
+    return title ? `${detail}. <a href=${link} target="_blank" rel="noopener">${title}</a>` : `<a href=${link} target="_blank" rel="noopener">${detail}</a>`;
   }
 
   @HostListener("document:scroll", ['$event'])

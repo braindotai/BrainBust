@@ -25,7 +25,6 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   }
 
   authenticate(): void {
-    console.log('authenticating...');
     this.loading = true;
     let values = this.formGroup.value;
     for ( const key of Object.keys(values) ) {

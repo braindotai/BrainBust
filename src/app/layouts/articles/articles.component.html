@@ -40,13 +40,18 @@
                     *ngSwitchCase="'paragraph'">
                     <img [src]="field.data.text" alt="Article image" *ngIf="field.data.text.includes('.webp') else showText">
                     <ng-template #showText>
+                        <!-- <div [innerHTML]="field.data.text" *ngIf="field.data.text.includes('iframe'); else showNormalText"></div> -->
                         <p [innerHTML]="cleanParagraph(field.data.text)"></p>
                     </ng-template>
                     <!-- <p style="color: white;">{{index}}</p> -->
                 </div>
                 <div class="article-image" [ngClass]="{'article-wall': index === 3}" *ngSwitchCase="'image'">
                     <img [src]="field.data.url" alt="Article image">
-                    <p>{{ field.data.caption }}</p>
+                    <p [innerHTML]="getImageSource(field.data.caption)"></p>
+                </div>
+                <div class="article-quote-container" *ngSwitchCase="'quote'">
+                    <p class="article-quote" [innerHTML]="cleanParagraph(field.data.text)"></p>
+                    <p class="article-quote-source" [innerHTML]="getCaptionSource(field.data.caption)"></p>
                 </div>
                 <div class="article-list" *ngSwitchCase="'list'">
                     <ul *ngIf="field.data.style === 'unordered'">

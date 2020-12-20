@@ -4,11 +4,11 @@ button {
     font-size: 1.1rem;
     font-weight: bold;
     
-    background-color: $dark-primary;
-    color: $white;
+    background-color: $white;
+    color: $dark-primary;
 
-    border: 1.8px solid $white;
     outline: none;
+    border: 2px solid white;
     border-radius: 7px;
 
     cursor: pointer;
@@ -26,9 +26,7 @@ button {
 
     &:hover,
     &:active {
-        background-color: $white;
-        color: $dark-primary;
-        border-color: $white;
+        transform: translateY(-4px);
     }
 }
 
@@ -38,17 +36,8 @@ button {
     opacity: 0.4;
 }
 
-.filled-button {
-    background-color: $white;
-    color: $dark-primary;
-    
-    &:hover,
-    &:active {
-        background-color: $primary;
-        color: $white;
-        border-color: $white;
-    }
-}
+// .filled-button {
+// }
 
 .round-button {
     border-radius: 100px;
@@ -60,17 +49,9 @@ button {
     margin: 0 auto;
     margin-bottom: 2rem;
 
-    padding: 1rem 2rem;
-    
-    color: $dark-primary;
+    padding: 1rem 2rem;   
     font-size: 1rem;
-    font-weight: 700;
-
-    background-color: $white;
-
-    border: 1.8px solid transparent;
-    border-radius: 8px;
-
+ 
     cursor: pointer;
 }
 

@@ -8,7 +8,14 @@
 
     &:hover {
         .article-card-wall {
+            opacity: 1;
             transform: scale(0.975);
+        }
+
+        .article-card-title {
+            h1 {
+                border-bottom: 1px solid transparentize($color: $text, $amount: 0.7);
+            }
         }
     }
 
@@ -54,6 +61,7 @@
         width: 100%;
         border-radius: 5px;
         box-shadow: 0 0 15px 0 $dark-primary;
+        opacity: 0.9;
         transform: scale(1.0);
 
         transition: all 250ms ease-out;
@@ -65,6 +73,8 @@
         h1 {
             color: $white;
             font-size: 2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid transparent;
             transition: all 250ms ease-out;
         }
     }
@@ -79,6 +89,10 @@
     .article-card-author-date-minutes {
         @include flexRowSpaceBetween();
         margin: 0.8rem 0;
+        p {
+            line-height: normal;
+            letter-spacing: normal;
+        }
 
         .article-card-author-date {
             display: flex;

@@ -26,12 +26,12 @@
             </div>
             <form id="subscription-form" [formGroup]="subscriptionFormGroup" (ngSubmit)="subscribe()" enctype="multipart/form-data">
                 <div class="field">
-                    <label for="subscription-email" class="field-title">Email</label>
+                    <label for="subscription-email" class="field-title field-title-over">Email</label>
                     <input id="subscription-email" placeholder="You'll receive all notifications here" type="text" [ngClass]="{'input-error': subscriptionTouchedError('email')}" formControlName="email">
-                    <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors.required">
+                    <h2 class="field-error" [hidden]="!(subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors.required)">
                         Email is required
                     </h2>
-                    <h2 class="field-error" *ngIf="subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors?.email">
+                    <h2 class="field-error" [hidden]="!(subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors?.email)">
                         Email is not valid
                     </h2>
                     <h2 class="field-help" *ngIf="subscriptionResponseMessage">
@@ -49,36 +49,36 @@
         <form id="contact-form" [formGroup]="messageFormGroup" (ngSubmit)="message()" enctype="multipart/form-data">
             <h1>Contact Me</h1>
             <div class="field">
-                <div class="text-field">
-                    <label for="contact-name" class="field-title">Name</label>
-                    <input id="contact-name" placeholder="Your name" type="text" [ngClass]="{'input-error': messageTouchedError('name')}" formControlName="name">
-                    <h2 class="field-error" *ngIf="messageTouchedError('name') && messageFormGroup.get('name').errors.required">
-                        Name is required
-                    </h2>
-                </div>
-                <div class="text-field">
-                    <label for="contact-email" class="field-title">Email</label>
-                    <input id="contact-email" placeholder="Your email for contact" type="text" [ngClass]="{'input-error': messageTouchedError('email')}" formControlName="email">
-                    <h2 class="field-error" *ngIf="messageTouchedError('email') && messageFormGroup.get('email').errors.required">
-                        Email is required
-                    </h2>
-                    <h2 class="field-error" *ngIf="messageTouchedError('email') && messageFormGroup.get('email').errors?.email">
-                        Email is not valid
-                    </h2>
-                </div>
-                <div class="text-field">
-                    <label for="contact-message" class="field-title">Message</label>
-                    <textarea id="contact-message" placeholder="So what is in your mind?" [ngClass]="{'input-error': messageTouchedError('message')}" formControlName="message" rows="8"></textarea>
-                    <h2 class="field-error" *ngIf="messageTouchedError('message') && messageFormGroup.get('message').errors.required">
-                        Message is required
-                    </h2>
-                </div>
-                <div class="text-field">
-                    <h2 class="field-help" *ngIf="messageResponseMessage">
-                        {{ messageResponseMessage }}
-                    </h2>
-                </div>
+                <label for="contact-name" class="field-title field-title-over">Name</label>
+                <input id="contact-name" placeholder="Your name" type="text" [ngClass]="{'input-error': messageTouchedError('name')}" formControlName="name">
+                <h2 class="field-error" [hidden]="!(messageTouchedError('name') && messageFormGroup.get('name').errors.required)">
+                    Name is required
+                </h2>
             </div>
+            <div class="field">
+                <label for="contact-email" class="field-title field-title-over">Email</label>
+                <input id="contact-email" placeholder="Your email for contact" type="text" [ngClass]="{'input-error': messageTouchedError('email')}" formControlName="email">
+                <h2 class="field-error" [hidden]="!(messageTouchedError('email') && messageFormGroup.get('email').errors.required)">
+                    Email is required
+                </h2>
+                <h2 class="field-error" [hidden]="!(messageTouchedError('email') && messageFormGroup.get('email').errors?.email)">
+                    Email is not valid
+                </h2>
+            </div>
+            <div class="field">
+                <label for="contact-message" class="field-title field-title-over">Message</label>
+                <textarea id="contact-message" placeholder="So what is in your mind?" [ngClass]="{'input-error': messageTouchedError('message')}" formControlName="message" rows="8"></textarea>
+                <h2 class="field-error" [hidden]="!(messageTouchedError('message') && messageFormGroup.get('message').errors.required)">
+                    Message is required
+                </h2>
+            </div>
+            <!-- <div class="field"> -->
+            <div class="text-field">
+                <h2 class="field-help" *ngIf="messageResponseMessage">
+                    {{ messageResponseMessage }}
+                </h2>
+            </div>
+            <!-- </div> -->
 
             <app-loading-button
                 title="Send Message"

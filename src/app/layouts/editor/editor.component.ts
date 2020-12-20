@@ -72,7 +72,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         header: {
           class: Header,
           inlineToolbar: ['link'],
-          shortcut: 'CMD+SHIFT+H',
+          shortcut: 'CTRL+SHIFT+H',
           config: {
             placeholder: 'Enter heading...',
             levels: [1, 2, 3, 4],
@@ -82,7 +82,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         list: {
           class: List,
           inlineToolbar: true,
-          shortcut: 'CMD+SHIFT+L',
+          shortcut: 'CTRL+SHIFT+L',
         },
         embed: {
           class: Embed,
@@ -96,7 +96,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         quote: {
           class: Quote,
           inlineToolbar: true,
-          shortcut: 'CMD+SHIFT+Q',
+          shortcut: 'CTRL+SHIFT+Q',
           config: {
             quotePlaceholder: 'Enter a quote...',
             captionPlaceholder: 'Quote\'s author',
@@ -104,11 +104,15 @@ export class EditorComponent implements OnInit, OnDestroy {
         },
         inlineCode: {
           class: InlineCode,
-          shortcut: 'CMD+SHIFT+C',
+          shortcut: 'CTRL+SHIFT+C',
         },
         blockCode: {
           class: CodeTool
         }
+        // math: {
+        //   class: EJLaTeX,
+        //   shortcut: 'CTRL+SHIFT+M'
+        // }
       },
       data: this.editorData
     })

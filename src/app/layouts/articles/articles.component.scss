@@ -21,6 +21,11 @@
     margin: 0.8rem 0;
     padding-top: 2rem;
     border-top: 1px solid transparentize($color: $text, $amount: 0.7);
+    
+    p {
+        line-height: normal;
+        letter-spacing: normal;
+    }
 
     .article-author-date {
         display: flex;
@@ -110,23 +115,42 @@
 
 .article-heading {
     h1 {
-        margin-top: 2rem;
+        margin-top: 2.2rem;
     }
 
     .subheading {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 }
 
 .article-paragraph {
     p {
         // font-family: Cochin, Georgia, Times, 'Times New Roman', serif;
-        font-size: 1.05rem;
-        line-height: 1.8rem;
-        letter-spacing: 0.4px;
+        font-size: 1.1rem;
+        // line-height: 1.8rem;
+        // letter-spacing: 0.4px;
 
         margin: 0 auto;
         color: $text;
+    }
+}
+
+.article-quote-container {
+    position: relative;
+    padding: 1.3rem 1.3rem 0.5rem 1.3rem;
+    border-left: 2px solid $white;
+    
+    .article-quote {
+        color: $white;
+        font-style: italic;
+    }
+
+    .article-quote-source {
+        margin-top: 0.6rem;
+        // margin-left: 2rem;
+        &::before {
+            content: "━ ";
+        }
     }
 }
 
@@ -153,6 +177,12 @@
         font-weight: 700;
         color: $text;
         // color: darken($color: $text, $amount: 10%);
+        a {
+            color: $text;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 
@@ -183,6 +213,12 @@
     background-color: #282c34;
     border-radius: 6px;
     box-shadow: 0 0 14px 0 darken($color: #282c34, $amount: 14%);
+
+    pre {
+        border-radius: 5px;
+        // box-shadow: 1 0 5px 0 $primary;
+        padding-bottom: 1rem;
+    }
 
     &:hover {
         .copy-button {
@@ -285,17 +321,17 @@
 
         &:hover {
             .youtube-video {
-                transform: scale(1.02);
+                transform: scale(1.06);
             }
         }
 
         .youtube-logo {
             position: absolute;
+            height: 8rem;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1;
-            filter: drop-shadow(0 0 8px $primary);
         }
 
         .youtube-video {
@@ -304,11 +340,7 @@
 
             background-size: cover;
             background-position: center;
-            // box-shadow: 0 0 20px 0 $dark-primary;
-
-            transform: scale(1);
-            transition: box-shadow 200ms ease-out, transform 200ms ease-out;
-
+            transition: transform 200ms ease-out;
         }
     }
 }

@@ -56,8 +56,11 @@ header {
         border: none;
         background-color: transparent;
         
-        transition: all 100ms ease-out;
+        transition: all 200ms ease-out;
 
+        &:hover {
+            transform: translateY(-2px);
+        }
     
         i {
             font-size: 1.1rem;

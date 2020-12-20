@@ -20,8 +20,6 @@ section {
         img {
             width: 80%;
             max-width: 20rem;
-
-            @extend %effect;
             display:inline-block;
         }
 
@@ -31,9 +29,8 @@ section {
             color: #fff;
         }
 
-    }
-
-    %effect{
-        filter:url("#glitch");
+        button {
+            border-radius: 100px;
+        }
     }
 }
