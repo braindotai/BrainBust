@@ -14,7 +14,7 @@
         </div>
         <div class="article-tags-framework">
             <div class="article-tags">
-                <p *ngFor="let tag of articleTags">{{ tag }}</p>
+                <a *ngFor="let tag of articleTags">{{ tag }}</a>
             </div>
             <div class="article-framework" *ngIf="articleFramework.length !== 0 && articleFramework !=='none'">
                 <img alt="Framework used" [src]="articleFramework">
@@ -80,7 +80,7 @@
             <div class="article-index-item" *ngIf="field.type === 'header'" [ngClass]="{'visible': isHeadingVisible(field.data.text)}" (click)="scrollToHeading(headingID(field.data.text))">
                 <div [ngClass]="{'article-index-heading': field.data.level === 1, 'article-index-subheading': field.data.level === 2}">
                     <i class="fas fa-minus" *ngIf="field.data.level === 1"></i>
-                    <p style="display: inline;" [innerHTML]="field.data.text.slice(0, 24) + '...'"></p>
+                    <p style="display: inline;" [innerHTML]="field.data.text.length > 25 ? field.data.text.slice(0, 24) + '...' : field.data.text.slice(0, 24)"></p>
                 </div>
             </div>
         </div>

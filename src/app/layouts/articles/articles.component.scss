@@ -90,20 +90,25 @@
 .article-tags {
     display: flex;
 
-    p {
-        display: block;
-        margin-right: 0.8rem;
+    a {
+        padding: 0.1rem 0.35rem;
+        margin-right: 0.6rem;
         
-        color: darken($color: $text, $amount: 22%);
-        font-size: 0.75rem;
+        color: #a5a7aa; // #627385
+        font-size: 0.7rem;
         font-weight: 700;
         text-transform: uppercase;
+
+        background-color: $primary;
+        border: 1px solid lighten($color: $primary, $amount: 20%);
+        border-radius: 3px;
+        cursor: default;
         
-        cursor: pointer;
         transition: color 150ms ease-out;
 
         &:hover {
-            color: #fff;
+            background-color: $primary;
+            color: $white;
         }
     }
 }
@@ -137,12 +142,13 @@
 
 .article-quote-container {
     position: relative;
-    padding: 1.3rem 1.3rem 0.5rem 1.3rem;
-    border-left: 2px solid $white;
+    padding: 0rem 1.4rem;
+    border-left: 1px solid $white;
     
     .article-quote {
         color: $white;
-        font-style: italic;
+        font-size: 1.25rem;
+        // font-style: italic;
     }
 
     .article-quote-source {
@@ -173,10 +179,11 @@
     }
 
     p {
-        text-align: center;
+        color: $text;
         font-size: 0.8rem;
         font-weight: 700;
-        color: $text;
+        text-align: center;
+        line-height: normal;
         // color: darken($color: $text, $amount: 10%);
         a {
             // color: $blue;
@@ -210,7 +217,7 @@
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.3rem;
-    padding: 2.5rem 0.7rem 0.8rem 0.7rem;
+    padding: 2.5rem 0.7rem 0.6rem 0.7rem;
     background-color: #282c34;
     border-radius: 6px;
     box-shadow: 0 0 14px 0 darken($color: #282c34, $amount: 14%);

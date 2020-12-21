@@ -6,7 +6,7 @@
         </div>
         <div class="article-card-tags-framework">
             <div class="article-card-tags">
-                <a href="#" *ngFor="let tag of tags">{{ tag }}</a>
+                <a *ngFor="let tag of tags">{{ tag }}</a>
             </div>
             <div class="article-card-framework" *ngIf="framework_image.length !== 0">
                 <img alt="Framework used" [src]="framework_image" *ngIf="framework !== 'none'">

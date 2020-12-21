@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   @HostListener("document:scroll", ['$event'])
   scrollEvent(): void {
     // [ top arrow ]
-    if (this.scrollService.getScrolledPercent > 60 && document.body.scrollHeight >= 1150) {
+    if (this.scrollService.getScrolledPercent > 20 && document.body.scrollHeight >= 1150) {
       this.renderer.setStyle(this.up.nativeElement, 'visibility', 'visible');
       this.renderer.setStyle(this.up.nativeElement, 'opacity', '1');
     }
