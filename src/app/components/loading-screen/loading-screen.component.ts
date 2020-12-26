@@ -16,7 +16,7 @@ export class LoadingScreenComponent implements OnInit, OnChanges {
     document.getElementsByTagName('html')[0].style.overflowY = "hidden";
     setTimeout(() => {
       this.showLoading = false;
-    }, 18000);
+    }, 25000);
   }
   
   ngOnChanges(): void {
