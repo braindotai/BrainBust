@@ -2,6 +2,7 @@
 @import '../../../styles.mixins.scss';
 
 .article-card {
+    display: block;
     margin: 0 0.8rem 2.8rem 0.8rem;
     cursor: pointer;
     z-index: 1;
@@ -67,7 +68,7 @@
     .article-card-wall {
         width: 100%;
         border-radius: 5px;
-        box-shadow: 0 0 15px 0 $dark-primary;
+        box-shadow: 0 0 15px 0 darken($color: $dark-primary, $amount: 40%);
         opacity: 0.9;
         transform: scale(1.0);
 
@@ -80,7 +81,7 @@
         h1 {
             color: $white;
             font-size: 2rem;
-            padding-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
             border-bottom: 1px solid transparent;
             transition: all 250ms ease-out;
         }

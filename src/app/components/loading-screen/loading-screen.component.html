@@ -1,6 +1,18 @@
-<div id="loading-screen" [ngClass]="{'hide': !loading}">
+<div id="loading-screen" [ngClass]="{'hide': !loading, 'shadow-fade': showLoading}">
     <div id="background">
-        <img src="../../../assets/svg/loadingW.svg" alt="Loading Icon">
-        <!-- <i class="fa fa-circle-notch rotate"></i> -->
+        <img src="../../../assets/svg/loadingW.svg" alt="Loading Icon" *ngIf="showLoading else networkIssueBlock">
+        <ng-template #networkIssueBlock>
+            <i class="fas fa-globe-americas"></i>
+            <p id="network-error">
+                Sorry, looks like your internet connection is too slow, please try again and reload the page.
+            </p>
+            <div id="reload-button" (click)="reloadPage()">
+                <app-loading-button
+                    title="Reload Page"
+                    [disabled]="false"
+                    [loading]="false">
+                </app-loading-button>
+            </div>
+        </ng-template>
     </div>
 </div>

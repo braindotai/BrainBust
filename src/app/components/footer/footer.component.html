@@ -13,20 +13,28 @@
                     ML Engineer | Web Developer | Magician
                 </p>
             </div>
-            <p class="text-spacing">
-                Welcome to my website, where I'll be showcasing my knowledge through projects, articles and video explanations.
-                My ultimate goal is to laymanize the knowledge I've gained and contribute to this generous field of AI with quality content.
-                All of my projects are entirely open sourced, and are available on my GitHub profile.
-            </p>
+            <div class="text-spacing">
+                <p id="current">
+                    Currently I'm a 2nd year Undergrad, ML Engineer at <a href="https://skylarklabs.ai/" target="_blank" rel="noopener" >Skylarklabs.ai</a> and Researcher at <a href="https://www.nevronas.in/" target="_blank" rel="noopener" >Nevronas.ai</a>
+                </p>
+                <p>
+                    Welcome to my website, where I'll be showcasing my knowledge through projects, articles and video explanations.
+                    My ultimate goal is to laymanize the knowledge I've gained and contribute to this generous field of AI with quality content.
+                    All of my projects are entirely open sourced, and are available on my GitHub profile.
+                </p>
+                <p id="current">
+                    <b>A new page showcasing my portfolio is coming soon. Stay Tuned!!!</b>
+                </p>
+            </div>
             <div id="follow">
-                <a href="https://www.youtube.com/channel/UCdbcIkMaFdRVYXm76TH6qiw/" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a id="abc" href="https://github.com/braindotai" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCdbcIkMaFdRVYXm76TH6qiw/" aria-label="YouTube"><i class="fab fa-youtube"></i>&emsp; YouTube</a>
+                <a target="_blank" rel="noopener" id="abc" href="https://github.com/braindotai" aria-label="GitHub"><i class="fab fa-github"></i>&emsp; GitHub</a>
                 <!-- <a href="https://github.com/braindotai" aria-label="Twitter"><i class="fab fa-twitter"></i></a> -->
-                <a href="https://brainbust00.medium.com/" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                <a target="_blank" rel="noopener" href="https://brainbust.medium.com/" aria-label="Medium"><i class="fab fa-medium"></i>&emsp; Medium</a>
             </div>
             <form id="subscription-form" [formGroup]="subscriptionFormGroup" (ngSubmit)="subscribe()" enctype="multipart/form-data">
-                <div class="field">
-                    <label for="subscription-email" class="field-title field-title-over">Email</label>
+                <div class="field field-title-over">
+                    <label for="subscription-email" class="field-title">Email</label>
                     <input id="subscription-email" placeholder="You'll receive all notifications here" type="text" [ngClass]="{'input-error': subscriptionTouchedError('email')}" formControlName="email">
                     <h2 class="field-error" [hidden]="!(subscriptionTouchedError('email') && subscriptionFormGroup.get('email').errors.required)">
                         Email is required
@@ -48,15 +56,15 @@
         </div>
         <form id="contact-form" [formGroup]="messageFormGroup" (ngSubmit)="message()" enctype="multipart/form-data">
             <h1>Contact Me</h1>
-            <div class="field">
-                <label for="contact-name" class="field-title field-title-over">Name</label>
+            <div class="field field-title-over">
+                <label for="contact-name" class="field-title">Name</label>
                 <input id="contact-name" placeholder="Your name" type="text" [ngClass]="{'input-error': messageTouchedError('name')}" formControlName="name">
                 <h2 class="field-error" [hidden]="!(messageTouchedError('name') && messageFormGroup.get('name').errors.required)">
                     Name is required
                 </h2>
             </div>
-            <div class="field">
-                <label for="contact-email" class="field-title field-title-over">Email</label>
+            <div class="field field-title-over">
+                <label for="contact-email" class="field-title">Email</label>
                 <input id="contact-email" placeholder="Your email for contact" type="text" [ngClass]="{'input-error': messageTouchedError('email')}" formControlName="email">
                 <h2 class="field-error" [hidden]="!(messageTouchedError('email') && messageFormGroup.get('email').errors.required)">
                     Email is required
@@ -65,8 +73,8 @@
                     Email is not valid
                 </h2>
             </div>
-            <div class="field">
-                <label for="contact-message" class="field-title field-title-over">Message</label>
+            <div class="field field-title-over">
+                <label for="contact-message" class="field-title">Message</label>
                 <textarea id="contact-message" placeholder="So what is in your mind?" [ngClass]="{'input-error': messageTouchedError('message')}" formControlName="message" rows="8"></textarea>
                 <h2 class="field-error" [hidden]="!(messageTouchedError('message') && messageFormGroup.get('message').errors.required)">
                     Message is required

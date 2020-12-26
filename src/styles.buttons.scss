@@ -9,7 +9,7 @@ button,
     color: $dark-primary;
 
     outline: none;
-    border: 2px solid white;
+    border: 2px solid $white;
     border-radius: 7px;
 
     cursor: pointer;
@@ -22,19 +22,27 @@ button,
     &:disabled {
         // pointer-events: none;
         cursor: not-allowed;
-        opacity: 0.6;
+        // opacity: 0.6;
+        border-color: darken($color: $white, $amount: 30%);
+        background-color: darken($color: $white, $amount: 30%);
+        
+        &:hover {
+            color: darken($color: $white, $amount: 30%);
+        }
     }
 
-    &:hover,
-    &:active {
-        transform: translateY(-4px);
+    &:hover {
+        background-color: $dark-primary;
+        color: $white;
     }
 }
 
 .disabled {
     pointer-events: none;
     // cursor: not-allowed;
-    opacity: 0.4;
+    // opacity: 0.4;
+    border-color: darken($color: $white, $amount: 30%);
+    background-color: darken($color: $white, $amount: 30%);
 }
 
 // .filled-button {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { SubscriptionLike } from 'rxjs';
@@ -13,6 +13,7 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
   formData: FormData = new FormData();
   formGroup: FormGroup = new FormGroup({});
   loading: boolean = false;
+  pageLoading: boolean = true;
 
   componentSubscriptions: SubscriptionLike[] = [];
 
@@ -22,6 +23,10 @@ export class AuthenticateComponent implements OnInit, OnDestroy {
     this.formGroup.addControl('username', new FormControl('', [Validators.required]));
     this.formGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
     this.formGroup.addControl('password', new FormControl('', [Validators.required]));
+    setTimeout(() => {
+      this.pageLoading = false;
+      console.log('setting false...');
+    }, 0);
   }
 
   authenticate(): void {

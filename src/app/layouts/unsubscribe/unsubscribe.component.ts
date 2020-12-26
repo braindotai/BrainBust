@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/ApiService/api-service.service';
 import { UnsubscriptionResponse, SubscriptionResponse } from 'src/app/models/interface';
 import { SubscriptionLike } from 'rxjs';
+import { SEOService } from 'src/app/services/SEO/seo.service';
 
 @Component({
   selector: 'app-unsubscribe',
@@ -23,10 +24,13 @@ export class UnsubscribeComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: ApiService
+    private service: ApiService,
+    private seoService: SEOService
     ) { }
     
   ngOnInit(): void {
+    this.seoService.setMeta('BrainBust - Unsubscribe', 'Unsubscribing from BrainBust');
+
     this.componentSubscriptions.push(
       this.route.paramMap.subscribe(params => {
         this.encodedEmail = params.get('encodedEmail');

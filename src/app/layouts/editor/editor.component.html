@@ -5,5 +5,10 @@
 <div class="container" *ngIf="isAuthenticated">
     <h1 class="container-title">{{ articleName | titlecase }}</h1>
     <div id="editor-js"></div>
-    <button id="submit-article" class="filled-button" (click)="submitArticle()">{{submitButton}}</button>
+    <app-loading-button
+        [title]="submitButton"
+        [disabled]="false"
+        [loading]="loading"
+        (click)="submitArticle()">
+    </app-loading-button>
 </div>

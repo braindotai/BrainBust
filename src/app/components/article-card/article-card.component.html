@@ -1,4 +1,4 @@
-<div class="article-card" [ngClass]="{'latest-article': latest, 'reverse-row': reverse}" #infoElement>
+<a [routerLink]="routerHrefLink" class="article-card" [ngClass]="{'latest-article': latest, 'reverse-row': reverse}" #infoElement>
     <img alt="Article Image" class="article-card-wall" [src]="wall" [alt]="'Wallpaper for ' + (title | titlecase)">
     <div class="info" [ngClass]="{'latest-article-right': latest}">
         <div class="article-card-title">
@@ -21,7 +21,7 @@
                     <p class="article-card-date">{{ date | date }}</p>
                 </div>
             </div>
-            <p class="article-card-minutes">{{ minutes }} MINS READ</p>
+            <p class="article-card-minutes">{{ minutes }} MIN READ</p>
         </div>
     </div>
-</div>
+</a>

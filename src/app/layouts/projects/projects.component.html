@@ -43,7 +43,7 @@
     
                     <label
                         [for]="field.name"label
-                        class="upload-button filled-button" [ngClass]="{'disabled': inferenceLoading}">
+                        class="upload-button" [ngClass]="{'disabled': inferenceLoading}">
                         {{ field.title }}
                     </label>
     
@@ -134,7 +134,7 @@
                 [description]="project.description"
                 [date]="project.date"
                 [minutes]="project.minutes"
-                [routerLink]="getProjectLink(project.title)"
+                [routerHrefLink]="getProjectLink(project.title)"
                 *ngFor="let project of projects">
                 </app-article-card>
             </div>

@@ -24,6 +24,7 @@ const routes: Routes = [
   
   { path: 'write-article', component: EditorComponent },
   
+  
   { path: 'home', component: HomeComponent },
   { path: '**', component: PageNotFoundComponent}
 ];

@@ -1,5 +1,5 @@
 <div id="background">
-    <app-header id="#top"></app-header>
+    <app-header id="#top" (scrollToAboutEvent)="scrollToAboutEventHandler()"></app-header>
     <router-outlet (activate)="scrollToTop()"></router-outlet>
     <app-footer id='footer'></app-footer>
     <a id="up" (click)="scrollToTop()" #up>

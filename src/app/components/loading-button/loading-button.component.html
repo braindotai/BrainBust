@@ -1,4 +1,4 @@
-<button (click)="onClick()" class="filled-button" [ngClass]="{'disabled': projectLoading}" type="submit" [disabled]="disabled || loading || projectLoading">
+<button (click)="onClick()" [ngStyle]="{'pointer-events': projectLoading ? 'none': 'all'}" type="submit" [disabled]="disabled || loading || projectLoading">
     <div *ngIf="projectLoading else elseBlock">
         <span>Loading project demo</span>
         <i class="fa fa-circle-notch fa-spin" *ngIf="loading || projectLoading"></i>

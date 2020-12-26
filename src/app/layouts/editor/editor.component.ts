@@ -33,6 +33,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   submitButton: string = 'Save Article';
   isAuthenticated: boolean = false;
   authInfo: FormGroup;
+  loading: boolean = false;
 
   componentSubscriptions: SubscriptionLike[] = [];
 
@@ -119,6 +120,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   submitArticle(): void {
+    this.loading = true;
     this.editor.saver.save().then(content => {
       this.formData.append('username', this.authInfo['username']);
       this.formData.append('email', this.authInfo['email']);
@@ -132,12 +134,14 @@ export class EditorComponent implements OnInit, OnDestroy {
         if (this.editorData) {
           this.componentSubscriptions.push(
             this.service.updateArticle(this.formData).subscribe(response => {
+              this.loading = false;
               this.router.navigate([this.articleURL]);
             })
           )
         } else {
           this.componentSubscriptions.push(
             this.service.uploadArticle(this.formData).subscribe(response => {
+              this.loading = false;
               this.router.navigate([this.articleURL]);
             })
           )
@@ -157,6 +161,7 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.formData.append('content', JSON.stringify(content));
         this.componentSubscriptions.push(
           this.service.uploadArticle(this.formData).subscribe(response => {
+            this.loading = false;
             this.router.navigate(['/articles']);
           })
         )

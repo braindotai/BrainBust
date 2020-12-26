@@ -160,9 +160,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         this.changeDetector.detectChanges();
   
         this.inferenceoutputs.nativeElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
+          // behavior: "smooth",
+          // block: "start",
+          // inline: "start",
         });
       })
     )

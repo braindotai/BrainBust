@@ -35,10 +35,16 @@ footer {
             max-width: 32rem;
 
             margin-right: 2rem;
+
+            p {
+                line-height: 1.5rem;
+            }
+
+            #current {
+                margin: 0.5rem 0;
+            }
             
             #profile {
-                margin-bottom: 0.5rem;
-                
                 #me {
                     display: flex;
                     align-items: center;
@@ -57,6 +63,7 @@ footer {
                 #do {
                     font-size: 0.9rem;
                     color: $blue;
+                    font-weight: 700;
                 }
     
             }
@@ -69,19 +76,25 @@ footer {
             #follow {
                 display: flex;
                 align-items: center;
-                margin-top: 0.9rem;
-
-                i {
-                    color: darken($color: $white, $amount: 15%);
-                    font-size: 1.5rem;
-                    margin-right: 1.5rem;
-                    filter: drop-shadow(0px 0px 0px #cccccc);
+                padding: 1rem 0;
+                
+                a {
+                    color: darken($color: $white, $amount: 15%);;
+                    font-size: 0.9rem;
+                    padding-right: 0.7rem;
+                    letter-spacing: 0.3px;
+                    i {
+                        padding-right: 0.3rem;
+                        font-size: 1.5rem;
+                        transform: translateY(3px);
+                        transition: color 200ms ease-out, filter 100ms ease-out;
+                    }
                     
-                    transition: color 200ms ease-out, filter 100ms ease-out;
-
                     &:hover {
-                        color: #fff;
-                        filter: drop-shadow(0px 0px 4px #cccccc);
+                        i {
+                            color: #fff;
+                            filter: drop-shadow(0px 0px 2px #fff);
+                        }
                     }
                 }
             }

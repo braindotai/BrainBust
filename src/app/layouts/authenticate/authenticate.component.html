@@ -1,3 +1,4 @@
+<app-loading-screen [loading]="pageLoading"></app-loading-screen>
 <div class="container">
     <h1 class="container-title">Authentication</h1>
     <form [formGroup]="formGroup" (ngSubmit)="authenticate()" enctype="multipart/form-data">

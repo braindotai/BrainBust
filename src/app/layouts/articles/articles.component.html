@@ -26,6 +26,7 @@
                     <a [href]="field.data.source" target="_blank" rel="noopener">
                         <img class="youtube-logo" src="../../../assets/youtube-logo.png" alt="YouTube Video">
                         <img class="youtube-video" alt="Youtube video for this project" [src]="getYouTubeThumbnail(field.data.source)">
+                        <p class="content-caption" [innerHTML]="getSource(field.data.caption)"></p>
                     </a>
                 </div>
                 <div class="article-heading" *ngSwitchCase="'header'" [id]="headingID(field.data.text)">
@@ -40,18 +41,16 @@
                     *ngSwitchCase="'paragraph'">
                     <img [src]="field.data.text" alt="Article image" *ngIf="field.data.text.includes('.webp') else showText">
                     <ng-template #showText>
-                        <!-- <div [innerHTML]="field.data.text" *ngIf="field.data.text.includes('iframe'); else showNormalText"></div> -->
                         <p [innerHTML]="cleanParagraph(field.data.text)"></p>
                     </ng-template>
-                    <!-- <p style="color: white;">{{index}}</p> -->
                 </div>
                 <div class="article-image" [ngClass]="{'article-wall': index === 3}" *ngSwitchCase="'image'">
                     <img [src]="field.data.url" alt="Article image">
-                    <p [innerHTML]="getImageSource(field.data.caption)"></p>
+                    <p class="content-caption" [innerHTML]="getSource(field.data.caption)"></p>
                 </div>
                 <div class="article-quote-container" *ngSwitchCase="'quote'">
                     <p class="article-quote" [innerHTML]="cleanParagraph(field.data.text)"></p>
-                    <p class="article-quote-source" [innerHTML]="getCaptionSource(field.data.caption)"></p>
+                    <p class="article-quote-source" [innerHTML]="getSource(field.data.caption)"></p>
                 </div>
                 <div class="article-list" *ngSwitchCase="'list'">
                     <ul *ngIf="field.data.style === 'unordered'">
@@ -77,17 +76,17 @@
 
     <div id="article-index" #articleindex>
         <div *ngFor="let field of article; index as index">
-            <div class="article-index-item" *ngIf="field.type === 'header'" [ngClass]="{'visible': isHeadingVisible(field.data.text)}" (click)="scrollToHeading(headingID(field.data.text))">
+            <div class="article-index-item" *ngIf="field.type === 'header'" (click)="scrollToHeading(headingID(field.data.text))">
                 <div [ngClass]="{'article-index-heading': field.data.level === 1, 'article-index-subheading': field.data.level === 2}">
-                    <i class="fas fa-minus" *ngIf="field.data.level === 1"></i>
-                    <p style="display: inline;" [innerHTML]="field.data.text.length > 25 ? field.data.text.slice(0, 24) + '...' : field.data.text.slice(0, 24)"></p>
+                    <!-- <i class="fas fa-minus" *ngIf="field.data.level === 1"></i> -->
+                    <p style="display: inline;" [ngClass]="{'visible': isVisible(headingID(field.data.text))}" [innerHTML]="field.data.text.length > 20 ? field.data.text.slice(0, 19) + '...' : field.data.text.slice(0, 24)"></p>
                 </div>
             </div>
         </div>
     </div>
 
     <section id="read-more" *ngIf="articles">
-        <h2 class="section-title">{{ readMore }}</h2>
+        <h2 class="section-title" id="read-more-title">{{ readMore }}</h2>
     
         <div class="article-cards">
             <app-article-card
@@ -98,7 +97,7 @@
                 [description]="article.description"
                 [date]="article.date"
                 [minutes]="article.minutes"
-                [routerLink]="showPageLoading ? getArticleLink(article.title) : getProjectLink(article.title)"
+                [routerHrefLink]="showPageLoading ? getArticleLink(article.title) : getProjectLink(article.title)"
                 *ngFor="let article of articles">
             </app-article-card>
         </div>
@@ -113,30 +112,6 @@
         <br>
         
         <div *ngIf="articles.length > 0">
-            <!-- <app-article-card 
-            [wall]="articles[0].wall"
-            [tags]="articles[0].tags"
-            [framework]="articles[0].framework"
-            [title]="articles[0].title"
-            [description]="articles[0].description"
-            [date]="articles[0].date"
-            [minutes]="articles[1].minutes"
-            [latest]="true"
-            [routerLink]="getArticleLink(articles[0].title)">
-            </app-article-card>
-            <app-article-card
-            [wall]="articles[1].wall"
-            [tags]="articles[1].tags"
-            [framework]="articles[1].framework"
-            [title]="articles[1].title"
-            [description]="articles[1].description"
-            [date]="articles[1].date"
-            [minutes]="articles[1].minutes"
-            [latest]="true"
-            [reverse]="true"
-            [routerLink]="getArticleLink(articles[1].title)">
-            </app-article-card> -->
-
             <div class="article-cards">
                 <app-article-card
                 [wall]="article.wall"
@@ -146,33 +121,12 @@
                 [description]="article.description"
                 [date]="article.date"
                 [minutes]="article.minutes"
-                [routerLink]="getArticleLink(article.title)"
+                [routerHrefLink]="getArticleLink(article.title)"
                 *ngFor="let article of articles">
                 </app-article-card>
             </div>
-            <!-- <app-article-card
-            [wall]="article.wall"
-            [tags]="article.tags"
-            [framework]="article.framework"
-            [title]="article.title"
-            [description]="article.description"
-            [date]="article.date"
-            [minutes]="2 MIN READ"
-            [routerLink]="getArticleLink(article.title)"
-            *ngFor="let article of articles.slice(2)">
-            </app-article-card> -->
         </div>
-        
-        <!-- <a routerLink="/write-article">
-            <button class="filled-button center-button">Write Article</button>
-        </a> -->
     </div>
-
-    <!-- <a routerLink="write-article" *ngIf="!article && !articles">
-        <br><br>
-        <button class="filled-button center-button">Write Article</button>
-    </a> -->
-
     <ng-template #show404>
         <app-page-not-found></app-page-not-found>
     </ng-template>

@@ -7,6 +7,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectionStrateg
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleCardComponent implements OnInit {
+  @Input('routerHrefLink') routerHrefLink: string;
   @Input('wall') wall: string;
   @Input('tags') tags: Array<string>;
   @Input('framework') framework: string;

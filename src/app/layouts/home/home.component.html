@@ -21,8 +21,8 @@
             [minutes]="article.minutes"
             [latest]="true"
             [reverse]="index % 2 !== 0"
-            [routerLink]="getArticleLink(article.title)"
-            *ngFor="let article of articles; let index = index">
+            [routerHrefLink]="getArticleLink(article.title)"
+            *ngFor="let article of articles.slice(0, 3); let index = index">
         </app-article-card>
     </div>
     <div class="section-read-more">
@@ -51,8 +51,8 @@
             [minutes]="projectArticle.minutes"
             [latest]="true"
             [reverse]="index % 2 !== 0"
-            [routerLink]="getProjectLink(projectArticle.title)"
-            *ngFor="let projectArticle of projectArticles; let index = index">
+            [routerHrefLink]="getProjectLink(projectArticle.title)"
+            *ngFor="let projectArticle of projectArticles.slice(0, 3); let index = index">
         </app-article-card>
     </div>
 

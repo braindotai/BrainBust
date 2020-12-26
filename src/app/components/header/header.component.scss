@@ -57,14 +57,16 @@ header {
         background-color: transparent;
         
         transition: all 200ms ease-out;
-
-        &:hover {
-            transform: translateY(-2px);
-        }
     
         i {
             font-size: 1.1rem;
             margin-right: 0.5rem;
+        }
+    }
+
+    &:hover {
+        button {
+            transform: translateY(-2px);
         }
     }
 }
@@ -106,6 +108,7 @@ header {
 
 .show-nav {
     transform: translateX(0);
+    box-shadow: 0 0 25px 0 #000;
 }
 
 @media only screen and (max-width: 1110px) {
@@ -129,12 +132,13 @@ header {
         padding-top: 3.5rem;
         height: 100vh;
         width: 12rem;
+        border: 1px solid transparentize($color: $text, $amount: 0.9);
         z-index: 11;
         
         background-color: $dark-primary;
 
         transform: translateX(12rem);
-        transition: transform 300ms ease-out;
+        transition: all 300ms ease-out;
         
         #nav-buttons {
             overflow-y: scroll;
@@ -163,8 +167,13 @@ header {
 
             &:hover {
                 background-color: #000;
-                border-left: 2px solid #fff;
+                border-left: 2px solid #fff;    
             }
+        }
+        
+        .active-link-button {
+            background-color: #000;
+            border-left: 2px solid #fff;    
         }
     }
 

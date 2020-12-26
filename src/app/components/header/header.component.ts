@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Renderer2, EventEmitter, Output } from '@angular/core';
 import { ScrollService } from 'src/app/services/ScrollService/scroll-service.service';
 
 @Component({
@@ -11,6 +11,8 @@ export class HeaderComponent implements OnInit {
   @ViewChild('nav') nav: ElementRef<HTMLElement>;
   @ViewChild('burgermenu') burgermenu: ElementRef<HTMLElement>;
   @ViewChild('burger') burger: ElementRef<HTMLElement>;
+
+  @Output('scrollToAboutEvent') scrollToAboutEvent = new EventEmitter<null>();
   
   isBurgerMenuOpen: boolean = false;
   previousScrollPosition: number;
@@ -28,6 +30,10 @@ export class HeaderComponent implements OnInit {
   //     this.isBurgerMenuOpen = !this.isBurgerMenuOpen;
   //   }, delay);
   // }
+
+  scrollToAbout(): void {
+    this.scrollToAboutEvent.emit();
+  }
 
   @HostListener('window:scroll', [])
   scrollEvent() {

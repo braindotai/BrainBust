@@ -21,6 +21,18 @@ export class AppComponent implements OnInit {
     this.scrollToTop();
   }
 
+  // enableScroll(): void {
+  //   document.getElementsByTagName('html')[0].style.overflow = "scroll";
+  // }
+
+  scrollToAboutEventHandler(): void {
+    document.getElementById('footer').scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest"
+    })
+  }
+
   @HostListener("document:scroll", ['$event'])
   scrollEvent(): void {
     // [ top arrow ]

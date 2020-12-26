@@ -28,12 +28,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   articleFramework: string = '';
   articleEditURL: string;
   readMore: string;
-  codeToCopy: string;
+  codeToCopy: string = null;
+  readMoreTitle: HTMLElement = null;
   componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private service: ApiService,
-    private scrollService: ScrollService,
     private seoService: SEOService,
     private router: Router,
     private route: ActivatedRoute,
@@ -103,29 +103,31 @@ export class ArticlesComponent implements OnInit, OnDestroy {
             this.pageLoading = false;
             this.pageLoaded.emit();
           });
-  
-          if (response.received.has_project) {
-            this.componentSubscriptions.push(
-              this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
-                this.articles = response.received;
-                this.articles = this.articles.filter(article => {
-                  return article.title.toString() !== this.articleName;
+
+          if (response.result === 'success') {
+            if (response.received.has_project) {
+              this.componentSubscriptions.push(
+                this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
+                  this.articles = response.received;
+                  this.articles = this.articles.filter(article => {
+                    return article.title.toString() !== this.articleName;
+                  })
+                  this.readMore = 'More Projects';
                 })
-                this.readMore = 'More Projects';
-              })
-            )
-          } else {
-            this.componentSubscriptions.push(
-              this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
-                this.articles = response.received;  
-                this.articles = this.articles.filter(article => {
-                  return article.title.toString() !== this.articleName;
+              )
+            } else {
+              this.componentSubscriptions.push(
+                this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
+                  this.articles = response.received;  
+                  this.articles = this.articles.filter(article => {
+                    return article.title.toString() !== this.articleName;
+                  })
+                  this.articles.sort((a, b) => {return b.date - a.date})
+                  this.readMore = 'More Articles';
                 })
-                this.readMore = 'More Articles';
-              })
-            )
+              )
+            }
           }
-  
         })
       )
     } else {
@@ -174,43 +176,30 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     }, 1500);
   }
 
-  getImageSource(caption: string): string {
-    if (caption.includes('http')) {
-      let preCaption: string, title: string, link: string, detail: string;
-      [preCaption, link] = caption.split(':&nbsp;');
-      [detail, title] = preCaption.split('. ');
-      // if (caption.includes('source')) {
-      //   link = caption.split('source:&nbsp;')[1];
-      //   caption = caption.replace('source:&nbsp;' + link, `<a href=${link} target="_blank" rel="noopener">source</a>`);
-      // } else if (caption.includes('Source')) {
-      //   link = caption.split('Source:&nbsp;')[1];
-      // }
-      return title ? `${detail}. <a href=${link} target="_blank" rel="noopener">${title}</a>` : `<a href=${link} target="_blank" rel="noopener">${detail}</a>`;
-    }
-    return caption;
-    // return caption.includes('source') || caption.includes('Source') ? `<a href=${caption.split(':&nbsp;')[1]} target="_blank" rel="noopener">source</a>` : caption;
-  }
 // Source: hdhskadjlksad.com
-  getCaptionSource(caption: string): string {
+  getSource(caption: string): string {
     if (caption.includes('http')) {
       let preCaption: string, title: string, link: string, detail: string;
       [preCaption, link] = caption.split(':&nbsp;');
       [detail, title] = preCaption.split('. ');
-      // if (caption.includes('source')) {
-      //   link = caption.split('source:&nbsp;')[1];
-      //   caption = caption.replace('source:&nbsp;' + link, `<a href=${link} target="_blank" rel="noopener">source</a>`);
-      // } else if (caption.includes('Source')) {
-      //   link = caption.split('Source:&nbsp;')[1];
-      // }
       return title ? `${detail}. <a href=${link} target="_blank" rel="noopener">${title}</a>` : `<a href=${link} target="_blank" rel="noopener">${detail}</a>`;
     }
     return caption;
   }
 
+  get isReadMoreVisible(): boolean {
+    if (this.readMoreTitle) {
+      return this.readMoreTitle.getBoundingClientRect().top - window.innerHeight < 0;
+    } else {
+      this.readMoreTitle = document.getElementById('read-more-title');
+      return this.readMoreTitle ? this.readMoreTitle.getBoundingClientRect().top - window.innerHeight < 0 : false;
+    }
+  }
+
   @HostListener("document:scroll", ['$event'])
   showArticleIndex(): void {
     if (this.articleindex) {
-      if (window.pageYOffset > 400 && (this.scrollService.getMaxScroll - this.scrollService.getScrollPosition) > 2100) {
+      if (window.pageYOffset > 400 && !this.isReadMoreVisible) {
         this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '1');
         this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'visible');
       } else {
@@ -222,9 +211,15 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   @HostListener("document:copy", ['$event'])
   copyClipboard(event: ClipboardEvent): void {
-    event.clipboardData.setData('text/plain', (this.codeToCopy.replace('$ ', '')));
-    event.preventDefault();
-    document.removeEventListener('copy', null);
+    try {
+      event.clipboardData.setData('text/plain', (this.codeToCopy.replace('$ ', '')));
+      this.codeToCopy = null;
+    } catch {
+      event.clipboardData.setData('text/plain', window.getSelection().toString());
+    } finally {
+      event.preventDefault();
+      document.removeEventListener('copy', null);
+    }
   }
 
   getYouTubeThumbnail(url: string): string {
@@ -254,8 +249,8 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   //   return (style.display === 'none')
   // }
 
-  isHeadingVisible(heading: string): boolean {
-    const rect = document.getElementById(this.headingID(heading)).getBoundingClientRect();
+  isVisible(heading: string): boolean {
+    const rect = document.getElementById(heading).getBoundingClientRect();
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
