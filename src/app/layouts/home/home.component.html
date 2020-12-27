@@ -22,7 +22,7 @@
             [latest]="true"
             [reverse]="index % 2 !== 0"
             [routerHrefLink]="getArticleLink(article.title)"
-            *ngFor="let article of articles.slice(0, 2); let index = index">
+            *ngFor="let article of articles.slice(0, 3); let index = index">
         </app-article-card>
     </div>
 
@@ -67,7 +67,7 @@
             [latest]="true"
             [reverse]="index % 2 !== 0"
             [routerHrefLink]="getProjectLink(projectArticle.title)"
-            *ngFor="let projectArticle of projectArticles.slice(0, 2); let index = index">
+            *ngFor="let projectArticle of projectArticles.slice(0, 3); let index = index">
         </app-article-card>
     </div>
 
