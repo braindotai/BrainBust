@@ -20,6 +20,8 @@ export class FooterComponent implements OnInit, OnDestroy {
   subscriptionLoading: boolean = false;
   componentSubscriptions: SubscriptionLike[] = [];
 
+  year = new Date().getFullYear();
+
   constructor(
     private service: ApiService
   ) { }
