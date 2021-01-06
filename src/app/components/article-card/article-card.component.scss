@@ -143,6 +143,10 @@
 
         .article-card-minutes {
             color: $blue;
+
+            i {
+                color: $white;
+            }
         }
     }
 }
