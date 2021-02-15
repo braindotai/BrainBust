@@ -29,8 +29,8 @@ header {
 
         margin: 0 auto;
 
-        width: 80%;
-        max-width: 75rem;
+        width: 78.6%;
+        max-width: 75.5rem;
     }
 
     #logo {
@@ -76,11 +76,6 @@ header {
 .link-button:hover {
     button {
         color: #fff;
-
-        &::before {
-            width: 100%;
-            padding: 0; // the other part of the trick
-        }
     }
 }
 
@@ -173,7 +168,7 @@ header {
         
         .active-link-button {
             background-color: #000;
-            border-left: 2px solid #fff;    
+            border-left: 2px solid #fff;  
         }
     }
 

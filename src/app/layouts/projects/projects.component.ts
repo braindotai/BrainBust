@@ -6,6 +6,9 @@ import { ApiService } from '../../services/ApiService/api-service.service';
 import { ProjectField, ProjectForm, ProjectInferenceResponse, ArticlesResponse, ArticlesReceived } from 'src/app/models/interface';
 import { Title } from '@angular/platform-browser';
 import { SubscriptionLike } from 'rxjs';
+import { saveAs } from 'file-saver';
+
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-projects',
@@ -14,6 +17,15 @@ import { SubscriptionLike } from 'rxjs';
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
   @ViewChild('inferenceoutputs') inferenceoutputs: ElementRef<HTMLElement>;
+  @ViewChild('maskDownloader') maskDownloader: ElementRef<HTMLElement>;
+
+  i18n = {
+    saveBtn: 'Download Mask Image',
+    sizes: {
+        extra: 'Extra'
+    }
+  }
+  
   articleLoading: boolean = true;
   projectLoading: boolean = true;
   inferenceLoading: boolean = false;
@@ -28,13 +40,18 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   projectInferenceResponse: ProjectInferenceResponse = null;
   projectArticle: object = null;
 
+  uploadedAspectRatio: number = null;
+  maxImagePreviewWidth: number = null;
+  maskName: string = null;
+
   componentSubscriptions: SubscriptionLike[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private service: ApiService,
     private title: Title,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit(): void {
@@ -130,9 +147,51 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   uploadImage(event: any, name: string): void {
     if (event.target.files && event.target.files[0]) {
       const imageFile = event.target.files[0];
+
+      this.maskName = imageFile.name;
+
       const reader = new FileReader();
+
+      if (!this.submitButton) {
+        var uploadedImage = new Image();
+      }
+      
       reader.readAsDataURL(imageFile);
-      reader.onload = event => this.formImageSrc[name] = reader.result;
+      reader.onload = () => {
+        if (!this.submitButton) {
+          // uploadedImage.onload = function() {
+          //   // this.uploadedAspectRatio = 
+            
+          // };
+          uploadedImage.src = reader.result.toString();
+        }
+        this.formImageSrc[name] = reader.result;
+      };
+
+      if (!this.submitButton) {
+        setTimeout(() => {
+          this.uploadedAspectRatio = uploadedImage.height / uploadedImage.width;
+
+          this.maxImagePreviewWidth = document.documentElement.clientWidth - 35;
+
+          if (this.maxImagePreviewWidth > 1024) {
+            this.maxImagePreviewWidth /= 1.8;
+          } else if (this.maxImagePreviewWidth < 512 && !this.deviceService.isMobile()) {
+            this.maxImagePreviewWidth = 512;
+          }
+        }, 250);
+
+        setTimeout(() => {
+          let toolbar: any = document.getElementsByClassName('buttons')[0];
+          toolbar.style.display = 'none';
+          this.maskDownloader.nativeElement.addEventListener('click', () => {
+            const canvas: any = document.getElementsByClassName('lower-canvas')[0];
+            this.maskDownloader.nativeElement.setAttribute('href', canvas.toDataURL("image/jpg"));
+            this.maskDownloader.nativeElement.setAttribute('download', `${this.maskName.split('.')[0]}-mask.jpg`);
+          })
+        }, 500);
+      }
+
       this.formData.append(name, imageFile, imageFile.name);
     }
 
@@ -160,9 +219,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         this.changeDetector.detectChanges();
   
         this.inferenceoutputs.nativeElement.scrollIntoView({
-          // behavior: "smooth",
-          // block: "start",
-          // inline: "start",
+          behavior: "smooth",
+          block: "start",
+          inline: "start",
         });
       })
     )

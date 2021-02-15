@@ -55,17 +55,31 @@
                         [src]="formImageSrc[field.name]"
                         [alt]="field.alt"
                         [ngStyle]="field.style"
-                        *ngIf="formImageSrc[field.name].length !== 0 && !touchedError(field.name)">
+                        *ngIf="formImageSrc[field.name].length !== 0 && !touchedError(field.name) && submitButton">
+                    
+                    <image-drawing
+                        [i18n]="i18n"
+                        [src]="formImageSrc[field.name]"
+                        [drawingSizes]="{ small: 5, medium: 10, large: 25, extra: 50 }"
+                        [colors]="{ black: '000' }"
+                        [width]="maxImagePreviewWidth"
+                        [height]="maxImagePreviewWidth * uploadedAspectRatio"
+                        [showCancelButton]="false"
+                        [enableRemoveImage]="true"
+                        *ngIf="!submitButton && uploadedAspectRatio">
+                    </image-drawing>
                     
                     <h2 class="field-error" *ngIf="touchedError(field.name)">Image is required</h2>
                 </ng-template>
             </div>
+
+            <a class="mask-downloader" [hidden]="formGroup.invalid" href="#" download #maskDownloader>Download Mask Image</a>
     
             <app-loading-button
                 [title]="submitButton"
                 [disabled]="formGroup.invalid"
                 [loading]="inferenceLoading"
-                [projectLoading]="projectLoading">
+                [projectLoading]="projectLoading" *ngIf="submitButton">
             </app-loading-button>
         </form>
     
@@ -101,30 +115,6 @@
         <br>
 
         <div *ngIf="projects">
-            <!-- <app-article-card 
-                [wall]="projects[0].wall"
-                [tags]="projects[0].tags"
-                [framework]="projects[0].framework"
-                [title]="projects[0].title"
-                [description]="projects[0].description"
-                [date]="projects[0].date"
-                minutes="2 MIN READ"
-                [latest]="true"
-                [routerLink]="getProjectLink(projects[0].title)">
-            </app-article-card>
-            <app-article-card
-                [wall]="projects[1].wall"
-                [tags]="projects[1].tags"
-                [framework]="projects[1].framework"
-                [title]="projects[1].title"
-                [description]="projects[1].description"
-                [date]="projects[1].date"
-                minutes="2 MIN READ"
-                [latest]="true"
-                [reverse]="true"
-                [routerLink]="getProjectLink(projects[1].title)">
-            </app-article-card> -->
-            
             <div class="article-cards">
                 <app-article-card
                 [wall]="project.wall"

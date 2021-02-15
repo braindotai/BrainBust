@@ -22,6 +22,8 @@ import { UnsubscribeComponent } from './layouts/unsubscribe/unsubscribe.componen
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ImageDrawingModule } from 'ngx-image-drawing';
+
 import { HighlightJsModule } from 'ngx-highlight-js';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -50,6 +52,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     ReactiveFormsModule,
     HighlightJsModule,
+    ImageDrawingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
