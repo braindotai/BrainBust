@@ -73,13 +73,13 @@
                 </ng-template>
             </div>
 
-            <a class="mask-downloader" [hidden]="formGroup.invalid" href="#" download #maskDownloader>Download Mask Image</a>
+            <a class="mask-downloader" [hidden]="formGroup.invalid" href="#" download *ngIf="!projectLoading" #maskDownloader>Download Mask Image</a>
     
             <app-loading-button
                 [title]="submitButton"
                 [disabled]="formGroup.invalid"
                 [loading]="inferenceLoading"
-                [projectLoading]="projectLoading" *ngIf="submitButton">
+                [projectLoading]="projectLoading" *ngIf="submitButton == 'load'">
             </app-loading-button>
         </form>
     

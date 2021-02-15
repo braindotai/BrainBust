@@ -36,7 +36,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   formGroup: FormGroup = new FormGroup({});
   formData: FormData = new FormData();
   formImageSrc: object = new Object();
-  submitButton: string;
+  submitButton: string = 'load';
   projectInferenceResponse: ProjectInferenceResponse = null;
   projectArticle: object = null;
 
