@@ -88,7 +88,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.componentSubscriptions.push(
         this.service.getProjectArguments(this.projectName).subscribe((response: ProjectForm) => {
           this.formFields = response.form;
+          console.log(this.submitButton, '...');
           this.submitButton = response.submitButton;
+          console.log(this.submitButton, '...');
     
           this.formFields.forEach(field => {
             field.help = '';
