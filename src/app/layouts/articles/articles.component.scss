@@ -21,7 +21,7 @@
     margin: 0.8rem 0;
     padding-top: 2rem;
     border-top: 1px solid transparentize($color: $text, $amount: 0.7);
-    
+
     p {
         line-height: normal;
         letter-spacing: normal;
@@ -52,8 +52,8 @@
                 color: #fff;
             }
         }
-        
-        
+
+
     }
 
     .article-date,
@@ -61,7 +61,7 @@
         font-size: 0.8rem;
         font-weight: bold;
     }
-    
+
     .article-date {
         color: $red;
     }
@@ -84,7 +84,7 @@
         width: 24px;
         border-radius: 100rem;
         transition: transform 150ms ease-out;
-        
+
         &:hover {
             transform: scale(1.2);
         }
@@ -97,7 +97,7 @@
     a {
         padding: 0.1rem 0.35rem;
         margin-right: 0.6rem;
-        
+
         color: #a5a7aa; // #627385
         font-size: 0.7rem;
         font-weight: 700;
@@ -107,7 +107,7 @@
         border: 1px solid lighten($color: $primary, $amount: 20%);
         border-radius: 3px;
         cursor: default;
-        
+
         transition: color 150ms ease-out;
 
         &:hover {
@@ -148,7 +148,7 @@
     position: relative;
     padding: 0rem 1.4rem;
     border-left: 1px solid $white;
-    
+
     .article-quote {
         color: $white;
         font-size: 1.25rem;
@@ -206,7 +206,7 @@
 
 .article-list {
     padding-left: 2rem;
-    
+
     font-size: 1.05rem;
     line-height: 1.8rem;
     color: $text;
@@ -280,7 +280,7 @@
             }
         }
     }
-    
+
     * {
         font-family: Consolas, monospace;
 
@@ -300,14 +300,14 @@
         right: 0.5rem;
 
         padding: 0.2rem 0.6rem;
-        
+
         color: #9aa3af;
         font-size: 0.9rem;
         font-family: Consolas, monospace;
-        
+
         background-color: lighten($color: #282c34, $amount: 8%);
         border-radius: 100px;
-        
+
         opacity: 0.0;
         cursor: pointer;
 
@@ -365,11 +365,11 @@
     max-height: 85vh;
     overflow-y: scroll;
     overflow-x: hidden;
-    
+
     color: transparentize($color: #8394aa, $amount: 0.3);
     // border-left: 2px solid transparentize($color: $text, $amount: 0.5);
     opacity: 0.0;
-    
+
     pointer-events: none;
     transition: opacity 200ms ease-out;
 
@@ -399,7 +399,7 @@
 
             .visible {
                 color: $white;
-                border-left: 2px solid $white;
+                border-left: 4px solid $white;
             }
         }
 
@@ -417,7 +417,7 @@
     width: 100%;
     padding-left: 0;
     padding-right: 0;
-    
+
     .section-title {
         padding-left: 0;
         font-size: 2.5rem;
