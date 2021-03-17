@@ -361,10 +361,14 @@
     position: fixed;
     height: 100%;
     top: 5rem;
-    left: 3%;
+    left: 2.5%;
     max-height: 85vh;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    &::-webkit-scrollbar-thumb {
+      background-color: transparentize($color: $text, $amount: 0.5);
+    }
 
     color: transparentize($color: #8394aa, $amount: 0.3);
     // border-left: 2px solid transparentize($color: $text, $amount: 0.5);

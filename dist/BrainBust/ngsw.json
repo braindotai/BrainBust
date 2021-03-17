@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1615897621833,
+  "timestamp": 1615998453811,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.b1116daaf267136ffd43.js",
+        "/main.777b83bc19192173b5ce.js",
         "/manifest.webmanifest",
         "/polyfills.9eb6fffd5d15f2b318cf.js",
         "/runtime.0e49e2b53282f40c8925.js",
-        "/styles.5c077f57b9b7e6c2638e.css"
+        "/styles.ba34167d6139943c12b2.css"
       ],
       "patterns": []
     },
@@ -98,12 +98,12 @@
     "/assets/tensorflow.jpg": "4d4992c0959fef057fa42bc8690f869cf14ae749",
     "/assets/youtube-logo.png": "d24d5eb982d614971bb797f84af9cc4f9cce7734",
     "/favicon.ico": "e5fa5f0d9e9abfdcbe910d452a72a9944fe55ede",
-    "/index.html": "43f0de9aeafc54a9f1b06364caa7cd385608d0c1",
-    "/main.b1116daaf267136ffd43.js": "92a8036c76f351569d76b7a1379c0d38ac1de585",
+    "/index.html": "c2babe1174d52b974493766b3a78b2c429280da3",
+    "/main.777b83bc19192173b5ce.js": "aaa731678f376d262da9d0f018a056610a0fbdb9",
     "/manifest.webmanifest": "1bfcb50e47bdc9c5e7db09eb61be4ef47f15a0c6",
     "/polyfills.9eb6fffd5d15f2b318cf.js": "60a07c4a2af8411110265fe9d79d010bd22600e8",
     "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/styles.5c077f57b9b7e6c2638e.css": "f84922743b6ccd2d60874ca6f38109ba69de8a62"
+    "/styles.ba34167d6139943c12b2.css": "4561cf120ccc833d8d2d88398136eaa5d7c5628a"
   },
   "navigationUrls": [
     {
