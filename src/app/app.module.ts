@@ -54,7 +54,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     HighlightJsModule,
     ImageDrawingModule,
-    DisqusModule.forRoot('disqus_brainbust-portfolio'),
+    DisqusModule.forRoot('brainbust-portfolio'),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

@@ -58,7 +58,6 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.url = this.router.url;
-    console.log(this.url)
     if (!this.articleName) {
       this.componentSubscriptions.push(
         this.route.paramMap.subscribe(params => {
