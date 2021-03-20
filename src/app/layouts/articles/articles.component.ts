@@ -189,11 +189,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
     return caption;
   }
 
-  get isReadMoreVisible(): boolean {
+  get isDisqusVisible(): boolean {
     if (this.readMoreTitle) {
       return this.readMoreTitle.getBoundingClientRect().top - window.innerHeight < 0;
     } else {
-      this.readMoreTitle = document.getElementById('read-more-title');
+      this.readMoreTitle = document.getElementById('disqus-block');
       return this.readMoreTitle ? this.readMoreTitle.getBoundingClientRect().top - window.innerHeight < 0 : false;
     }
   }
@@ -201,7 +201,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   @HostListener("document:scroll", ['$event'])
   showArticleIndex(): void {
     if (this.articleindex) {
-      if (window.pageYOffset > 400 && !this.isReadMoreVisible) {
+      if (window.pageYOffset > 400 && !this.isDisqusVisible) {
         this.renderer.setStyle(this.articleindex.nativeElement, 'opacity', '1');
         this.renderer.setStyle(this.articleindex.nativeElement, 'pointer-events', 'visible');
       } else {

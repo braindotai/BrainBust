@@ -6,10 +6,10 @@
 
     max-width: 50rem;
     margin: 3rem auto;
-    padding-bottom: 4rem;
+    margin-bottom: 0;
     color: $white;
 
-    border-bottom: 1px solid transparentize($color: $text, $amount: 0.7);
+    // border-bottom: 1px solid transparentize($color: $text, $amount: 0.7);
 }
 
 #article-title {
@@ -417,6 +417,17 @@
     }
 }
 
+#disqus-block {
+  margin: 0 auto;
+  width: 80%;
+
+  h1 {
+    color: $white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
 #read-more {
     width: 100%;
     padding-left: 0;
@@ -443,6 +454,10 @@
     #article-index {
         display: none;
     }
+
+    #disqus-block {
+      width: 90%;
+    }
 }
 
 @media only screen and (max-width: 730px) {
@@ -460,6 +475,12 @@
             text-align: center;
             margin-left: 0;
         }
+    }
+
+    #disqus-block {
+      h1 {
+        text-align: center;
+      }
     }
 }
 
@@ -479,6 +500,10 @@
             width: 100%;
         }
     }
+
+    #disqus-block {
+      width: 100%;
+    }
 }
 
 @media only screen and (max-width: 650px) {
@@ -486,5 +511,9 @@
         p {
             font-size: 1rem;
         }
+    }
+
+    #disqus-block {
+      width: 95%;
     }
 }
