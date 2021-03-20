@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ImageDrawingModule } from 'ngx-image-drawing';
+import { DisqusModule } from "ngx-disqus";
 
 import { HighlightJsModule } from 'ngx-highlight-js';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -53,6 +54,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     HighlightJsModule,
     ImageDrawingModule,
+    DisqusModule.forRoot('disqus_brainbust-portfolio'),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

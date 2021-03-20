@@ -74,6 +74,8 @@
         <br>
     </div>
 
+    <disqus [identifier]="'/articles/' + this.articleName" [language]="'en'"></disqus>
+
     <div id="article-index" #articleindex>
         <h2>Content</h2>
         <div *ngFor="let field of article; index as index">
@@ -88,7 +90,7 @@
 
     <section id="read-more" *ngIf="articles">
         <h2 class="section-title" id="read-more-title">{{ readMore }}</h2>
-    
+
         <div class="article-cards">
             <app-article-card
                 [wall]="article.wall"
@@ -111,7 +113,7 @@
             <i class="fas fa-pen-alt"></i>Articles Written
         </h1>
         <br>
-        
+
         <div *ngIf="articles.length > 0">
             <div class="article-cards">
                 <app-article-card

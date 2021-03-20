@@ -60,6 +60,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
       this.componentSubscriptions.push(
         this.route.paramMap.subscribe(params => {
           this.articleName = params.get('articleName')
+          console.log(this.articleName)
           if (this.showPageLoading) {
             this.seoService.setMeta('BrainBust - Articles', 'Articles written by BrainBust | Rishik Mourya');
           }
@@ -81,11 +82,11 @@ export class ArticlesComponent implements OnInit, OnDestroy {
             this.articleDate = jsonResponse.time;
             this.articleMinutes = response.received.minutes;
             this.articleTags = response.received.tags;
-  
+
             if (response.received.has_deployed) {
               this.loadInference.emit();
             }
-            
+
             if (response.received.framework.length !== 0) {
               if (response.received.framework !== 'none') {
                 this.articleFramework = `../../../assets/${response.received.framework}.jpg`;
@@ -93,12 +94,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
                 this.articleFramework = 'none';
               }
             }
-    
+
             this.article = jsonResponse.blocks;
             // console.log(this.article);
             this.articleEditURL = `${this.service.articleURL(this.articleName.split(' ').join('-'))}/edit-article`;
           }
-          
+
           setTimeout(() => {
             this.pageLoading = false;
             this.pageLoaded.emit();
@@ -118,7 +119,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
             } else {
               this.componentSubscriptions.push(
                 this.service.receiveArticles().subscribe((response: ArticlesResponse) => {
-                  this.articles = response.received;  
+                  this.articles = response.received;
                   this.articles = this.articles.filter(article => {
                     return article.title.toString() !== this.articleName;
                   })
@@ -136,7 +137,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
           // console.log(response);
           this.articles = response.received;
           this.articles.sort((a, b) => {return b.date - a.date})
-  
+
           setTimeout(() => {
             this.pageLoading = false;
           });
