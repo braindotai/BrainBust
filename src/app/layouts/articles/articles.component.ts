@@ -31,6 +31,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   codeToCopy: string = null;
   readMoreTitle: HTMLElement = null;
   componentSubscriptions: SubscriptionLike[] = [];
+  url: string = null;
 
   constructor(
     private service: ApiService,
@@ -56,11 +57,12 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.url = this.router.url;
+    console.log(this.url)
     if (!this.articleName) {
       this.componentSubscriptions.push(
         this.route.paramMap.subscribe(params => {
           this.articleName = params.get('articleName')
-          console.log(this.articleName)
           if (this.showPageLoading) {
             this.seoService.setMeta('BrainBust - Articles', 'Articles written by BrainBust | Rishik Mourya');
           }
