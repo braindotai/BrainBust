@@ -39,10 +39,12 @@ export class AppComponent implements OnInit {
     if (this.scrollService.getScrolledPercent > 20 && document.body.scrollHeight >= 1150) {
       this.renderer.setStyle(this.up.nativeElement, 'visibility', 'visible');
       this.renderer.setStyle(this.up.nativeElement, 'opacity', '1');
+      this.renderer.setStyle(this.up.nativeElement, 'transform', 'scale(1.0)');
     }
     else{
-      this.renderer.setStyle(this.up.nativeElement, 'visibility', 'hidden');
       this.renderer.setStyle(this.up.nativeElement, 'opacity', '0');
+      this.renderer.setStyle(this.up.nativeElement, 'transform', 'scale(0.2)');
+      this.renderer.setStyle(this.up.nativeElement, 'visibility', 'hidden');
     }
   }
 

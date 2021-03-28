@@ -74,11 +74,6 @@
         <br>
     </div>
 
-    <div id="disqus-block">
-      <h1>Discussion</h1>
-      <disqus [identifier]="'/articles/' + this.articleName" [language]="'en'" [url]="url"></disqus>
-    </div>
-
     <div id="article-index" #articleindex>
         <h2>Content</h2>
         <div *ngFor="let field of article; index as index">
@@ -92,21 +87,27 @@
     </div>
 
     <section id="read-more" *ngIf="articles">
-        <h2 class="section-title" id="read-more-title">{{ readMore }}</h2>
+      <div id="disqus-block">
+        <h1>Discussion</h1>
+        <disqus [identifier]="'/articles/' + this.articleName" [language]="'en'" [url]="url"></disqus>
+      </div>
 
-        <div class="article-cards">
-            <app-article-card
-                [wall]="article.wall"
-                [tags]="article.tags"
-                [framework]="article.framework"
-                [title]="article.title"
-                [description]="article.description"
-                [date]="article.date"
-                [minutes]="article.minutes"
-                [routerHrefLink]="showPageLoading ? getArticleLink(article.title) : getProjectLink(article.title)"
-                *ngFor="let article of articles">
-            </app-article-card>
-        </div>
+      <br>
+      <h2 class="section-title" id="read-more-title">{{ readMore }}</h2>
+
+      <div class="article-cards">
+          <app-article-card
+              [wall]="article.wall"
+              [tags]="article.tags"
+              [framework]="article.framework"
+              [title]="article.title"
+              [description]="article.description"
+              [date]="article.date"
+              [minutes]="article.minutes"
+              [routerHrefLink]="showPageLoading ? getArticleLink(article.title) : getProjectLink(article.title)"
+              *ngFor="let article of articles">
+          </app-article-card>
+      </div>
     </section>
 </div>
 

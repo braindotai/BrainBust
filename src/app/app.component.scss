@@ -11,10 +11,10 @@
 
     width: 2.5rem;
     height: 2.5rem;
-    
+
     color: $white;
     font-size: 18px;
-    
+
     background-color: $primary;
     border: 1px solid darken($color: $white, $amount: 70%);
     border-radius: 100px;
@@ -23,7 +23,7 @@
     box-shadow: 0px 0px 10px 0px $dark-primary;
     cursor: pointer;
 
-    transition: all 120ms ease-out;
+    transition: all 120ms ease-out, transform 200ms ease-out;
 
     &:active {
         color: $dark-primary;
