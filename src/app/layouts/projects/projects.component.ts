@@ -25,7 +25,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         extra: 'Extra'
     }
   }
-  
+
   articleLoading: boolean = true;
   projectLoading: boolean = true;
   inferenceLoading: boolean = false;
@@ -58,7 +58,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.componentSubscriptions.push(
       this.route.paramMap.subscribe(params => {
         this.projectName = params.get('projectName');
-  
+
         if (this.projectName) {
           this.projectName = this.projectName.split('-').join(' ');
           this.title.setTitle('BrainBust - Project - ' + this.projectName.split(' ').map((word: string) => {
@@ -71,7 +71,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
             this.service.receiveProjectArticles().subscribe((response: ArticlesResponse) => {
               this.projects = response.received;
               this.projects.sort((a, b) => {return b.date - a.date})
-              
+
               this.articleLoading = false;
               // setTimeout(() => {
               // }, 1000);
@@ -91,17 +91,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
           console.log(this.submitButton, '...');
           this.submitButton = response.submitButton;
           console.log(this.submitButton, '...');
-    
+
           this.formFields.forEach(field => {
             field.help = '';
-            
+
             let validators = [];
             validators.push(Validators.required);
-            
+
             if (field.validations) {
               Object.keys(field.validations).forEach(validationType => {
                 let threshold = field.validations[validationType];
-    
+
                 switch (validationType) {
                   case 'minlength':
                     validators.push(Validators.minLength(threshold));
@@ -118,15 +118,15 @@ export class ProjectsComponent implements OnInit, OnDestroy {
                   case 'max':
                     validators.push(Validators.max(threshold));
                     field.help += ` to ${threshold}`
-                    break;          
+                    break;
                   default:
                     break;
                 }
               });
             }
-    
+
             this.formGroup.addControl(field.name, new FormControl('', validators));
-            
+
             if (field.type === 'image') {
               this.formImageSrc[field.name] = '';
             }
@@ -134,10 +134,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
           this.projectLoading = false;
         })
       )
-      
+
     }
   }
-  
+
   getProjectLink(projecName: string): string {
     return this.service.getProjectLink(projecName);
   }
@@ -157,13 +157,13 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       if (!this.submitButton) {
         var uploadedImage = new Image();
       }
-      
+
       reader.readAsDataURL(imageFile);
       reader.onload = () => {
         if (!this.submitButton) {
           // uploadedImage.onload = function() {
-          //   // this.uploadedAspectRatio = 
-            
+          //   // this.uploadedAspectRatio =
+
           // };
           uploadedImage.src = reader.result.toString();
         }
@@ -217,9 +217,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.service.postProjectArguments(this.projectName, this.formData).subscribe((response: ProjectInferenceResponse) => {
         this.projectInferenceResponse = response;
         this.inferenceLoading = false;
-  
+
         this.changeDetector.detectChanges();
-  
+
         this.inferenceoutputs.nativeElement.scrollIntoView({
           behavior: "smooth",
           block: "start",

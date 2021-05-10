@@ -1,6 +1,4 @@
 <header [ngClass]="{'blur': notOnTop}" #header>
-<!-- <header #header> -->
-
     <div id="header-container">
         <a id="logo" routerLink='/home'>BrainBust</a>
         <nav [ngClass]="{'show-nav': isBurgerMenuOpen}" #nav>
@@ -35,6 +33,12 @@
                         <span>GitHub</span>
                     </button>
                 </a>
+                <a class="link-button" href="https://www.linkedin.com/in/rishik-c-mourya-011733211/" target="_blank" rel="noopener">
+                  <button>
+                      <i class="fab fa-linkedin"></i>
+                      <span>Linkedin</span>
+                  </button>
+                </a>
                 <a class="link-button" href="https://www.youtube.com/channel/UCdbcIkMaFdRVYXm76TH6qiw/" target="_blank" rel="noopener">
                     <button>
                         <i class="fab fa-youtube"></i>
@@ -49,7 +53,7 @@
                 </a>
             </div>
         </nav>
-    
+
         <div id="burger-menu" #burgermenu>
             <div id="burger" [ngClass]="{'burger-open': isBurgerMenuOpen}" #burger></div>
         </div>
