@@ -30,7 +30,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.messageFormGroup.addControl('name', new FormControl('', [Validators.required]));
     this.messageFormGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
     this.messageFormGroup.addControl('message', new FormControl('', [Validators.required]));
-    
+
     this.subscriptionFormGroup.addControl('email', new FormControl('', [Validators.required, Validators.email]));
   }
 
@@ -53,13 +53,13 @@ export class FooterComponent implements OnInit, OnDestroy {
       this.service.subscribe(this.subscriptionFormData).subscribe((response: SubscriptionResponse) => {
         if (response.result === 'success') {
           this.subscriptionResponseMessage = response.message;
-  
+
           setTimeout(() => {
             this.subscriptionResponseMessage = null;
             this.subscriptionFormGroup.reset();
           }, 3000);
         }
-  
+
         this.subscriptionLoading = false;
       })
     )

@@ -68,7 +68,7 @@ export class ApiService {
   articleURL(articleName: string): string {
     return `${`${this.ArticleBackendURL}/articles/receive-article`}/${articleName.replace("?", "question_mark")}/`;
   }
-  
+
   getProjectLink(projectName: string): string {
     return `/projects/${projectName.split(' ').join('-')}`;
   }

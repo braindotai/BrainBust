@@ -17,9 +17,9 @@ export class ArticleCardComponent implements OnInit {
   @Input('minutes') minutes: string;
   @Input('latest') latest: boolean = false;
   @Input('reverse') reverse: boolean = false;
-  
+
   @ViewChild('infoElement') infoElement: ElementRef<HTMLElement>;
-  
+
   framework_image: string = '';
 
   constructor() { }

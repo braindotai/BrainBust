@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.apiService.receiveProjectArticles().subscribe((response: ArticlesResponse) =>  {
         this.projectArticles = response.received;
         this.projectArticles.sort((a, b) => {return b.date - a.date});
-        
+
         // setTimeout(() => {
         //   this.pageLoading = false;
         // }, 1000);
@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.apiService.receiveArticles().subscribe((response: ArticlesResponse) =>  {
         this.articles = response.received;
         this.articles.sort((a, b) => {return b.date - a.date});
-        
+
         this.pageLoading = false;
         // setTimeout(() => {
         // }, 2000);
